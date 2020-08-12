@@ -6,10 +6,11 @@
 	<link rel="stylesheet" href="../client/css.css">
 <body>  
 	<?php
-$servername = "progdatabase-1.ctxbjl62xf2l.us-east-2.rds.amazonaws.com";
-$dbname = "programmingdb";
-$username = "root";
-$password = "mypassword";
+$servername = utf8_encode("progdatabase-1.ctxbjl62xf2l.us-east-2.rds.amazonaws.com");
+$dbname = utf8_encode("programmingdb");
+$username = utf8_encode("root");
+$password = utf8_encode("mypassword");
+
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 if ($conn->connect_error) {
