@@ -1,7 +1,7 @@
 <?php
 /* Database credentials. Assuming you are running MySQL
 server with default setting (user 'root' with no password) */
-define('DB_SERVER', 'progdatabase-1.ctxbjl62xf2l.us-east-2.rds.amazonaws.com ');
+define('DB_SERVER', 'progdatabase-1.ctxbjl62xf2l.us-east-2.rds.amazonaws.com');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', 'mypassword');
 define('DB_NAME', 'programmingdb');
