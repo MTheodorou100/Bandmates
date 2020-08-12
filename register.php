@@ -6,8 +6,8 @@
 	<link rel="stylesheet" href="../client/css.css">
 <body>  
 	<?php
-$servername = utf8_encode("progdatabase-1.ctxbjl62xf2l.us-east-2.rds.amazonaws.com");
-$dbname = utf8_encode("programmingdb");
+$servername = utf8_encode("35.197.167.52");
+$dbname = utf8_encode("bandmates");
 $username = utf8_encode("root");
 $password = utf8_encode("mypassword");
 
@@ -18,7 +18,7 @@ if ($conn->connect_error) {
 }     
 
 $sql = "INSERT INTO Person (username, password)
-VALUES ('$_POST[username]', '$_POST[password]'";
+VALUES ('$_POST[username]', '$_POST[password]')";
   
 if ($conn->query($sql) === TRUE) {
 } else {
@@ -26,13 +26,6 @@ if ($conn->query($sql) === TRUE) {
 }
   
 
-#$file = fopen('users.csv','a+'); //"w"=overwrite
-#fwrite($file, $_POST['username']);
-#fwrite($file, ",");
-#fwrite($file, $_POST["password"]); 
-#fwrite($file, ",");
-#fwrite($file, $_POST["account"].PHP_EOL);
-#fclose($file);
 ?>
 	<h1>The user has been registered!</h1>
 	<p> <a href="home.html">Click here</a> to return to main directory</p>
