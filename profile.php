@@ -12,7 +12,6 @@
         <main>
             <section>
                 <form action="/action_page.php">
-                    <fieldset>
                     <label for="cars">
                         Choose a genre:
                     </label>
@@ -35,7 +34,7 @@
 
                     <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
                     <label for="vehicle2"> I have a car</label><br>
-                    
+
                     <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
                     <label for="vehicle3"> I have a boat</label>
                     <input type="submit">
