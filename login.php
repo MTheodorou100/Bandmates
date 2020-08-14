@@ -10,7 +10,7 @@
       
       $sql = "SELECT username FROM Person WHERE username = '$myusername' AND password = '$mypassword'";
       $result = mysqli_query($db,$sql);
-      $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+      $row = mysqli_fetch_array($result);
       $active = $row['active'];
       
       $count = mysqli_num_rows($result);
@@ -18,8 +18,8 @@
       // If result matched $myusername and $mypassword, table row must be 1 row
 		
       if($count == 1) {
-         session_register("myusername");
-         $_SESSION['login_user'] = $myusername;
+        //session_register("myusername");
+        $_SESSION['login_user'] = $myusername;
          
          header("location: register.html");
       }else {

@@ -30,5 +30,6 @@ if ($conn->query($sql) === TRUE) {
 	<h1>The user has been registered!</h1>
 	<p> <a href="home.html">Click here</a> to return to main directory</p>
 	
+	
 </body>
 </html>
