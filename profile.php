@@ -1,14 +1,22 @@
 <html>
     <head>
-
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" type="text/css" href="style.css"> 
+        <link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet">
     </head>
+
     <body>
         <header>
             Bandmates Profile
         </header>
+
         <nav>
-            navbar
+           <a href="home.html">Home </a>
+           <a href="register.html"> Register </a>
+           <a href="bands.html"> Bands</a>
         </nav>
+
         <main>
             <section>
                 <form action="/profile.php">
