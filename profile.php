@@ -12,6 +12,14 @@
         <main>
             <section>
                 <form action="/profile.php">
+                    First Name
+                    <br>
+                    <input type="text">
+                    <br>
+                    Last Name
+                    <br>
+                    <input type="text">
+                    <br>
                     Select Instruments
                     <br>
                     <input type="checkbox" id="instr1" value="Guitar">
