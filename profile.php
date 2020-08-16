@@ -3,7 +3,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <link rel="stylesheet" type="text/css" href="style.css"> 
-        <link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet">
+        
     </head>
 
     <body>
