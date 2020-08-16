@@ -1,0 +1,19 @@
+    nav {
+      font-family: 'Rubik', sans-serif;
+      height: 50px;
+      width: 100%;
+      background-color: #29335C;
+      text-align: center;
+      position: sticky;
+      display: inline-block;
+	}
+
+	nav a {
+      font-family: 'Rubik', sans-serif;
+      display: inline-block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      font-size: 17px;
+	}
