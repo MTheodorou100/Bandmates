@@ -26,8 +26,8 @@
                     <br>
                     Last Name
                     <br>
-                    <input type="text">
-                    <br>
+                    Your Band History
+                    <textarea name="message" rows="20" cols="45"></textarea><<br>
                     Select Instruments
                     <br>
                     <input type="checkbox" id="instr1" value="Guitar">
