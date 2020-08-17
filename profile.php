@@ -1,6 +1,8 @@
             <?php   
             session_start();  
-            echo $_SESSION['login_user'] = $myusername; ?>
+             echo $_SESSION['login_user'];
+           
+            ?>
 <html>
     <head>
         <meta charset="utf-8">
@@ -34,16 +36,18 @@
                     Favourite Instrument
                     <br>
                     <select name="instrument" id='instrument'>
-                    <option value="Guitar">Guitar</option
-                    <option value="Bass Guitar">Bass Guitar</option
-                    <option value="Drums">Drums</option
+                    <option value="Guitar">Guitar</option>
+                    <option value="Bass Guitar">Bass Guitar</option>
+                    <option value="Drums">Drums</option>
+                    </select>
                     <br>
                     Favourite Genre
                     <br>
-           <select name="genre" id='genre'>
-                    <option value="Rock">Rock</option
-                    <option value="Jazz">Jazz</option
-                    <option value="Metal">Metal</option
+                    <select name="genre" id='genre'>
+                    <option value="Rock">Rock</option>
+                    <option value="Jazz">Jazz</option>
+                    <option value="Metal">Metal</option>
+                    </select>
                     <br>
                     <br>
                     <input type="submit">

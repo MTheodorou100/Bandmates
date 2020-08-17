@@ -22,7 +22,7 @@ if ($conn->connect_error) {
 $sql = "INSERT INTO Person (username, password)
 VALUES ('$_POST[username]', '$_POST[password]')";
   
- $_SESSION['login_user'] = $myusername;
+ $_SESSION['login_user'] = $_POST['username'];
 
 if ($conn->query($sql) === TRUE) {
 } else {
