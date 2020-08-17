@@ -1,7 +1,5 @@
             <?php   
-            session_start();  
-             echo $_SESSION['login_user'];
-           
+            session_start();         
             ?>
 <html>
     <head>
@@ -24,7 +22,7 @@
 
         <main>
             <section>
-                <form action="cprofile.php" method='POST'>
+                <form action="dprofile.php" method='POST'>
                     First Name
                     <br>
                     <input type="text" name="fname">

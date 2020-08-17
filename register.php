@@ -28,7 +28,7 @@ if ($conn->query($sql) === TRUE) {
 } else {
   echo "Error: " . $sql . "<br>" . $conn->error;
 }
- header("Location: profile.php"); 
+ header("Location: eprofile.php"); 
 
 ?>
 	<h1>The user has been registered!</h1>

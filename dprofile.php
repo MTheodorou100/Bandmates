@@ -32,8 +32,8 @@ if ($conn->query($sql) === TRUE) {
   echo "Error: " . $sql . "<br>" . $conn->error;
 }
 ?>
-	<h1>The user has been registered!</h1>
-	<p> <a href="home.html">Click here</a> to return to main directory</p>
+	<h1>The user has been registered</h1>
+	<p> ToDo Displaying Profile Section</p>
 	
 </body>
 </html>
