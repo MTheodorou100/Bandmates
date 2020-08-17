@@ -20,11 +20,13 @@ if ($conn->connect_error) {
 $sql = "INSERT INTO Person (username, password)
 VALUES ('$_POST[username]', '$_POST[password]')";
   
+ $_SESSION['login_user'] = $myusername;
+
 if ($conn->query($sql) === TRUE) {
 } else {
   echo "Error: " . $sql . "<br>" . $conn->error;
 }
-  
+ header("Location: profile.php"); 
 
 ?>
 	<h1>The user has been registered!</h1>

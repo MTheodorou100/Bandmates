@@ -1,3 +1,4 @@
+<? php echo $_SESSION['login_user'] = $myusername; ?>
 <html>
     <head>
         <meta charset="utf-8">
