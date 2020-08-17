@@ -1,4 +1,4 @@
-<? php echo $_SESSION['login_user'] = $myusername; ?>
+
 <html>
     <head>
         <meta charset="utf-8">
@@ -17,10 +17,10 @@
            <a href="register.html"> Register </a>
            <a href="bands.html"> Bands</a>
         </nav>
-
+            <?    session_start(); php echo $_SESSION['login_user'] = $myusername; ?>
         <main>
             <section>
-                <form action="/profile.php">
+                <form action="/cprofile.php" method='POST'>
                     First Name
                     <br>
                     <input type="text">
