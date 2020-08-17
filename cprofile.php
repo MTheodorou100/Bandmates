@@ -19,16 +19,19 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }     
 
-$sql = "UPDATE Person SET firstName= '$_POST[fname]', surName='$_POST[lname]', instrument ='$_POST[instrument]', genre='$_POST[genre]' WHERE username= $_SESSION['login_user'];";
-  
+$fname = $_POST['fname'];
+$lname= $_POST['lname'];
+$instrument= $_POST['instrument'];
+$genre= $_POST['genre'];
+$username= $_SESSION['login_user'];
 
+$sql = "UPDATE Person SET firstName=$fname, surName=$lname, instrument=$instrument, genre=$genre WHERE username=$username";
+  
 
 if ($conn->query($sql) === TRUE) {
 } else {
   echo "Error: " . $sql . "<br>" . $conn->error;
 }
- header("Location: profile.php"); 
-
 ?>
 	<h1>The user has been registered!</h1>
 	<p> <a href="home.html">Click here</a> to return to main directory</p>

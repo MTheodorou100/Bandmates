@@ -24,7 +24,7 @@
 
         <main>
             <section>
-                <form action="/cprofile.php" method='POST'>
+                <form action="cprofile.php" method='POST'>
                     First Name
                     <br>
                     <input type="text" name="fname">
