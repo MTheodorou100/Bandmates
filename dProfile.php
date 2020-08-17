@@ -43,13 +43,25 @@ if ($conn->query($sql) === TRUE) {
                 </div>
             </section>
             <section>
-                Name:
+                First Name:
+                <div>
+                    <!-- fill with php echo -->
+                </div>
+            </section>
+	    <section>
+                Last Name:
                 <div>
                     <!-- fill with php echo -->
                 </div>
             </section>
             <section>
-                Instruments:
+                Your Band History:
+                <div>
+                    <!-- fill with php echo -->
+                </div>
+       	    </section>
+	    <section>
+                Instruments Played:
                 <div>
                     <!-- fill with php echo -->
                 </div>
