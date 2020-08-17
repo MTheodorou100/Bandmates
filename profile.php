@@ -1,4 +1,6 @@
-
+            <?php   
+            session_start();  
+            echo $_SESSION['login_user'] = $myusername; ?>
 <html>
     <head>
         <meta charset="utf-8">
@@ -17,39 +19,31 @@
            <a href="register.html"> Register </a>
            <a href="bands.html"> Bands</a>
         </nav>
-            <?    session_start(); php echo $_SESSION['login_user'] = $myusername; ?>
+
         <main>
             <section>
                 <form action="/cprofile.php" method='POST'>
                     First Name
                     <br>
-                    <input type="text">
+                    <input type="text" name="fname">
                     <br>
                     Last Name
                     <br>
-                    <input type="text">
+                    <input type="text" name="lname">
                     <br>
-                    Select Instruments
+                    Favourite Instrument
                     <br>
-                    <input type="checkbox" id="instr1" value="Guitar">
-                    <label for="instr1"> Guitar </label>
+                    <select name="instrument" id='instrument'>
+                    <option value="Guitar">Guitar</option
+                    <option value="Bass Guitar">Bass Guitar</option
+                    <option value="Drums">Drums</option
                     <br>
-                    <input type="checkbox" id="instr2" value="Bass Guitar">
-                    <label for="instr2"> Bass Guitar </label>
+                    Favourite Genre
                     <br>
-                    <input type="checkbox" id="instr3" value="Drums">
-                    <label for="instr3"> Drums </label>
-                    <br>
-                    Select Genres
-                    <br>
-                    <input type="checkbox" id="genre1" value="Rock">
-                    <label for="genre1"> Rock </label>
-                    <br>
-                    <input type="checkbox" id="genre2" value="Jazz">
-                    <label for="genre2"> Jazz </label>
-                    <br>
-                    <input type="checkbox" id="genre3" value="Metal">
-                    <label for="genre3"> Metal </label>
+           <select name="genre" id='genre'>
+                    <option value="Rock">Rock</option
+                    <option value="Jazz">Jazz</option
+                    <option value="Metal">Metal</option
                     <br>
                     <br>
                     <input type="submit">

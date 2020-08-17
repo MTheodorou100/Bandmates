@@ -7,7 +7,7 @@
 <body>  
 	<?php
 
-	      session_start();  
+session_start();  
 $servername = utf8_encode("35.197.167.52");
 $dbname = utf8_encode("bandmates");
 $username = utf8_encode("root");
@@ -19,10 +19,9 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }     
 
-$sql = "INSERT INTO Person (username, password)
-VALUES ('$_POST[username]', '$_POST[password]')";
+$sql = "UPDATE Person SET firstName= '$_POST[fname]', surName='$_POST[lname]', instrument ='$_POST[instrument]', genre='$_POST[genre]' WHERE username= $_SESSION['login_user'];";
   
- $_SESSION['login_user'] = $myusername;
+
 
 if ($conn->query($sql) === TRUE) {
 } else {
