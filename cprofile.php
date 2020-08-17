@@ -25,9 +25,8 @@ $instrument= $_POST['instrument'];
 $genre= $_POST['genre'];
 $username= $_SESSION['login_user'];
 
-$sql = "UPDATE Person SET firstName=$fname, surName=$lname, instrument=$instrument, genre=$genre WHERE username=$username";
+$sql = "UPDATE Person SET firstName='$_POST[fname]', surName='$_POST[lname]', instrument='$_POST[instrument]', genre='$_POST[genre]' WHERE username='$_SESSION[login_user]'";
   
-
 if ($conn->query($sql) === TRUE) {
 } else {
   echo "Error: " . $sql . "<br>" . $conn->error;
