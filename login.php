@@ -63,6 +63,6 @@
   </div>
   <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
 </form>
-<!-- <div style = "font-size:11px; color:#cc0000; margin-top:10px"> <?php echo $error; ?> </div> -->
+<div style = "font-size:11px; color:#cc0000; margin-top:10px"> <?php echo $error; ?> </div>
 </body>
 </html>
