@@ -53,15 +53,14 @@
   <body class="text-center">
     <form class="form-signin">
   <h1 class="h3 mb-3 font-weight-normal">Bandmates  |  Login</h1>
+<div class="email">
   <label for="inputEmail" class="sr-only">Email address</label>
   <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+</div>
+<div class="password">
   <label for="inputPassword" class="sr-only">Password</label>
   <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-  <!-- <div class="checkbox mb-3">
-    <label>
-      <input type="checkbox" value="remember-me"> Remember me
-    </label>
-  </div> -->
+</div>
   <button class="button-login" type="submit">Login</button> or <button class="button-register" type="submit">Register</button>
 </form>
 <!-- <div style = "font-size:11px; color:#cc0000; margin-top:10px"> <?php echo $error; ?> </div> -->
