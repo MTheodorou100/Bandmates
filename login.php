@@ -42,13 +42,14 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/sign-in/">
 
     <!-- Bootstrap core CSS -->
-<!-- <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+<link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="/docs/4.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
   
 
     <!-- Custom styles for this template -->
     <link href="signin.css" rel="stylesheet">
   </head>
+
   <body class="text-center">
     <form class="form-signin">
   <h1 class="h3 mb-3 font-weight-normal">Bandmates  |  Login</h1>
@@ -56,13 +57,13 @@
   <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
   <label for="inputPassword" class="sr-only">Password</label>
   <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-  <div class="checkbox mb-3">
+  <!-- <div class="checkbox mb-3">
     <label>
       <input type="checkbox" value="remember-me"> Remember me
     </label>
-  </div>
-  <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+  </div> -->
+  <button class="button-login" type="submit">Login</button> or <button class="button-register" type="submit">Register</button>
 </form>
-<div style = "font-size:11px; color:#cc0000; margin-top:10px"> <?php echo $error; ?> </div>
+<!-- <div style = "font-size:11px; color:#cc0000; margin-top:10px"> <?php echo $error; ?> </div> -->
 </body>
 </html>
