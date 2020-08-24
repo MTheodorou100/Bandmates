@@ -1523,15 +1523,7 @@ section {
   color: #f1f7ff;
 }
 
-label {
-  color: #FFFFFF;
-}
-
-h2 {
-   color: #FFFFFF;
-}
-
-p {
+.white {
    color: #FFFFFF;
 }
 
