@@ -2,84 +2,86 @@
             session_start();         
             ?>
 
-<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Jekyll v4.1.1">
-    <title>Bandmates | Create a Profile</title>
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/sign-in/">
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/starter-template/">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
+  <title>BandMates | Create a Profile</title>
+  <meta content="" name="descriptison">
+  <meta content="" name="keywords">
 
-    <!-- Bootstrap core CSS -->
-<link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="/docs/4.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-  
-  <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
 
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style>
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="assets/vendor/ionicons/css/ionicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+  <link href="assets/vendor/venobox/venobox.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="register.css" rel="stylesheet">
-  </head>
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
 
-        <body class="text-center">
+  <!-- =======================================================
+  * Template Name: NewBiz - v2.1.0
+  * Template URL: https://bootstrapmade.com/newbiz-bootstrap-business-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
 
-        	<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-  <a class="navbar-brand" href="#">Bandmates</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<body>
 
-  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="home.html">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="login.php">Login</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="register.php" tabindex="-1" aria-disabled="true">Register</a>
-      </li>
-          </ul>
-  </div>
-</nav>
-   		 <form class="form-register" action="home.html" method='POST'>
- 		 <h1 class="h3 mb-3 font-weight-normal">Create a Profile</h1>
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top">
+    <div class="container">
+
+      <div class="logo float-left">
+        <!-- Uncomment below if you prefer to use an text logo -->
+        <!-- <h1><a href="index.html">NewBiz</a></h1> -->
+        <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>
+      </div>
+
+      <nav class="main-nav float-right d-none d-lg-block">
+        <ul>
+          <li class="active"><a href="index.html">Home</a></li>
+          <li><a href="login.html">Login</a></li>
+          <li><a href="register.html">Register</a></li>
+            <li><a href="service.html">Terms of Service</a></li>
+             <li><a href="policy.html">Privacy Policy</a></li>
+        </ul>
+      </nav><!-- .main-nav -->
+      </div>
+    </header>
+    
+        
+
+    <section id="intro" class="clearfix">
+    <div class="container">
+        <h2 class="white">Edit Profile</h2>
+        <p class="white">Fill in your details to create your Profile</p>
+   		 <form class="form-register" action="cprofile.php" method='POST'>
 
 <div class="fname">
-  <label for="firstname">First Name:</label>
-  <input type="text" id="inputFName" class="form-control">
+  <label class="white" for="firstname">First Name:</label>
+  <input type="text" id="fname" name="fname" class="form-control">
 </div>
 
 <div class="lname">
-  <label for="lastname">Last Name:</label>
-  <input type="text" id="inputLName" class="form-control">
+  <label class="white"  for="lastname">Last Name:</label>
+  <input type="text" id="lname" name="lname" class="form-control">
 </div>
 
 <div class="instrument">
-  <label for="instrumentSelect">Instrument Played:</label>
+  <label class="white" for="instrumentSelect">Instrument Played:</label>
 	<select name="instrument" id='instrument'>
                     <option value="Guitar">Guitar</option>
                     <option value="Bass Guitar">Bass Guitar</option>
@@ -89,7 +91,7 @@
 </div>
 
 <div class="genre">
-  <label for="genreSelect">Preferred Genre:</label>
+  <label class="white" for="genreSelect">Preferred Genre:</label>
 	<select name="genre" id='genre'>
                     <option value="Rock">Rock</option>
                     <option value="Jazz">Jazz</option>
@@ -101,5 +103,73 @@
  <button class="button-register" type="submit" href="home.html">Register</button>
          
          </form>
-    </body>
+    </div>    
+        </section>
+</body>
+    
+    
+    
+    
+    
+    
+    
+    
+      <footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-4 col-md-6 footer-info">
+          </div>
+
+          <div class="col-lg-2 col-md-6 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><a href="#">Home</a></li>
+              <li><a href="#">Services</a></li>
+              <li><a href="#">Terms of service</a></li>
+              <li><a href="#">Privacy policy</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-contact">
+            <h4>Contact Us</h4>
+            <p>
+              A410 Morobe Street <br>
+              Heidelberg West, Victoria<br>
+              Australia <br>
+              <strong>Phone:</strong> +1 5589 55488 55<br>
+              <strong>Email:</strong> support@xpertmenace.com<br>
+            </p>
+
+            <div class="social-links">
+              <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+              <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+              <a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
+              <a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a>
+              <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
+            </div>
+
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong>BandMates</strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!--
+        All the links in the footer should remain intact.
+        You can delete the links only if you purchased the pro version.
+        Licensing information: https://bootstrapmade.com/license/
+        Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=NewBiz
+      -->
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
 </html>

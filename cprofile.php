@@ -1,10 +1,14 @@
+            <?php   
+            session_start();         
+            ?>
+
 <html lang="en">
 
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>BandMates | Register</title>
+  <title>BandMates | Create a Profile</title>
   <meta content="" name="descriptison">
   <meta content="" name="keywords">
 
@@ -34,7 +38,35 @@
   ======================================================== -->
 </head>
 
-<body>
+	<?php
+
+session_start();  
+$servername = utf8_encode("35.197.167.52");
+$dbname = utf8_encode("bandmates");
+$username = utf8_encode("root");
+$password = utf8_encode("mypassword");
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}     
+
+$fname = $_POST['fname'];
+$lname= $_POST['lname'];
+$instrument= $_POST['instrument'];
+$genre= $_POST['genre'];
+$username= $_SESSION['login_user'];
+
+$sql = "UPDATE Person SET firstName='$_POST[fname]', surName='$_POST[lname]', instrument='$_POST[instrument]', genre='$_POST[genre]' WHERE username='$_SESSION[login_user]'";
+  
+if ($conn->query($sql) === TRUE) {
+} else {
+  echo "Error: " . $sql . "<br>" . $conn->error;
+}
+?>
+
+  <body>
 
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top">
@@ -62,30 +94,9 @@
 
     <section id="intro" class="clearfix">
     <div class="container">
-        <h2 class="white">Sign Up</h2>
-        <p class="white">Please fill this form to create an account.</p>
-        <form action="register.php" method="post">
-            <div class="form-group">
-                <label class="white">Username</label>
-                <input type="text" name="username" >
-                <span class="help-block"><?php echo $username_err; ?></span>
-            </div>    
-            <div class="form-group">
-                <label class="white">Password</label>
-                <input type="password" name="password" >
-                <span class="help-block"></span>
-            </div>
-            <div class="form-group">
-                <label class="white">Confirm Password</label>
-                <input type="password" name="confirm_password" >
-                <span class="help-block"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Submit">
-                <input type="reset" class="btn btn-default" value="Reset">
-            </div>
-            <p class="white" >Already have an account? <a href="login.html">Login here</a>.</p>
-        </form>
+        <h2 class="white">Success!</h2>
+        <p class="white">Your profile has been created!</p>
+
     </div>    
         </section>
 </body>
