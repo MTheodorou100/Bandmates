@@ -1,10 +1,14 @@
+            <?php   
+            session_start();         
+            ?>
+
 <html lang="en">
 
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>BandMates | Register</title>
+  <title>BandMates | Create a Profile</title>
   <meta content="" name="descriptison">
   <meta content="" name="keywords">
 
@@ -62,30 +66,43 @@
 
     <section id="intro" class="clearfix">
     <div class="container">
-        <h2 class="white">Sign Up</h2>
-        <p class="white">Please fill this form to create an account.</p>
-        <form action="register.php" method="post">
-            <div class="form-group">
-                <label class="white">Username</label>
-                <input type="text" name="username" >
-                <span class="help-block"><?php echo $username_err; ?></span>
-            </div>    
-            <div class="form-group">
-                <label class="white">Password</label>
-                <input type="password" name="password" >
-                <span class="help-block"></span>
-            </div>
-            <div class="form-group">
-                <label class="white">Confirm Password</label>
-                <input type="password" name="confirm_password" >
-                <span class="help-block"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Submit">
-                <input type="reset" class="btn btn-default" value="Reset">
-            </div>
-            <p class="white" >Already have an account? <a href="login.html">Login here</a>.</p>
-        </form>
+        <h2 class="white">Edit Profile</h2>
+        <p class="white">Fill in your details to create your Profile</p>
+   		 <form class="form-register" action="cprofile.php" method='POST'>
+
+<div class="fname">
+  <label class="white" for="firstname">First Name:</label>
+  <input type="text" id="fname" name="fname" class="form-control">
+</div>
+
+<div class="lname">
+  <label class="white"  for="lastname">Last Name:</label>
+  <input type="text" id="lname" name="lname" class="form-control">
+</div>
+
+<div class="instrument">
+  <label class="white" for="instrumentSelect">Instrument Played:</label>
+	<select name="instrument" id='instrument'>
+                    <option value="Guitar">Guitar</option>
+                    <option value="Bass Guitar">Bass Guitar</option>
+                    <option value="Drums">Drums</option>
+                    <option value="Vocals">Vocals</option>
+    </select>
+</div>
+
+<div class="genre">
+  <label class="white" for="genreSelect">Preferred Genre:</label>
+	<select name="genre" id='genre'>
+                    <option value="Rock">Rock</option>
+                    <option value="Jazz">Jazz</option>
+                    <option value="Metal">Metal</option>
+                    <option value="RnB">RnB</option>
+    </select>
+</div>
+                           
+ <button class="button-register" type="submit" href="home.html">Register</button>
+         
+         </form>
     </div>    
         </section>
 </body>
