@@ -1,44 +1,14 @@
-<?php
-   include("config.php");
-   session_start();
-   
-   if($_SERVER["REQUEST_METHOD"] == "POST") {
-      // username and password sent from form 
-      
-      $myusername = mysqli_real_escape_string($db,$_POST['username']);
-      $mypassword = mysqli_real_escape_string($db,$_POST['password']); 
-      
-      $sql = "SELECT username FROM Person WHERE username = '$myusername' AND password = '$mypassword'";
-      $result = mysqli_query($db,$sql);
-      $row = mysqli_fetch_array($result);
-      $active = $row['active'];
 
-      $count = mysqli_num_rows($result);
-      
-      // If result matched $myusername and $mypassword, table row must be 1 row
-		
-      if($count == 1) {
-        //session_register("myusername");
-        $_SESSION['login_user'] = $myusername;
-
-         
-         header("location: index.php");
-      }else {
-         $error = "Your Login Name or Password is invalid";
-      }
-   }
-?>
-
-
-
-
+<!DOCTYPE html>
 <html lang="en">
-
+  <?php
+  session_start()
+  ?>
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>BandMates | Login</title>
+  <title>BandMates | Home</title>
   <meta content="" name="descriptison">
   <meta content="" name="keywords">
 
@@ -86,45 +56,40 @@
           <li><a href="login.html">Login</a></li>
           <li><a href="register.html">Register</a></li>
             <li><a href="service.html">Terms of Service</a></li>
-             <li><a href="policy.html">Privacy Policy</a></li>
+            <li><a href="policy.html">Privacy Policy</a></li>
+            <li><a href="profile.php">Hello, <?php print_r($_SESSION['login_user']) ?></a></li>
         </ul>
       </nav><!-- .main-nav -->
-      </div>
-    </header>
-    
-        
 
-    <section id="intro" class="clearfix">
-    <div class="container">
-        <h2 class="white">Login</h2>
-        <form action="" method="post">
-            <div class="form-group">
-                <label class="white">Username</label>
-                <input type="text" name="username" >
-                <span class="help-block"><?php echo $username_err; ?></span>
-            </div>    
-            <div class="form-group">
-                <label class="white">Password</label>
-                <input class="white" type="password" name="password" >
-                <span class="help-block"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Submit">
-            </div>
-            <p class="white">Don't have an Account? <a href="register.html">Sign up here!</a>.</p>
-        </form>
-    </div>    
-        </section>
-</body>
-    
-    
-    
-    
-    
-    
-    
-    
-      <footer id="footer">
+    </div>
+  </header><!-- #header -->
+
+  <!-- ======= Intro Section ======= -->
+  <section id="intro" class="clearfix">
+    <div class="container" data-aos="fade-up">
+
+      <div class="intro-img" data-aos="zoom-out" data-aos-delay="200">
+        <img src="assets/img/intro-img.svg" alt="" class="img-fluid">
+      </div>
+
+      <div class="intro-info" data-aos="zoom-in" data-aos-delay="100">
+        <h2>Find your ideal <br><span>Band</span><br>today!</h2>
+        <div>
+          <a href="#about" class="btn-get-started scrollto">Register as a Band</a>
+          <a href="register.html" class="btn-services scrollto">Register as a Member</a>
+        </div>
+      </div>
+
+    </div>
+  </section><!-- End Intro Section -->
+
+  <main id="main">
+
+   
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
     <div class="footer-top">
       <div class="container">
         <div class="row">
@@ -135,9 +100,10 @@
           <div class="col-lg-2 col-md-6 footer-links">
             <h4>Useful Links</h4>
             <ul>
-              <li><a href="index.html">Home</a></li>
-              <li><a href="service.html">Terms of service</a></li>
-              <li><a href="policy.html">Privacy policy</a></li>
+              <li><a href="#">Home</a></li>
+              <li><a href="#">Services</a></li>
+              <li><a href="#">Terms of service</a></li>
+              <li><a href="#">Privacy policy</a></li>
             </ul>
           </div>
 
@@ -181,4 +147,24 @@
       </div>
     </div>
   </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/jquery/jquery.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/counterup/counterup.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
+  <script src="assets/vendor/waypoints/jquery.waypoints.min.js"></script>
+  <script src="assets/vendor/venobox/venobox.min.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+</body>
+
 </html>
