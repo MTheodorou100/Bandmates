@@ -101,7 +101,6 @@
             <div class="form-group">
                 <label class="white">Username</label>
                 <input type="text" name="username" >
-                <span class="help-block"><?php echo $username_err; ?></span>
             </div>    
             <div class="form-group">
                 <label class="white">Password</label>
