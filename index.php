@@ -56,8 +56,8 @@
           <li><a href="login.html">Login</a></li>
           <li><a href="register.html">Register</a></li>
             <li><a href="service.html">Terms of Service</a></li>
-             <li><a href="policy.html">Privacy Policy</a></li>
-             <li><a>Hello, </a></li>
+            <li><a href="policy.html">Privacy Policy</a></li>
+            <li><a href="profile.php">Hello, <?php print_r($_SESSION['login_user']) ?></a></li>
         </ul>
       </nav><!-- .main-nav -->
 
