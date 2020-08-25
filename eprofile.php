@@ -69,16 +69,15 @@
         <h2 class="white">Edit Profile</h2>
         <p class="white">Fill in your details to create your Profile</p>
    		 <form class="form-register" action="cprofile.php" method='POST'>
- 		 <h1 class="h3 mb-3 font-weight-normal">Create a Profile</h1>
 
 <div class="fname">
   <label class="white" for="firstname">First Name:</label>
-  <input type="text" id="inputFName" class="form-control">
+  <input type="text" id="fname" name="fname" class="form-control">
 </div>
 
 <div class="lname">
   <label class="white"  for="lastname">Last Name:</label>
-  <input type="text" id="inputLName" class="form-control">
+  <input type="text" id="lname" name="lname" class="form-control">
 </div>
 
 <div class="instrument">
