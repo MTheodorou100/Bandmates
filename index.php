@@ -2,7 +2,8 @@
 <!DOCTYPE html>
 <html lang="en">
   <?php
-  session_start()
+  session_start();
+  include("config.php");
   ?>
 <head>
   <meta charset="utf-8">
@@ -77,6 +78,13 @@
         <div>
           <a href="#about" class="btn-get-started scrollto">Register as a Band</a>
           <a href="register.html" class="btn-services scrollto">Register as a Member</a>
+        </div>
+            <form action="search.php" method="post">
+                Search: <input type="text" name="item" /><br />
+                <input type="submit" name="submit" value="Submit" />
+            </form>
+        <div>
+
         </div>
       </div>
 
