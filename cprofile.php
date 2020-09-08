@@ -80,6 +80,8 @@ if ($conn->query($sql) === TRUE) {
 
       <nav class="main-nav float-right d-none d-lg-block">
         <ul>
+
+          
           <li class="active"><a href="index.php">Home</a></li>
           <li><a href="login.php">Login</a></li>
           <li><a href="register.html">Register</a></li>

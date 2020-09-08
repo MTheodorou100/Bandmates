@@ -2,7 +2,32 @@
 <!DOCTYPE html>
 <html lang="en">
   <?php
-  session_start()
+  session_start();
+  include("config.php");
+  function search() {
+
+  
+  if($db == false){
+    die("ERROR: Could not connect. " . mysqli_connect_error());
+  }
+
+  $item = ($_REQUEST['item']);    
+
+  $sql = "SELECT * FROM Person WHERE instrument LIKE '%".$item."%'";
+  $result = mysqli_query($db, $sql);
+
+  if (mysqli_num_rows($result) > 0) {
+    // output data of each row
+    while($row = mysqli_fetch_assoc($result)) {
+      $result = "Name: " . $row["firstName"]. " " . $row["surName"]. "<br>";
+      return $result;
+    }
+  } else {
+    echo "0 results";
+  }
+}
+  
+
   ?>
 <head>
   <meta charset="utf-8">
@@ -76,6 +101,14 @@
         <div>
           <a href="#about" class="btn-get-started scrollto">Register as a Band</a>
           <a href="register.html" class="btn-services scrollto">Register as a Member</a>
+        </div>
+            <form onsubmit="showUser(this.value)" method="post">
+                Search: <input type="text" name="item" /><br />
+                <input type="submit" name="submit" value="Submit" />
+            </form>
+            <div id="txtHint"><b>Person info will be listed here...</b></div>
+        <div>
+
         </div>
       </div>
 
@@ -163,6 +196,23 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+  <script> 
+  function showUser(str) {
+  if (str == "") {
+    document.getElementById("txtHint").innerHTML = "";
+    return;
+  } else {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("txtHint").innerHTML = this.responseText;
+      }
+    };
+    xmlhttp.open("GET","search.php?q="+str,true);
+    xmlhttp.send();
+  }
+}
+</script>
 
 </body>
 
