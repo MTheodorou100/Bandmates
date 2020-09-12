@@ -1,7 +1,9 @@
 
 <!DOCTYPE html>
+
 <html lang="en">
   <?php
+    error_reporting(E_ERROR | E_PARSE);
   session_start();
   include("config.php");
   function search() {
@@ -128,18 +130,21 @@
       <div class="intro-img" data-aos="zoom-out" data-aos-delay="200">
         <img src="assets/img/intro-img.svg" alt="" class="img-fluid">
       </div>
-
-      <div class="intro-info" data-aos="zoom-in" data-aos-delay="100">
-        <h2>Find your ideal <br><span>Band</span><br>today!</h2>
+        <div class='intro-info' data-aos='zoom-in' data-aos-delay='100'>
+ <?php if ( $_SESSION['login_user']==null){
+      echo "<h2>Find your ideal <br><span>Band</span><br>today!</h2>
         <div>
-          <a href="#about" class="btn-get-started scrollto">Register as a Band</a>
-          <a href="register.html" class="btn-services scrollto">Register as a Member</a>
-        </div>
-            <form onsubmit="showUser(this.value)" method="post">
-                Search: <input type="text" name="item" /><br />
-                <input type="submit" name="submit" value="Submit" />
+          <a href='#about' class='btn-get-started scrollto'>Register as a Band</a>
+          <a href='register.html' class='btn-services scrollto'>Register as a Member</a>
+        </div>";} else {
+             echo "<form onsubmit='showUser(this.value)' method='post'>
+                Search: <input type='text' name='item' /><br />
+                <input type='submit' name='submit' value='Submit' />
             </form>
-            <div id="txtHint"><b>Person info will be listed here...</b></div>
+            <div id='txtHint'><b>Person info will be listed here...</b></div>";
+}?>
+          
+ 
         <div>
 
         </div>
