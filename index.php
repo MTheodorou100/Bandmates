@@ -137,11 +137,12 @@
           <a href='#about' class='btn-get-started scrollto'>Register as a Band</a>
           <a href='register.html' class='btn-services scrollto'>Register as a Member</a>
         </div>";} else {
-             echo "<form onsubmit='showUser(this.value)' method='post'>
-                Search: <input type='text' name='item' /><br />
+             echo "<h2> Search for your Ideal Band! </h2>
+             <form onsubmit='showUser(this.value)' method='post'>
+                <label class='white'>Search:</label> <input type='text' name='item' /><br />
                 <input type='submit' name='submit' value='Submit' />
             </form>
-            <div id='txtHint'><b>Person info will be listed here...</b></div>";
+            <div id='txtHint'><label class='white'>Person info will be listed here...</label></div>";
 }?>
           
  
