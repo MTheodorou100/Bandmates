@@ -15,6 +15,11 @@ body {
 }
 
 a {
+  color: #0c0d0c;
+  transition: 0.5s;
+}
+
+appy {
   color: #007bff;
   transition: 0.5s;
 }
