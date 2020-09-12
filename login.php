@@ -4,7 +4,7 @@
 
    if($db === false){
     die("ERROR: Could not connect. " . mysqli_connect_error());
-   
+   }
    if($_SERVER["REQUEST_METHOD"] == "POST") {
       // username and password sent from form 
       
