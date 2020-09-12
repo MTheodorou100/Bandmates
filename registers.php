@@ -19,16 +19,22 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }     
 
+
+if ($_POST['password']==$_POST['confirm_password']){
 $sql = "INSERT INTO Person (username, password)
 VALUES ('$_POST[username]', '$_POST[password]')";
-  
- $_SESSION['login_user'] = $_POST['username'];
+$_SESSION['login_user'] = $_POST['username'];
+header("Location: eprofile.php"); 
+
+} else {
+    header("Location: register.php");
+} 
+ 
 
 if ($conn->query($sql) === TRUE) {
 } else {
   echo "Error: " . $sql . "<br>" . $conn->error;
 }
- header("Location: eprofile.php"); 
 
 ?>
 	<h1>The user has been registered!</h1>
