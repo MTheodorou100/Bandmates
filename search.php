@@ -88,10 +88,7 @@
     // output data of each row
     while($row = mysqli_fetch_array($result)) {
       $result = "Name: " . $row["firstName"]. " " . $row["surName"]. " " . $row["instrument"]. " " . $row["genre"]. "<br>";
-      $numb = 1;
       echo $result;
-      echo $numb;
-      $numb += 1;
     }
   } else {
     echo "0 results";
