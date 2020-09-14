@@ -140,7 +140,7 @@
           <a href='register.html' class='btn-services scrollto'>Register as a Member</a>
         </div>";} else {
              echo "<h2> Search for your Ideal Band! </h2>
-             <form onsubmit='showUser(this.value)' method='post'>
+             <form action='search.php' method='post'>
                 <label class='white'>Search:</label> <input type='text' name='item' /><br />
                 <input type='submit' name='submit' value='Submit' />
             </form>
