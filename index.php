@@ -1,6 +1,36 @@
 
 <!DOCTYPE html>
+
 <html lang="en">
+
+
+  <?php
+    error_reporting(E_ERROR | E_PARSE);
+  session_start();
+  include("config.php");
+  function search() {
+
+  
+  if($db == false){
+    die("ERROR: Could not connect. " . mysqli_connect_error());
+  }
+
+  $item = ($_REQUEST['item']);    
+
+  $sql = "SELECT * FROM Person WHERE instrument LIKE '%".$item."%'";
+  $result = mysqli_query($db, $sql);
+
+  if (mysqli_num_rows($result) > 0) {
+    // output data of each row
+    while($row = mysqli_fetch_assoc($result)) {
+      $result = "Name: " . $row["firstName"]. " " . $row["surName"]. "<br>";
+      return $result;
+    }
+  } else {
+    echo "0 results";
+  }
+}
+
   
 <head>
   <meta charset="utf-8">
@@ -38,28 +68,61 @@
 
 <body>
 
-  <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top">
-    <div class="container">
+    <?php
+    if ( $_SESSION['login_user']==null){
+    echo "<header id='header' class='fixed-top'>
+    <div class='container'>
 
-      <div class="logo float-left">
+      <div class='logo float-left'>
         <!-- Uncomment below if you prefer to use an text logo -->
-        <!-- <h1><a href="index.html">NewBiz</a></h1> -->
-        <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>
+        <!-- <h1><a href='index.html'>NewBiz</a></h1> -->
+        <a href='index.php'><img src='assets/img/logo.png' alt='' class='img-fluid'></a>
       </div>
 
-      <nav class="main-nav float-right d-none d-lg-block">
-       <ul>
-          <li class="active"><a href="index.php">Home</a></li>
-          <li><a href="login.php">Login</a></li>
-          <li><a href="register.html">Register</a></li>
-            <li><a href="service.html">Terms of Service</a></li>
-             <li><a href="policy.html">Privacy Policy</a></li>
+      <nav class='main-nav float-right d-none d-lg-block'>
+        <ul>
+
+          
+          <li class='active'><a href='index.php'>Home</a></li>
+          <li><a href='login.php'>Login</a></li>
+          <li><a href='register.php'>Register</a></li>
+            <li><a href='service.php'>Terms of Service</a></li>
+             <li><a href='policy.php'>Privacy Policy</a></li>
         </ul>
       </nav><!-- .main-nav -->
+      </div>
+    </header>";
+    } else {
+        echo "<header id='header' class='fixed-top'>
+    <div class='container'>
 
-    </div>
-  </header><!-- #header -->
+      <div class='logo float-left'>
+        <!-- Uncomment below if you prefer to use an text logo -->
+        <!-- <h1><a href='index.html'>NewBiz</a></h1> -->
+        <a href='index.php'><img src='assets/img/logo.png' alt='' class='img-fluid'></a>
+        <a href='index.php'>Logged in as ".$_SESSION['login_user']." </a>                               
+      </div>
+
+
+      <nav class='main-nav float-right d-none d-lg-block'>
+        <ul>
+
+          
+          <li class='active'><a href='index.php'>Home</a></li>
+            <li><a href='service.php'>Terms of Service</a></li>
+             <li><a href='policy.php'>Privacy Policy</a></li>
+             <li><a href='profile.php'>My Profile</a></li>
+             <li><a href='signout.php'> Sign Out </a></li>
+             
+        </ul>
+        
+        
+      </nav><!-- .main-nav -->
+      </div>
+    </header>";
+    }
+    
+    ?> 
 
   <!-- ======= Intro Section ======= -->
   <section id="intro" class="clearfix">
@@ -68,17 +131,24 @@
       <div class="intro-img" data-aos="zoom-out" data-aos-delay="200">
         <img src="assets/img/intro-img.svg" alt="" class="img-fluid">
       </div>
-
-      <div class="intro-info" data-aos="zoom-in" data-aos-delay="100">
-        <h2>Find your ideal <br><span>Band</span><br>today!</h2>
+        <div class='intro-info' data-aos='zoom-in' data-aos-delay='100'>
+ <?php if ( $_SESSION['login_user']==null){
+      echo "<h2>Find your ideal <br><span>Band</span><br>today!</h2>
         <div>
-          <a href="#about" class="btn-get-started scrollto">Register as a Band</a>
-          <a href="register.html" class="btn-services scrollto">Register as a Member</a>
-        </div>
-            <form action="search.php" method="POST">
-                Search: <input type="text" name="item" /><br />
-                <input type="submit" name="submit" value="Submit" />
+
+          <a href='#about' class='btn-get-started scrollto'>Register as a Band</a>
+          <a href='register.html' class='btn-services scrollto'>Register as a Member</a>
+        </div>";} else {
+             echo "<h2> Search for your Ideal Band! </h2>
+             <form onsubmit='showUser(this.value)' method='post'>
+                <label class='white'>Search:</label> <input type='text' name='item' /><br />
+                <input type='submit' name='submit' value='Submit' />
             </form>
+            <div id='txtHint'><label class='white'>Person info will be listed here...</label></div>";
+}?>
+          
+ 
+
         <div>
 
         </div>
