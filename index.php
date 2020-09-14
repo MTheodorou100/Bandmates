@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 <html lang="en">
@@ -72,16 +71,13 @@
     if ( $_SESSION['login_user']==null){
     echo "<header id='header' class='fixed-top'>
     <div class='container'>
-
       <div class='logo float-left'>
         <!-- Uncomment below if you prefer to use an text logo -->
         <!-- <h1><a href='index.html'>NewBiz</a></h1> -->
         <a href='index.php'><img src='assets/img/logo.png' alt='' class='img-fluid'></a>
       </div>
-
       <nav class='main-nav float-right d-none d-lg-block'>
         <ul>
-
           
           <li class='active'><a href='index.php'>Home</a></li>
           <li><a href='login.php'>Login</a></li>
@@ -95,18 +91,14 @@
     } else {
         echo "<header id='header' class='fixed-top'>
     <div class='container'>
-
       <div class='logo float-left'>
         <!-- Uncomment below if you prefer to use an text logo -->
         <!-- <h1><a href='index.html'>NewBiz</a></h1> -->
         <a href='index.php'><img src='assets/img/logo.png' alt='' class='img-fluid'></a>
         <a href='index.php'>Logged in as ".$_SESSION['login_user']." </a>                               
       </div>
-
-
       <nav class='main-nav float-right d-none d-lg-block'>
         <ul>
-
           
           <li class='active'><a href='index.php'>Home</a></li>
             <li><a href='service.php'>Terms of Service</a></li>
@@ -135,7 +127,6 @@
  <?php if ( $_SESSION['login_user']==null){
       echo "<h2>Find your ideal <br><span>Band</span><br>today!</h2>
         <div>
-
           <a href='#about' class='btn-get-started scrollto'>Register as a Band</a>
           <a href='register.html' class='btn-services scrollto'>Register as a Member</a>
         </div>";} else {
