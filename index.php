@@ -2,6 +2,8 @@
 <!DOCTYPE html>
 
 <html lang="en">
+
+
   <?php
     error_reporting(E_ERROR | E_PARSE);
   session_start();
@@ -28,9 +30,8 @@
     echo "0 results";
   }
 }
-  
 
-  ?>
+  
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -134,6 +135,7 @@
  <?php if ( $_SESSION['login_user']==null){
       echo "<h2>Find your ideal <br><span>Band</span><br>today!</h2>
         <div>
+
           <a href='#about' class='btn-get-started scrollto'>Register as a Band</a>
           <a href='register.html' class='btn-services scrollto'>Register as a Member</a>
         </div>";} else {
@@ -146,6 +148,7 @@
 }?>
           
  
+
         <div>
 
         </div>
