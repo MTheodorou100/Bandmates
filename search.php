@@ -5,30 +5,6 @@
     error_reporting(E_ERROR | E_PARSE);
   session_start();
   include("config.php");
-  function search() {
-
-  
-  if($db == false){
-    die("ERROR: Could not connect. " . mysqli_connect_error());
-  }
-
-  $item = ($_REQUEST['item']);    
-
-  $sql = "SELECT * FROM Person WHERE instrument LIKE '%".$item."%'";
-  $result = mysqli_query($db, $sql);
-
-  if (mysqli_num_rows($result) > 0) {
-    // output data of each row
-    while($row = mysqli_fetch_assoc($result)) {
-      $result = "Name: " . $row["firstName"]. " " . $row["surName"]. "<br>";
-      return $result;
-    }
-  } else {
-    echo "0 results";
-  }
-}
-  
-
   ?>
 <head>
   <meta charset="utf-8">
@@ -130,16 +106,8 @@
         <img src="assets/img/intro-img.svg" alt="" class="img-fluid">
       </div>
         <div class='intro-info' data-aos='zoom-in' data-aos-delay='100'>
-        
- <style type="text/css">
- $results {
-   color: white;
- }    
- </style>   
-        
+  
         <?php
-  session_start();
-  include("config.php");
   if($db == false){
     die("ERROR: Could not connect. " . mysqli_connect_error());
   }
