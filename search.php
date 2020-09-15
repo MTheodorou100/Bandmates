@@ -126,7 +126,7 @@
   <section id="intro" class="clearfix">
     <div class="container" data-aos="fade-up">
 
-      <div class="intro-img" data-aos="zoom-out" data-aos-delay="200">
+      <div class="intro-img" data-aos="zoom-out" data-aos-delay="200" style="color:white;">
         <img src="assets/img/intro-img.svg" alt="" class="img-fluid">
       </div>
         <div class='intro-info' data-aos='zoom-in' data-aos-delay='100'>
