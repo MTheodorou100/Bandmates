@@ -2,36 +2,11 @@
 <!DOCTYPE html>
 
 <html lang="en">
-
-
   <?php
     error_reporting(E_ERROR | E_PARSE);
   session_start();
   include("config.php");
-  function search() {
-
-  
-  if($db == false){
-    die("ERROR: Could not connect. " . mysqli_connect_error());
-  }
-
-  $item = ($_REQUEST['item']);    
-
-  $sql = "SELECT * FROM Person WHERE instrument LIKE '%".$item."%'";
-  $result = mysqli_query($db, $sql);
-
-  if (mysqli_num_rows($result) > 0) {
-    // output data of each row
-    while($row = mysqli_fetch_assoc($result)) {
-      $result = "Name: " . $row["firstName"]. " " . $row["surName"]. "<br>";
-      return $result;
-    }
-  } else {
-    echo "0 results";
-  }
-}
-
-  
+  ?>
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -135,20 +110,18 @@
  <?php if ( $_SESSION['login_user']==null){
       echo "<h2>Find your ideal <br><span>Band</span><br>today!</h2>
         <div>
-
           <a href='#about' class='btn-get-started scrollto'>Register as a Band</a>
           <a href='register.html' class='btn-services scrollto'>Register as a Member</a>
         </div>";} else {
              echo "<h2> Search for your Ideal Band! </h2>
-             <form onsubmit='showUser(this.value)' method='post'>
+             <form action='search.php' method='GET'>
                 <label class='white'>Search:</label> <input type='text' name='item' /><br />
                 <input type='submit' name='submit' value='Submit' />
-            </form>
-            <div id='txtHint'><label class='white'>Person info will be listed here...</label></div>";
+            </form>";
+            
 }?>
           
  
-
         <div>
 
         </div>
