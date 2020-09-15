@@ -114,7 +114,7 @@
 
   $item = ($_GET['item']);    
 
-  $sql = "SELECT * FROM Person WHERE instrument LIKE '%".$item."%'";
+  $sql = "SELECT * FROM Person WHERE instrument LIKE '%".$item."%' OR genre LIKE '%".$item."%'";
   $result = mysqli_query($db, $sql) or die(mysqli_error($db));
   
 
