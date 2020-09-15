@@ -1,3 +1,40 @@
+<?php
+   include("config.php");
+   session_start();
+
+   if($db === false){
+    die("ERROR: Could not connect. " . mysqli_connect_error());
+   }
+   if($_SERVER["REQUEST_METHOD"] == "POST") {
+      // username and password sent from form 
+      
+      $myusername = mysqli_real_escape_string($db,$_POST['username']);
+      $mypassword = mysqli_real_escape_string($db,$_POST['password']); 
+      
+      $sql = "SELECT username FROM Person WHERE username = '$myusername' AND password = '$mypassword'";
+      $result = mysqli_query($db,$sql);
+      $row = mysqli_fetch_array($result);
+      $active = $row['active'];
+
+      $count = mysqli_num_rows($result);
+      
+      // If result matched $myusername and $mypassword, table row must be 1 row
+		
+      if($count == 1) {
+        //session_register("myusername");
+        $_SESSION['login_user'] = $myusername;
+
+         
+         header("location: index.php");
+      }else {
+         $error = "Your Login Name or Password is invalid";
+      }
+   }
+?>
+
+
+
+
 <html lang="en">
 
 <head>
@@ -36,29 +73,61 @@
 
 <body>
 
-  <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top">
-    <div class="container">
+<?php
+    if ( $_SESSION['login_user']==null){
+    echo "<header id='header' class='fixed-top'>
+    <div class='container'>
 
-      <div class="logo float-left">
+      <div class='logo float-left'>
         <!-- Uncomment below if you prefer to use an text logo -->
-        <!-- <h1><a href="index.html">NewBiz</a></h1> -->
-        <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>
+        <!-- <h1><a href='index.html'>NewBiz</a></h1> -->
+        <a href='index.php'><img src='assets/img/logo.png' alt='' class='img-fluid'></a>
       </div>
 
-      <nav class="main-nav float-right d-none d-lg-block">
+      <nav class='main-nav float-right d-none d-lg-block'>
         <ul>
-          <li class="active"><a href="index.html">Home</a></li>
-          <li><a href="login.html">Login</a></li>
-          <li><a href="register.html">Register</a></li>
-            <li><a href="service.html">Terms of Service</a></li>
-             <li><a href="policy.html">Privacy Policy</a></li>
+
+          
+          <li class='active'><a href='index.php'>Home</a></li>
+          <li><a href='login.php'>Login</a></li>
+          <li><a href='register.php'>Register</a></li>
+            <li><a href='service.php'>Terms of Service</a></li>
+             <li><a href='policy.php'>Privacy Policy</a></li>
         </ul>
       </nav><!-- .main-nav -->
       </div>
-    </header>
-    
+    </header>";
+    } else {
+        echo "<header id='header' class='fixed-top'>
+    <div class='container'>
+
+      <div class='logo float-left'>
+        <!-- Uncomment below if you prefer to use an text logo -->
+        <!-- <h1><a href='index.html'>NewBiz</a></h1> -->
+        <a href='index.php'><img src='assets/img/logo.png' alt='' class='img-fluid'></a>
+        <a href='index.php'>Logged in as ".$_SESSION['login_user']." </a>                               
+      </div>
+
+
+      <nav class='main-nav float-right d-none d-lg-block'>
+        <ul>
+
+          
+          <li class='active'><a href='index.php'>Home</a></li>
+            <li><a href='service.php'>Terms of Service</a></li>
+             <li><a href='policy.php'>Privacy Policy</a></li>
+             <li><a href='profile.php'>My Profile</a></li>
+             <li><a href='signout.php'> Sign Out </a></li>
+             
+        </ul>
         
+        
+      </nav><!-- .main-nav -->
+      </div>
+    </header>";
+    }
+    
+    ?>     
 
     <section id="intro" class="clearfix">
     <div class="container">
@@ -67,7 +136,6 @@
             <div class="form-group">
                 <label class="white">Username</label>
                 <input type="text" name="username" >
-                <span class="help-block"><?php echo $username_err; ?></span>
             </div>    
             <div class="form-group">
                 <label class="white">Password</label>
@@ -77,7 +145,7 @@
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Submit">
             </div>
-            <p class="white">Don't have an Account? <a href="register.html">Sign up here!</a>.</p>
+            <p class="white">Don't have an Account? <a href="register.php">Sign up here!</a>.</p>
         </form>
     </div>    
         </section>

@@ -1,6 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
 
+<html lang="en">
+  <?php
+    error_reporting(E_ERROR | E_PARSE);
+  session_start();
+  include("config.php");
+  ?>
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -37,42 +42,96 @@
 
 <body>
 
-  <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top">
-    <div class="container">
+    <?php
+    if ( $_SESSION['login_user']==null){
+    echo "<header id='header' class='fixed-top'>
+    <div class='container'>
 
-      <div class="logo float-left">
+      <div class='logo float-left'>
         <!-- Uncomment below if you prefer to use an text logo -->
-        <!-- <h1><a href="index.html">NewBiz</a></h1> -->
-        <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>
+        <!-- <h1><a href='index.html'>NewBiz</a></h1> -->
+        <a href='index.php'><img src='assets/img/logo.png' alt='' class='img-fluid'></a>
       </div>
 
-      <nav class="main-nav float-right d-none d-lg-block">
+      <nav class='main-nav float-right d-none d-lg-block'>
         <ul>
-          <li class="active"><a href="index.html">Home</a></li>
-          <li><a href="login.html">Login</a></li>
-          <li><a href="register.html">Register</a></li>
-            <li><a href="service.html">Terms of Service</a></li>
-             <li><a href="policy.html">Privacy Policy</a></li>
+
+          
+          <li class='active'><a href='index.php'>Home</a></li>
+          <li><a href='login.php'>Login</a></li>
+          <li><a href='register.php'>Register</a></li>
+            <li><a href='service.php'>Terms of Service</a></li>
+             <li><a href='policy.php'>Privacy Policy</a></li>
         </ul>
       </nav><!-- .main-nav -->
+      </div>
+    </header>";
+    } else {
+        echo "<header id='header' class='fixed-top'>
+    <div class='container'>
 
-    </div>
-  </header><!-- #header -->
+      <div class='logo float-left'>
+        <!-- Uncomment below if you prefer to use an text logo -->
+        <!-- <h1><a href='index.html'>NewBiz</a></h1> -->
+        <a href='index.php'><img src='assets/img/logo.png' alt='' class='img-fluid'></a>
+        <a href='index.php'>Logged in as ".$_SESSION['login_user']." </a>                               
+      </div>
+
+
+      <nav class='main-nav float-right d-none d-lg-block'>
+        <ul>
+
+          
+          <li class='active'><a href='index.php'>Home</a></li>
+            <li><a href='service.php'>Terms of Service</a></li>
+             <li><a href='policy.php'>Privacy Policy</a></li>
+             <li><a href='profile.php'>My Profile</a></li>
+             <li><a href='signout.php'> Sign Out </a></li>
+             
+        </ul>
+        
+        
+      </nav><!-- .main-nav -->
+      </div>
+    </header>";
+    }
+    
+    ?> 
 
   <!-- ======= Intro Section ======= -->
   <section id="intro" class="clearfix">
     <div class="container" data-aos="fade-up">
 
-      <div class="intro-img" data-aos="zoom-out" data-aos-delay="200">
+      <div class="intro-img" data-aos="zoom-out" data-aos-delay="200" style="color:white;">
         <img src="assets/img/intro-img.svg" alt="" class="img-fluid">
       </div>
+        <div class='intro-info' data-aos='zoom-in' data-aos-delay='100'>
+  
+        <?php
+  if($db == false){
+    die("ERROR: Could not connect. " . mysqli_connect_error());
+  }
 
-      <div class="intro-info" data-aos="zoom-in" data-aos-delay="100">
-        <h2>Find your ideal <br><span>Band</span><br>today!</h2>
-        <div>
-          <a href="#about" class="btn-get-started scrollto">Register as a Band</a>
-          <a href="register.html" class="btn-services scrollto">Register as a Member</a>
+  $item = ($_GET['item']);    
+
+  $sql = "SELECT * FROM Person WHERE instrument LIKE '%".$item."%' OR genre LIKE '%".$item."%'";
+  $result = mysqli_query($db, $sql) or die(mysqli_error($db));
+  
+
+  if (mysqli_num_rows($result) > 0) {
+    // output data of each row
+    while($row = mysqli_fetch_array($result, MYSQL_ASSOC)) {
+      $results = "Name: " . $row["firstName"]. " " . $row["surName"]. " " . $row["instrument"]. " " . $row["genre"]. "<br>";
+      echo $results;
+    }
+  } else {
+    echo "0 results";
+  }
+  
+  $db->close();
+?>
+          
+ 
         </div>
       </div>
 
@@ -160,6 +219,23 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+  <script> 
+  function showUser(str) {
+  if (str == "") {
+    document.getElementById("txtHint").innerHTML = "";
+    return;
+  } else {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("txtHint").innerHTML = this.responseText;
+      }
+    };
+    xmlhttp.open("GET","search.php?q="+str,true);
+    xmlhttp.send();
+  }
+}
+</script>
 
 </body>
 

@@ -15,6 +15,11 @@ body {
 }
 
 a {
+  color: #0c0d0c;
+  transition: 0.5s;
+}
+
+appy {
   color: #007bff;
   transition: 0.5s;
 }
@@ -403,6 +408,7 @@ h1, h2, h3, h4, h5, h6 {
 #intro .intro-info {
   width: 50%;
   float: left;
+  color:white;
 }
 
 @media (max-width: 991px) {
@@ -1526,4 +1532,3 @@ section {
 .white {
    color: #FFFFFF;
 }
-

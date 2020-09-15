@@ -1,11 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
 
+<!DOCTYPE html>
+
+<html lang="en">
+  <?php
+    error_reporting(E_ERROR | E_PARSE);
+  session_start();
+  include("config.php");
+  ?>
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>BandMates | Terms of Service</title>
+  <title>BandMates | Home</title>
   <meta content="" name="descriptison">
   <meta content="" name="keywords">
 
@@ -37,93 +43,95 @@
 
 <body>
 
-  <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top">
-    <div class="container">
+    <?php
+    if ( $_SESSION['login_user']==null){
+    echo "<header id='header' class='fixed-top'>
+    <div class='container'>
 
-      <div class="logo float-left">
+      <div class='logo float-left'>
         <!-- Uncomment below if you prefer to use an text logo -->
-        <!-- <h1><a href="index.html">NewBiz</a></h1> -->
-        <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>
+        <!-- <h1><a href='index.html'>NewBiz</a></h1> -->
+        <a href='index.php'><img src='assets/img/logo.png' alt='' class='img-fluid'></a>
       </div>
 
-      <nav class="main-nav float-right d-none d-lg-block">
+      <nav class='main-nav float-right d-none d-lg-block'>
         <ul>
-          <li class="active"><a href="index.html">Home</a></li>
-          <li><a href="login.html">Login</a></li>
-          <li><a href="register.html">Register</a></li>
-            <li><a href="service.html">Terms of Service</a></li>
-             <li><a href="policy.html">Privacy Policy</a></li>
+
+          
+          <li class='active'><a href='index.php'>Home</a></li>
+          <li><a href='login.php'>Login</a></li>
+          <li><a href='register.php'>Register</a></li>
+            <li><a href='service.php'>Terms of Service</a></li>
+             <li><a href='policy.php'>Privacy Policy</a></li>
         </ul>
       </nav><!-- .main-nav -->
+      </div>
+    </header>";
+    } else {
+        echo "<header id='header' class='fixed-top'>
+    <div class='container'>
 
-    </div>
-  </header><!-- #header -->
+      <div class='logo float-left'>
+        <!-- Uncomment below if you prefer to use an text logo -->
+        <!-- <h1><a href='index.html'>NewBiz</a></h1> -->
+        <a href='index.php'><img src='assets/img/logo.png' alt='' class='img-fluid'></a>
+        <a href='index.php'>Logged in as ".$_SESSION['login_user']." </a>                               
+      </div>
 
 
-  <main id="main">
- <!-- ======= Services Section ======= -->
-    <section id="services" class="section-bg">
-      <div class="container" data-aos="fade-up">
+      <nav class='main-nav float-right d-none d-lg-block'>
+        <ul>
 
-        <header class="section-header">
-          <br>
-          <br>
-          <h3>Terms of Services</h3>
-          <p>These Terms of Service reflect the way that BandMates business works as well as the laws that apply to our company.</p>
-        </header>
+          
+          <li class='active'><a href='index.php'>Home</a></li>
+            <li><a href='service.php'>Terms of Service</a></li>
+             <li><a href='policy.php'>Privacy Policy</a></li>
+             <li><a href='profile.php'>My Profile</a></li>
+             <li><a href='signout.php'> Sign Out </a></li>
+             
+        </ul>
+        
+        
+      </nav><!-- .main-nav -->
+      </div>
+    </header>";
+    }
+    
+    ?> 
 
-        <div class="row justify-content-center">
+  <!-- ======= Intro Section ======= -->
+  <section id="intro" class="clearfix">
+    <div class="container" data-aos="fade-up">
 
-          <div class="col-md-6 col-lg-5" data-aos="zoom-in" data-aos-delay="100">
-            <div class="box">
-              <div class="icon"><i class="ion-ios-analytics-outline" style="color: #ff689b;"></i></div>
-              <h4 class="title"><a href="">Lorem Ipsum</a></h4>
-              <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-5" data-aos="zoom-in" data-aos-delay="200">
-            <div class="box">
-              <div class="icon"><i class="ion-ios-bookmarks-outline" style="color: #e9bf06;"></i></div>
-              <h4 class="title"><a href="">Dolor Sitema</a></h4>
-              <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-5" data-aos="zoom-in" data-aos-delay="100">
-            <div class="box">
-              <div class="icon"><i class="ion-ios-paper-outline" style="color: #3fcdc7;"></i></div>
-              <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>
-              <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-5" data-aos="zoom-in" data-aos-delay="200">
-            <div class="box">
-              <div class="icon"><i class="ion-ios-speedometer-outline" style="color:#41cf2e;"></i></div>
-              <h4 class="title"><a href="">Magni Dolores</a></h4>
-              <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-5" data-aos="zoom-in" data-aos-delay="100">
-            <div class="box">
-              <div class="icon"><i class="ion-ios-world-outline" style="color: #d6ff22;"></i></div>
-              <h4 class="title"><a href="">Nemo Enim</a></h4>
-              <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-5" data-aos="zoom-in" data-aos-delay="200">
-            <div class="box">
-              <div class="icon"><i class="ion-ios-clock-outline" style="color: #4680ff;"></i></div>
-              <h4 class="title"><a href="">Eiusmod Tempor</a></h4>
-              <p class="description">Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi</p>
-            </div>
-          </div>
+      <div class="intro-img" data-aos="zoom-out" data-aos-delay="200">
+        <img src="assets/img/intro-img.svg" alt="" class="img-fluid">
+      </div>
+        <div class='intro-info' data-aos='zoom-in' data-aos-delay='100'>
+ <?php if ( $_SESSION['login_user']==null){
+      echo "<h2>Find your ideal <br><span>Band</span><br>today!</h2>
+        <div>
+          <a href='#about' class='btn-get-started scrollto'>Register as a Band</a>
+          <a href='register.html' class='btn-services scrollto'>Register as a Member</a>
+        </div>";} else {
+             echo "<h2> Search for your Ideal Band! </h2>
+             <form action='search.php' method='GET'>
+                <label class='white'>Search:</label> <input type='text' name='item' /><br />
+                <input type='submit' name='submit' value='Submit' />
+            </form>";
+            
+}?>
+          
+ 
+        <div>
 
         </div>
-
       </div>
-    </section><!-- End Services Section -->
+
+    </div>
+  </section><!-- End Intro Section -->
+
+  <main id="main">
+
    
   </main><!-- End #main -->
 
@@ -203,6 +211,23 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+  <script> 
+  function showUser(str) {
+  if (str == "") {
+    document.getElementById("txtHint").innerHTML = "";
+    return;
+  } else {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("txtHint").innerHTML = this.responseText;
+      }
+    };
+    xmlhttp.open("GET","search.php?q="+str,true);
+    xmlhttp.send();
+  }
+}
+</script>
 
 </body>
 
