@@ -132,23 +132,19 @@
         <div class='intro-info' data-aos='zoom-in' data-aos-delay='100'>
         
  <style type="text/css">
- $result {
-   color: black;
+ $results {
+   color: white;
  }    
  </style>   
-        
         
         <?php
   session_start();
   include("config.php");
-  
-    
-  
   if($db == false){
     die("ERROR: Could not connect. " . mysqli_connect_error());
   }
 
-  $item = ($_POST['item']);    
+  $item = ($_GET['item']);    
 
   $sql = "SELECT * FROM Person WHERE instrument LIKE '%".$item."%'";
   $result = mysqli_query($db, $sql) or die(mysqli_error($db));
@@ -157,19 +153,17 @@
   if (mysqli_num_rows($result) > 0) {
     // output data of each row
     while($row = mysqli_fetch_array($result, MYSQL_ASSOC)) {
-      $result = "Name: " . $row["firstName"]. " " . $row["surName"]. " " . $row["instrument"]. " " . $row["genre"]. "<br>";
-      echo $result;
+      $results = "Name: " . $row["firstName"]. " " . $row["surName"]. " " . $row["instrument"]. " " . $row["genre"]. "<br>";
+      echo $results;
     }
   } else {
     echo "0 results";
   }
-  echo "<span style= color:black><?php echo $result; ?></span>";
+  
   $db->close();
 ?>
           
  
-        <div>
-
         </div>
       </div>
 

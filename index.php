@@ -1,7 +1,12 @@
+
 <!DOCTYPE html>
 
 <html lang="en">
-
+  <?php
+    error_reporting(E_ERROR | E_PARSE);
+  session_start();
+  include("config.php");
+  ?>
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -109,11 +114,11 @@
           <a href='register.html' class='btn-services scrollto'>Register as a Member</a>
         </div>";} else {
              echo "<h2> Search for your Ideal Band! </h2>
-             <form action='search.php' method='post'>
+             <form action='search.php' method='GET'>
                 <label class='white'>Search:</label> <input type='text' name='item' /><br />
                 <input type='submit' name='submit' value='Submit' />
-            </form>
-            <div id='txtHint'><label class='white'>Person info will be listed here...</label></div>";
+            </form>";
+            
 }?>
           
  
@@ -204,6 +209,25 @@
   <script src="assets/vendor/venobox/venobox.min.js"></script>
   <script src="assets/vendor/aos/aos.js"></script>
 
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+  <script> 
+  function showUser(str) {
+  if (str == "") {
+    document.getElementById("txtHint").innerHTML = "";
+    return;
+  } else {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("txtHint").innerHTML = this.responseText;
+      }
+    };
+    xmlhttp.open("GET","search.php?q="+str,true);
+    xmlhttp.send();
+  }
+}
+</script>
 
 </body>
 
