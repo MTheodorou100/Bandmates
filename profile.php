@@ -1,30 +1,17 @@
 <?php
    
-   session_start();
+  session_start();
+  include("config.php");
+   if($db == false){
+    die("ERROR: Could not connect. " . mysqli_connect_error());
+  }
 
-    $servername = utf8_encode("35.197.167.52");
-    $dbname = utf8_encode("bandmates");
-    $username = utf8_encode("root");
-    $password = utf8_encode("mypassword");
+  $item = ($_GET['item']);    
 
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    if (mysqli_connect_errno()) {
-    echo "Failed to connect to MySQL: " . mysqli_connect_error();
-    exit();
-}
-
-     $result = mysqli_query($conn, 'SELECT firstName FROM Person WHERE username = john'); 
-        while ($row = mysqli_fetch_array($result)) {
-            echo $row['firstName'];
-        
-    
-  //  echo "Returned rows are: " . mysqli_num_rows($result);
-  // Free result set
-   //  mysqli_free_result($result);
-}
-
-mysqli_close($con);
+  $sql = "SELECT * FROM Person WHERE username='$_SESSION[login_user]'";
+  $result = mysqli_query($db, $sql) or die(mysqli_error($db));
+  
+  $row = mysqli_fetch_array($result, MYSQL_ASSOC);
     
       
      
@@ -130,19 +117,51 @@ mysqli_close($con);
 
     <section id="intro" class="clearfix">
     <div class="container">
-        <h2 class="white">Profile</h2><br>
+        <h2 class="white"><?php echo $row['username']; ?></h2><br>
         <form action="" method="post">
             <div class="form-group">
                 <label class="white">First Name</label>
-                <p><?php echo $result; ?></p>
+                <p><?php echo $row['firstName']; ?></p>
             </div>    
             <div class="form-group">
                 <label class="white">Last Name</label>
-                
+                <p><?php echo $row['surName'];?></p>
                 <span class="help-block"></span>
             </div>
             <div class="form-group">
                 <label class="white">Instrument</label>
+				<p><?php echo $row['instrument'];?></p>
+            
+                <span class="help-block"></span>
+            </div>
+			<div class="form-group">
+                <label class="white">Genre</label>
+				<p><?php echo $row['genre'];?></p>
+            
+                <span class="help-block"></span>
+            </div>
+			<div class="form-group">
+                <label class="white">Bio</label>
+				<p></p>
+            
+                <span class="help-block"></span>
+            </div>
+			<div class="form-group">
+                <label class="white">Previous Experience</label>
+				<p></p>
+            
+                <span class="help-block"></span>
+            </div>
+			
+			<div class="form-group">
+                <label class="white">Contact Links</label>
+				<div class="social-links">
+              <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+              <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+              <a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
+              <a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a>
+              <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
+            </div>
             
                 <span class="help-block"></span>
             </div>
