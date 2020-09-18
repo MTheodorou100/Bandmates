@@ -24,6 +24,44 @@
 <html lang="en">
 
 <head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+}
+
+.title {
+  color: grey;
+  font-size: 18px;
+}
+
+button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+a {
+  text-decoration: none;
+  font-size: 22px;
+  color: black;
+}
+
+button:hover, a:hover {
+  opacity: 0.7;
+}
+</style>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
@@ -117,29 +155,22 @@
 
     <section id="intro" class="clearfix">
     <div class="container">
-        <h2 class="white"><?php echo $row['username']; ?></h2><br>
-        <form action="" method="post">
-            <div class="form-group">
-                <label class="white">First Name</label>
-                <p><?php echo $row['firstName']; ?></p>
-            </div>    
-            <div class="form-group">
-                <label class="white">Last Name</label>
-                <p><?php echo $row['surName'];?></p>
-                <span class="help-block"></span>
-            </div>
-            <div class="form-group">
-                <label class="white">Instrument</label>
-				<p><?php echo $row['instrument'];?></p>
-            
-                <span class="help-block"></span>
-            </div>
-			<div class="form-group">
-                <label class="white">Genre</label>
-				<p><?php echo $row['genre'];?></p>
-            
-                <span class="help-block"></span>
-            </div>
+     <center><h2 class="white"><?php echo $row['username']; ?></h2><br></center> 
+      <div class="card">
+  <img src="assets/img/empty.png" style="width:100%">
+  <h1><?php echo $row['firstName']; ?> <?php echo $row['surName'];?></h1>
+  <p class="title">//Band Position//</p>
+        <p><b>Genres:</b> <?php echo $row['genre'];?></p>
+        <p><b>Instruments:</b> <?php echo $row['instrument'];?></p>
+
+  <div style="margin: 24px 0;">
+    <a href="#"><i class="fa fa-dribbble"></i></a> 
+    <a href="#"><i class="fa fa-twitter"></i></a>  
+    <a href="#"><i class="fa fa-linkedin"></i></a>  
+    <a href="#"><i class="fa fa-facebook"></i></a> 
+  </div>
+  <p><button>Contact</button></p>
+</div>
 			<div class="form-group">
                 <label class="white">Bio</label>
 				<p></p>
@@ -152,21 +183,6 @@
             
                 <span class="help-block"></span>
             </div>
-			
-			<div class="form-group">
-                <label class="white">Contact Links</label>
-				<div class="social-links">
-              <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
-              <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
-              <a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
-              <a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a>
-              <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
-            </div>
-            
-                <span class="help-block"></span>
-            </div>
-            
-        </form>
     </div>    
         </section>
 </body>
