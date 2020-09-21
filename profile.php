@@ -1,30 +1,17 @@
 <?php
    
-   session_start();
+  session_start();
+  include("config.php");
+   if($db == false){
+    die("ERROR: Could not connect. " . mysqli_connect_error());
+  }
 
-    $servername = utf8_encode("35.197.167.52");
-    $dbname = utf8_encode("bandmates");
-    $username = utf8_encode("root");
-    $password = utf8_encode("mypassword");
+  $item = ($_GET['item']);    
 
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    if (mysqli_connect_errno()) {
-    echo "Failed to connect to MySQL: " . mysqli_connect_error();
-    exit();
-}
-
-     $result = mysqli_query($conn, 'SELECT firstName FROM Person WHERE username = john'); 
-        while ($row = mysqli_fetch_array($result)) {
-            echo $row['firstName'];
-        
-    
-  //  echo "Returned rows are: " . mysqli_num_rows($result);
-  // Free result set
-   //  mysqli_free_result($result);
-}
-
-mysqli_close($con);
+  $sql = "SELECT * FROM Person WHERE username='$_SESSION[login_user]'";
+  $result = mysqli_query($db, $sql) or die(mysqli_error($db));
+  
+  $row = mysqli_fetch_array($result, MYSQL_ASSOC);
     
       
      
@@ -37,6 +24,44 @@ mysqli_close($con);
 <html lang="en">
 
 <head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+}
+
+.title {
+  color: grey;
+  font-size: 18px;
+}
+
+button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+a {
+  text-decoration: none;
+  font-size: 22px;
+  color: black;
+}
+
+button:hover, a:hover {
+  opacity: 0.7;
+}
+</style>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
@@ -130,24 +155,34 @@ mysqli_close($con);
 
     <section id="intro" class="clearfix">
     <div class="container">
-        <h2 class="white">Profile</h2><br>
-        <form action="" method="post">
-            <div class="form-group">
-                <label class="white">First Name</label>
-                <p><?php echo $result; ?></p>
-            </div>    
-            <div class="form-group">
-                <label class="white">Last Name</label>
-                
-                <span class="help-block"></span>
-            </div>
-            <div class="form-group">
-                <label class="white">Instrument</label>
+     <center><h2 class="white"><?php echo $row['username']; ?></h2><br></center> 
+      <div class="card">
+  <img src="assets/img/empty.png" style="width:100%">
+  <h1><?php echo $row['firstName']; ?> <?php echo $row['surName'];?></h1>
+  <p class="title">//Band Position//</p>
+        <p><b>Genres:</b> <?php echo $row['genre'];?></p>
+        <p><b>Instruments:</b> <?php echo $row['instrument'];?></p>
+
+  <div style="margin: 24px 0;">
+    <a href="#"><i class="fa fa-dribbble"></i></a> 
+    <a href="#"><i class="fa fa-twitter"></i></a>  
+    <a href="#"><i class="fa fa-linkedin"></i></a>  
+    <a href="#"><i class="fa fa-facebook"></i></a> 
+  </div>
+  <p><button>Contact</button></p>
+</div>
+			<div class="form-group">
+                <label class="white">Bio</label>
+				<p></p>
             
                 <span class="help-block"></span>
             </div>
+			<div class="form-group">
+                <label class="white">Previous Experience</label>
+				<p></p>
             
-        </form>
+                <span class="help-block"></span>
+            </div>
     </div>    
         </section>
 </body>
