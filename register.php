@@ -5,6 +5,93 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    
+  <script type="text/javascript">
+    
+  function validate() 
+    {
+        var username = document.getElementById("uname");
+        var password = document.getElementById("pass");
+        var conpassword = document.getElementById("confirmpass");
+        
+        if(username.value.trim() =="")
+          {  
+            //alert("Blank username");
+            username.style.border = "solid 3px red";
+            document.getElementById("lbluser").style.visibility="visible";
+            return false;
+          }
+       else if(password.value.trim() =="")
+          {
+            //alert("Blank password");
+            password.style.border = "solid 3px red";
+            document.getElementById("lblpass").style.visibility="visible";
+            return false;  
+          }
+       else if(conpassword.value.trim() =="" || conpassword.value.trim() != password.value.trim())
+          {
+            //alert("Blank confirm password");
+            conpassword.style.border = "solid 3px red";
+            document.getElementById("lblconpass").style.visibility="visible";
+            return false;   
+          }
+       else
+          {
+            return true;
+          }
+    }
+      
+  function liveuservalidate()
+      {
+          var username = document.getElementById("uname");
+          
+          if(username.value.trim() != "")
+          {
+              username.style.border = "solid 3px green";
+              document.getElementById("lbluser").style.visibility="hidden";
+          }
+        else
+          {
+              username.style.border = "solid 3px red";
+              document.getElementById("lbluser").style.visibility="visible";
+          }
+    }
+    
+  function livepassvalidate()
+      {
+          var password = document.getElementById("pass");
+          
+          if(password.value.trim() != "")
+          {
+              password.style.border = "solid 3px green";
+              document.getElementById("lblpass").style.visibility="hidden";
+          }
+        else
+          {
+              password.style.border = "solid 3px red";
+              document.getElementById("lblpass").style.visibility="visible";
+          }
+    }
+      
+//    function liveconpassvalidate()
+//      {
+//          var conpassword = document.getElementById("confirmpass");
+//          
+//          if(conpassword.value == password.value)
+//          {
+//              conpassword.style.border = "solid 3px green";
+//              document.getElementById("lblconpass").style.visibility="hidden";
+//              document.getElementById("conpasserror").style.visibility="hidden";
+//          }
+//        else
+//          {
+//              conpassword.style.border = "solid 3px red";
+//              document.getElementById("conpasserror").style.visibility="visible";
+//          }
+//    }    
+      
+    
+  </script>
 
   <title>BandMates | Register</title>
   <meta content="" name="descriptison">
@@ -99,21 +186,22 @@
     <div class="container">
         <h2 class="white">Sign Up</h2>
         <p class="white">Please fill this form to create an account.</p>
-        <form action="registers.php" method="post">
-            <div class="form-group">
+        <form onsubmit="return validate()" action="registers.php" method="post">
                 <label class="white">Username</label>
-                <input type="text" name="username" >
-            </div>    
-            <div class="form-group">
+                <input id="uname" type="text" onchange="liveuservalidate()">
+                <label id="lbluser" style="color: red; visibility: hidden;"> Please enter a username</label>
+                <br><br>
+            
                 <label class="white">Password</label>
-                <input type="password" name="password" >
-                <span class="help-block"></span>
-            </div>
-            <div class="form-group">
+                <input id="pass" type="password" onchange="livepassvalidate()">
+                <label id="lblpass" style="color: red; visibility: hidden;"> Please enter a password</label>
+                <br><br>
+                
                 <label class="white">Confirm Password</label>
-                <input type="password" name="confirm_password" >
-                <span class="help-block"></span>
-            </div>
+                <input id="confirmpass" type="password">
+                <label id="lblconpass" style="color: red; visibility: hidden;"> Please enter matching password</label>
+                <br><br>
+            
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Submit">
                 <input type="reset" class="btn btn-default" value="Reset">
