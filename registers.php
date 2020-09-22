@@ -8,21 +8,19 @@
 	<?php
 
 	      session_start();  
-$servername = utf8_encode("35.197.167.52");
-$dbname = utf8_encode("bandmates");
-$username = utf8_encode("root");
-$password = utf8_encode("mypassword");
+		  include("config.php");
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
+if ($db->connect_error) {
+  die("Connection failed: " . $db->connect_error);
 }     
 
 
 if ($_POST['password']==$_POST['confirm_password']){
+$password = $_POST['password'];
+$hash = md5_file($password);
+echo($hash);
 $sql = "INSERT INTO Person (username, password)
-VALUES ('$_POST[username]', '$_POST[password]')";
+VALUES ('$_POST[username]', $hash)";
 $_SESSION['login_user'] = $_POST['username'];
 header("Location: eprofile.php"); 
 
@@ -31,7 +29,7 @@ header("Location: eprofile.php");
 } 
  
 
-if ($conn->query($sql) === TRUE) {
+if ($db->query($sql) === TRUE) {
 } else {
   echo "Error: " . $sql . "<br>" . $conn->error;
 }
