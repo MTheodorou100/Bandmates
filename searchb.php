@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 <html lang="en">
@@ -103,26 +102,36 @@
   <section id="intro" class="clearfix">
     <div class="container" data-aos="fade-up">
 
-      <div class="intro-img" data-aos="zoom-out" data-aos-delay="200">
+      <div class="intro-img" data-aos="zoom-out" data-aos-delay="200" style="color:white;">
         <img src="assets/img/intro-img.svg" alt="" class="img-fluid">
       </div>
         <div class='intro-info' data-aos='zoom-in' data-aos-delay='100'>
- <?php if ( $_SESSION['login_user']==null){
-      echo "<h2>Find your ideal <br><span>Band</span><br>today!</h2>
-        <div>
-          <a href='#about' class='btn-get-started scrollto'>Register as a Band</a>
-          <a href='register.html' class='btn-services scrollto'>Register as a Member</a>
-        </div>";} else {
-             require_once('hash.php');
+  
+        <?php
+  if($db == false){
+    die("ERROR: Could not connect. " . mysqli_connect_error());
+  }
 
-              
+  $item = ($_GET['item']);    
 
-                       
-}?>
+  $sql = "SELECT * FROM Band WHERE bandGenre LIKE '%".$item."%' OR bandName LIKE '%".$item."%'";
+  $result = mysqli_query($db, $sql) or die(mysqli_error($db));
+  
+
+  if (mysqli_num_rows($result) > 0) {
+    // output data of each row
+    while($row = mysqli_fetch_array($result, MYSQL_ASSOC)) {
+      $results = "Name: " . $row["bandName"]. " " . $row["bandGenre"]. "<br>";
+      echo $results;
+    }
+  } else {
+    echo "0 results";
+  }
+  
+  $db->close();
+?>
           
  
-        <div>
-
         </div>
       </div>
 
@@ -225,20 +234,6 @@
     xmlhttp.open("GET","search.php?q="+str,true);
     xmlhttp.send();
   }
-}
-
-function openSearch(evt, searchName) {
-  var i, tabcontent, tablinks;
-  tabcontent = document.getElementsByClassName("tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-  }
-  tablinks = document.getElementsByClassName("tablinks");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
-  }
-  document.getElementById(searchName).style.display = "block";
-  evt.currentTarget.className += " active";
 }
 </script>
 
