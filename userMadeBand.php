@@ -4,9 +4,6 @@
         <h1>
             userMadeBand Page
         </h1>
-        <h2>
-            (SHOULD ONLY LOAD IF USER IS LOGGED IN AND IN SESSION)
-        </h2>
         <?php
             session_start();  
             $servername = utf8_encode("35.197.167.52");
@@ -19,34 +16,82 @@
                 die("Connection failed: " . $conn->connect_error);
             }
             
-            $newBandName = $_POST['bandName'];
-            $newBandGenre = $_POST['bandGenre'];
-            $newBandLeader = $_POST['bandLeader'];
-            echo "<br> bandName = " . $newBandName . "<br> bandGenre = " . $newBandGenre . "<br> bandLeader = " . $newBandLeader . "<br>";
-            
-            // $_SESSION['login_user'] = "el poopy";
-
-            if ( $_SESSION['login_user']==null)
+            if (isset($_SESSION['login_user']) == false)
             {
-                echo "You must be logged in to make a band";
+                echo "<br> You must be logged in to make a band";
             }
             else
             {
-                echo "you're logged in, FORM GOES HERE";
+                echo "You're logged in as: " . $_SESSION['login_user'];
+                echo "<br> you're logged in, here's the form to make a band:";
+                echo "  <form action=\"\" method=\"post\"> 
+                            <label>Band Name</label>
+                            <input name=\"bandName\" type=\"text\" placeholder=\"The Flavour Townspeople\" required>
+                            <br>
+                            <label>Band Genre</label>
+                            <select name=\"bandGenre\" require>
+                                <option value=\"Rock\">Rock</option>
+                                <option value=\"Jazz\">Jazz</option>
+                                <option value=\"Metal\">Metal</option>
+                                <option value=\"RnB\">RnB</option>
+                            <br>
+                            <input type=\"submit\">
+                        </form>";
+            }
+
+            if( (isset($_POST['bandName']) == true) and (isset($_POST['bandGenre']) == true) )
+            {
+                echo "<br> form submitted <br>";
+
+                $currentUsername = $_SESSION['login_user'];
+                $newBandName = $_POST['bandName'];
+                $newBandGenre = $_POST['bandGenre'];
+
+                //MAKE Band
+                $sql1 = "INSERT INTO Band (bandName, bandGenre) VALUES ('$newBandName', '$newBandGenre')";
+                if ($conn->query($sql1) === TRUE) //executes "$conn->query($sql);" to run the insert
+                {
+                    $last_id = $conn->insert_id;
+                    echo "<br> last_id = ". $last_id . "<br>";
+                } 
+                else 
+                {
+                    echo "Error: " . $sql1 . "<br>" . $conn->error;
+                }
+
+                //GET personID
+                $sqlPID = "SELECT personID FROM Person WHERE username = '$currentUsername'";
+                $resultPID = $conn->query($sqlPID);
+                if ($resultPID->num_rows > 0)
+                {
+                    while($row = $resultPID->fetch_assoc())
+                    {
+                        $newBandLeader = $row["personID"];
+                    }
+                }
+                else
+                {
+                    echo "0 results";
+                }
+                
+                //MAKE BandMember
+                $leaderBoolean = TRUE;
+                $sql2 = "INSERT INTO BandMembers (bandID, personID, leaderBool) VALUES ('$last_id', '$newBandLeader', '$leaderBoolean')";
+                if ($conn->query($sql2) === TRUE) //executes "$conn->query($sql);" to run the insert
+                {
+                } 
+                else 
+                {
+                    echo "Error: " . $sql2 . "<br>" . $conn->error;
+                }
+
+
+                echo "<br> bandName = " . $newBandName . "<br> bandGenre = " . $newBandGenre . "<br> bandLeader = " . $newBandLeader . "<br>";
+            }
+            else
+            {
+                echo "<br> form not submitted <br>";
             }
         ?>
-
-        <form action="" method="post"> 
-            <label>Band Name</label>
-            <input name="bandName" type="text" placeholder="The Flavour Townspeople" required>
-            <br>
-            <label>Band Genre</label>
-            <input name="bandGenre" type="text" placeholder="Post-Industrial" required>
-            <br>
-            <label>Band Leader</label>
-            <input name="BandLeader" type="text" value="<?php echo $_SESSION['login_user'] ?>" required readonly>
-            <br>
-            <input type="submit">
-        </form>
     </body>
 </html>
