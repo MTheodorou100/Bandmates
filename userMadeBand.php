@@ -16,11 +16,11 @@
                 die("Connection failed: " . $conn->connect_error);
             }
             
-            if (isset($_SESSION['login_user']) == false)
+            if (isset($_SESSION['login_user']) == false)        //dont display form unless the user is logged in
             {
                 echo "<br> You must be logged in to make a band";
             }
-            else
+            else        //display form if the user is logged in
             {
                 echo "You're logged in as: " . $_SESSION['login_user'];
                 echo "<br> you're logged in, here's the form to make a band:";
@@ -39,7 +39,7 @@
                         </form>";
             }
 
-            if( (isset($_POST['bandName']) == true) and (isset($_POST['bandGenre']) == true) )
+            if( (isset($_POST['bandName']) == true) and (isset($_POST['bandGenre']) == true) )      //ensures that the form was sent
             {
                 echo "<br> form submitted <br>";
 
@@ -47,7 +47,7 @@
                 $newBandName = $_POST['bandName'];
                 $newBandGenre = $_POST['bandGenre'];
 
-                //MAKE Band
+                //Make the band
                 $sql1 = "INSERT INTO Band (bandName, bandGenre) VALUES ('$newBandName', '$newBandGenre')";
                 if ($conn->query($sql1) === TRUE) //executes "$conn->query($sql);" to run the insert
                 {
@@ -59,7 +59,7 @@
                     echo "Error: " . $sql1 . "<br>" . $conn->error;
                 }
 
-                //GET personID
+                //Get the personID of the user to set as a bandmember
                 $sqlPID = "SELECT personID FROM Person WHERE username = '$currentUsername'";
                 $resultPID = $conn->query($sqlPID);
                 if ($resultPID->num_rows > 0)
@@ -74,7 +74,7 @@
                     echo "0 results";
                 }
                 
-                //MAKE BandMember
+                //Make the user a bandmember
                 $leaderBoolean = TRUE;
                 $sql2 = "INSERT INTO BandMembers (bandID, personID, leaderBool) VALUES ('$last_id', '$newBandLeader', '$leaderBoolean')";
                 if ($conn->query($sql2) === TRUE) //executes "$conn->query($sql);" to run the insert
@@ -85,10 +85,9 @@
                     echo "Error: " . $sql2 . "<br>" . $conn->error;
                 }
 
-
                 echo "<br> bandName = " . $newBandName . "<br> bandGenre = " . $newBandGenre . "<br> bandLeader = " . $newBandLeader . "<br>";
             }
-            else
+            else        //if no form was sent, or loading page from external link
             {
                 echo "<br> form not submitted <br>";
             }
