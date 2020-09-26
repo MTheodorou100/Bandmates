@@ -139,7 +139,7 @@
             </div>    
             <div class="form-group">
                 <label class="white">Password</label>
-                <input class="white" type="password" name="password" >
+                <input type="password" name="password" >
                 <span class="help-block"></span>
             </div>
             <div class="form-group">
