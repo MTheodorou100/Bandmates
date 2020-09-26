@@ -2,7 +2,7 @@
 <html lang="en">
     <body>
         <h1>
-            userMadeBand Page
+            viewBands Page
         </h1>
         <?php
             session_start();  
@@ -26,8 +26,9 @@
             }
             else        //display bands if the user is logged in
             {
-                echo "You're logged in as: " . $_SESSION['login_user'];
+                echo "<div> You're logged in as: " . $_SESSION['login_user'] . "</div> <br>";
                 
+                $currentUsername = $_SESSION['login_user'];
                 //Get the personID of the user to set as a bandmember
                 $sqlPID = "SELECT personID FROM Person WHERE username = '$currentUsername'";
                 $resultPID = $conn->query($sqlPID);
@@ -42,22 +43,27 @@
                 {
                     echo "0 results";
                 }
-
+                //get count of user's bands
                 //Get the user's bands
-                $sqlBands = "SELECT * FROM bandmates.Band WHERE bandID in (SELECT bandID FROM bandmates.BandMembers WHERE personID = '$personID')";
+                $sqlBands = "SELECT * FROM Band WHERE bandID in (SELECT bandID FROM BandMembers WHERE personID = '$personID')";
                 $resultBands = $conn->query($sqlBands);
+
+                $sqlBandsCount = $resultBands->num_rows;
+                echo "<div> You are a part of " . $sqlBandsCount . " bands: </div> <br>";
+
                 if ($resultBands->num_rows > 0)
                 {
                     while($row = $resultBands->fetch_assoc())
                     {
-                        $personID = $row["personID"];
                         echo "<div>";
-                        echo "bandID = " . $row["bandID"];
-                        echo "bandName = " . $row["bandName"];
-                        echo "bandGenre = " . $row["bandGenre"];
-                        echo "Are you the leader? " . $row["bandJamBool"];
-                        echo "(edit link)";
+                        echo "bandID = " . $row["bandID"] . "<br>";
+                        echo "bandName = " . $row["bandName"] . "<br>";
+                        echo "bandGenre = " . $row["bandGenre"] . "<br>";
+                        echo "Are you the leader? " . $row["bandJamBool"] . "<br>";
+                        // echo "(edit link)";
+                        echo "<a href=\"band.php?band=" . $row["bandID"] . "\">edit link</a>";
                         echo "</div>";
+                        echo "<br>";
                     }
                 }
                 else
