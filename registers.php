@@ -16,11 +16,13 @@ if ($db->connect_error) {
 
 
 if ($_POST['password']==$_POST['confirm_password']){
-$password = $_POST['password'];
-$hash = md5_file($password);
-echo($hash);
+//$password = $_POST['password'];
+//$hash = md5_file($password);
+//echo($hash);
+//$sql = "INSERT INTO Person (username, password)
+//VALUES ('$_POST[username]', $hash)";
 $sql = "INSERT INTO Person (username, password)
-VALUES ('$_POST[username]', $hash)";
+VALUES ('$_POST[username]', '$_POST[password]')";
 $_SESSION['login_user'] = $_POST['username'];
 header("Location: eprofile.php"); 
 

@@ -108,12 +108,12 @@
   <label class="white" for="firstname">First Name:</label>
   <input type="text" id="fname" name="fname" class="form-control">
 </div>
-
+<br>
 <div class="lname">
   <label class="white"  for="lastname">Last Name:</label>
   <input type="text" id="lname" name="lname" class="form-control">
 </div>
-
+<br>
 <div class="instrument">
   <label class="white" for="instrumentSelect">Instrument Played:</label>
 	<select name="instrument" id='instrument'>
@@ -133,7 +133,41 @@
                     <option value="RnB">RnB</option>
     </select>
 </div>
-                           
+            
+    <div class="position">
+  <label class="white" for="positionSelect">Preferred Position:</label>
+	<select name="position" id='position'>
+                    <option value="Guitarist">Guitarist</option>
+                    <option value="Drummer">Drummer</option>
+                    <option value="Lead Vocals">Lead Vocals</option>
+                    <option value="Keyboardist">Keyboardist</option>
+    </select>
+</div>
+
+            
+            <div class="bio">
+               
+  <label class="white" for="Bio">Bio (Tell us about yourself):</label>
+               <br>
+	<textarea name="bio" id='bio' rows="4" cols="50">
+
+    </textarea>
+</div>
+            
+<div class="pexp">
+   <br>
+  <label class="white" for="pexp">Write about your previous Band Experiences:</label>
+   <br>
+	<textarea name="pexp" id='pexp' rows="4" cols="50">
+
+    </textarea>
+</div>
+
+<div class="email">
+  <label class="white" for="email">Contact Email:</label>
+  <input type="text" id="email" name="email" class="form-control">
+</div>
+            <br>                       
  <button class="button-register" type="submit" href="home.html">Register</button>
          
          </form>
