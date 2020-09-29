@@ -43,11 +43,11 @@
                 {
                     echo "0 results";
                 }
-                //get count of user's bands
                 //Get the user's bands
                 $sqlBands = "SELECT * FROM Band WHERE bandID in (SELECT bandID FROM BandMembers WHERE personID = '$personID')";
                 $resultBands = $conn->query($sqlBands);
-
+                
+                //get count of user's bands
                 $sqlBandsCount = $resultBands->num_rows;
                 echo "<div> You are a part of " . $sqlBandsCount . " bands: </div> <br>";
 
@@ -59,7 +59,7 @@
                         echo "bandID = " . $row["bandID"] . "<br>";
                         echo "bandName = " . $row["bandName"] . "<br>";
                         echo "bandGenre = " . $row["bandGenre"] . "<br>";
-                        echo "Are you the leader? " . $row["bandJamBool"] . "<br>";
+                        echo "Are you the leader? MUST BE FIXED " . $row["bandJamBool"] . "<br>";
                         // echo "(edit link)";
                         echo "<a href=\"band.php?band=" . $row["bandID"] . "\">edit link</a>";
                         echo "</div>";

@@ -19,26 +19,64 @@
 
             $thisBandID = $_GET['band'];
 
-            $sqlBand = "SELECT * FROM Band WHERE bandID = '$thisBandID'";
+            $sqlBand = "SELECT * FROM Band WHERE bandID = '$thisBandID'";   //get band info
             $resultBand = $conn->query($sqlBand);
+
+            $sqlBandMembers = "SELECT * FROM Person WHERE personID in (SELECT personID FROM BandMembers WHERE bandID = '$thisBandID')";      //get band members
+            $resultBandMembers = $conn->query($sqlBandMembers);
 
             if ($resultBand->num_rows > 0)
             {
                 while($row = $resultBand->fetch_assoc())
                 {
                     echo "<div>";
+                    echo "Band Details: <br>";
                     echo "bandID = " . $row["bandID"] . "<br>";
                     echo "bandName = " . $row["bandName"] . "<br>";
                     echo "bandGenre = " . $row["bandGenre"] . "<br>";
-                    echo "Are you the leader? " . $row["bandJamBool"] . "<br>";
+                    echo "Jam Band? " . $row["bandJamBool"] . "<br>";
+                    echo "Are you the leader? MUST BE FIXED " . $row["bandJamBool"] . "<br>";
                     echo "</div>";
-                    echo "<br>";
+
                 }
+                echo "<div>";
+                if ($resultBandMembers->num_rows > 0)
+                {
+                    echo "Band Members: <br>";
+                    while($rowB = $resultBandMembers->fetch_assoc())
+                    {
+                        echo $rowB["firstName"] . "<br>";
+                    }
+                }
+                else
+                {
+                    echo "no results, there must be 0 band members";
+                }
+                echo "</div>";
             }
             else
             {
                 echo "0 results";
+            }
+
+
+            $sqlGenres = "SELECT * FROM Genres";
+            $resultGenres = $conn->query($sqlGenres);
+            if ($resultGenres->num_rows > 0)
+            {
+                echo "<br> <div>";
+                echo "<form action=\"genreFormTest.php\" method=\"post\">";
+                while($rowC = $resultGenres->fetch_assoc())
+                {
+                    echo "<input type=\"checkbox\" id=\"" . $rowC["genreID"] . "\" name=\"" . $rowC["genreID"] . "\" value=\"" . $rowC["genreID"] . "\">";
+                    // echo "<input type=\"checkbox\" id=\"" . $rowC["genreID"] . "\" name=\"checkbox[]\" value=\"" . $rowC["genreID"] . "\">";
+                    echo "<label for=\"" . $rowC["genreID"] ."\"> " . $rowC["genreName"] . "</label> <br>";
+                    // echo $rowC["genreName"] . "<br>";
                 }
+                echo "<input type=\"submit\">";
+                echo "</div>";
+                echo "</form>";
+            }
 
         ?>
     </body>
