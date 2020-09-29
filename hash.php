@@ -21,7 +21,7 @@ body {font-family: Arial;}
   cursor: pointer;
   padding: 14px 16px;
   transition: 0.3s;
-  font-size: 17px;
+  font-size: 16px;
 }
 
 /* Change background color of buttons on hover */
@@ -59,8 +59,8 @@ body {font-family: Arial;}
 <h3>Search For Musician or Bands</h3>
 
 <div class="tab">
-  <button class="tablinks" onclick="openCity(event, 'London')">Looking for a Band</button>
-  <button class="tablinks" onclick="openCity(event, 'Paris')">Looking for a Musician</button>
+  <button class="tablinks" onclick="openCity(event, 'London')">Looking for a Band? Click Here!</button>
+  <button class="tablinks" onclick="openCity(event, 'Paris')">Looking for a Musician? Click Here!</button>
 </div>
 
 <div id="London" class="tabcontent">
