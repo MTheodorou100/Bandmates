@@ -7,6 +7,115 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    
+  <script type="text/javascript">
+      
+  function validate()
+    {
+        var firstname = document.getElementById("fname");
+        var lastname = document.getElementById("lname");
+        var textarea = document.getElementById("bio");
+        var textarea2 = document.getElementById("pexp");
+        
+        if(firstname.value.trim() =="")
+          {  
+            //alert("Blank username");
+            firstname.style.border = "solid 3px red";
+            document.getElementById("lblfname").style.visibility="visible";
+            return false;
+          }
+       else if(lastname.value.trim() =="")
+          {
+            //alert("Blank password");
+            lastname.style.border = "solid 3px red";
+            document.getElementById("lbllname").style.visibility="visible";
+            return false;  
+          }
+       else if(textarea.value.trim() =="")
+          {
+            //alert("Blank password");
+            textarea.style.border = "solid 3px red";
+            document.getElementById("lbltxtarea").style.visibility="visible";
+            return false;  
+          }
+       else if(textarea2.value.trim() =="")
+          {
+            //alert("Blank password");
+            textarea2.style.border = "solid 3px red";
+            document.getElementById("lbltxtarea2").style.visibility="visible";
+            return false;
+          }
+        else
+          {
+            return true;
+          }
+    }
+      
+    function livefnamevalidate()
+      {
+          var firstname = document.getElementById("fname");
+          
+          if(firstname.value.trim() != "")
+          {
+              firstname.style.border = "solid 3px green";
+              document.getElementById("lblfname").style.visibility="hidden";
+          }
+        else
+          {
+              firstname.style.border = "solid 3px red";
+              document.getElementById("lblfname").style.visibility="visible";
+          }
+    }
+    
+  function livelnamevalidate()
+      {
+          var lastname = document.getElementById("lname");
+          
+          if(lastname.value.trim() != "")
+          {
+              lastname.style.border = "solid 3px green";
+              document.getElementById("lbllname").style.visibility="hidden";
+          }
+        else
+          {
+              lastname.style.border = "solid 3px red";
+              document.getElementById("lbllname").style.visibility="visible";
+          }
+      }
+          
+  function livebiovalidate()
+      {
+          var textarea = document.getElementById("bio");
+          
+          if(textarea.value.trim() != "")
+          {
+              textarea.style.border = "solid 3px green";
+              document.getElementById("lbltxtarea").style.visibility="hidden";
+          }
+        else
+          {
+              textarea.style.border = "solid 3px red";
+              document.getElementById("lbltxtarea").style.visibility="visible";
+          }
+      }
+          
+  function livepbevalidate()
+      {
+          var textarea2 = document.getElementById("pexp");
+          
+          if(textarea2.value.trim() != "")
+          {
+              textarea2.style.border = "solid 3px green";
+              document.getElementById("lbltxtarea2").style.visibility="hidden";
+          }
+        else
+          {
+              textarea2.style.border = "solid 3px red";
+              document.getElementById("lbltxtarea2").style.visibility="visible";
+          }
+    }
+      
+    </script>
 
   <title>BandMates | Create a Profile</title>
   <meta content="" name="descriptison">
@@ -102,18 +211,21 @@
     <div class="container">
         <h2 class="white">Edit Profile</h2>
         <p class="white">Fill in your details to create your Profile</p>
-   		 <form class="form-register" action="cprofile.php" method='POST'>
+   		 <form onsubmit="return validate()" action="cprofile.php" method='POST'>
 
-<div class="fname">
   <label class="white" for="firstname">First Name:</label>
-  <input type="text" id="fname" name="fname" class="form-control">
-</div>
-<br>
-<div class="lname">
-  <label class="white"  for="lastname">Last Name:</label>
-  <input type="text" id="lname" name="lname" class="form-control">
-</div>
-<br>
+
+  <input id="fname" name="fname" type="text" onchange="livefnamevalidate()">
+  <label id="lblfname" style="color: red; visibility: hidden;"> Please enter first name</label>
+  <br><br>
+             
+  <label class="white" for="lastname">Last Name:</label>
+  <input id="lname" name="lname" type="text" onchange="livelnamevalidate()">
+  <label id="lbllname" style="color: red; visibility: hidden;"> Please enter last name</label>
+  <br><br>
+             
+             
+
 <div class="instrument">
   <label class="white" for="instrumentSelect">Instrument Played:</label>
 	<select name="instrument" id='instrument'>
@@ -122,6 +234,7 @@
                     <option value="Drums">Drums</option>
                     <option value="Vocals">Vocals</option>
     </select>
+    <br><br>
 </div>
 
 <div class="genre">
@@ -132,7 +245,37 @@
                     <option value="Metal">Metal</option>
                     <option value="RnB">RnB</option>
     </select>
+    <br><br>
 </div>
+            
+    <div class="position">
+  <label class="white" for="positionSelect">Preferred Position:</label>
+	<select name="position" id='position'>
+                    <option value="Guitarist">Guitarist</option>
+                    <option value="Drummer">Drummer</option>
+                    <option value="Lead Vocals">Lead Vocals</option>
+                    <option value="Keyboardist">Keyboardist</option>
+    </select>
+    <br><br>
+</div>
+             
+    <div class="bio">
+  <label class="white" for="Bio">Bio (Tell us about yourself):</label><br>
+    <textarea name="bio" id='bio' rows="4" cols="50" onchange="livebiovalidate()"></textarea>
+    <label id="lbltxtarea" style="color: red; visibility: hidden;"> Please enter details in the text box provided</label>
+    </div>  
+             
+    <div class="pexp">
+  <label class="white" for="pexp">Write about your previous Band Experiences:</label><br>
+    <textarea name="pexp" id='pexp' rows="4" cols="50" onchange="livepbevalidate()"></textarea>
+    <label id="lbltxtarea2" style="color: red; visibility: hidden;"> Please enter details in the text box provided</label>
+    </div>
+             
+<div class="email">
+  <label class="white" for="email">Contact Email:</label>
+  <input type="email" id="email" name="email" class="form-control">
+</div>
+
             
     <div class="position">
   <label class="white" for="positionSelect">Preferred Position:</label>
@@ -167,6 +310,7 @@
   <label class="white" for="email">Contact Email:</label>
   <input type="text" id="email" name="email" class="form-control">
 </div>
+
             <br>                       
  <button class="button-register" type="submit" href="home.html">Register</button>
          

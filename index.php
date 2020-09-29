@@ -50,7 +50,7 @@
 
       <div class='logo float-left'>
         <!-- Uncomment below if you prefer to use an text logo -->
-        <!-- <h1><a href='index.html'>NewBiz</a></h1> -->
+        <!-- <h1><a href='index.php'>NewBiz</a></h1> -->
         <a href='index.php'><img src='assets/img/logo.png' alt='' class='img-fluid'></a>
       </div>
 
@@ -73,7 +73,7 @@
 
       <div class='logo float-left'>
         <!-- Uncomment below if you prefer to use an text logo -->
-        <!-- <h1><a href='index.html'>NewBiz</a></h1> -->
+        <!-- <h1><a href='index.php'>NewBiz</a></h1> -->
         <a href='index.php'><img src='assets/img/logo.png' alt='' class='img-fluid'></a>
         <a href='index.php'>Logged in as ".$_SESSION['login_user']." </a>                               
       </div>
