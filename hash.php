@@ -9,7 +9,7 @@ body {font-family: Arial;}
 .tab {
   overflow: hidden;
   border: 1px solid #ccc;
-  background-color: #f1f1f1;
+  background-color: #248f8f;
 }
 
 /* Style the buttons inside the tab */
@@ -21,7 +21,7 @@ body {font-family: Arial;}
   cursor: pointer;
   padding: 14px 16px;
   transition: 0.3s;
-  font-size: 17px;
+  font-size: 16px;
 }
 
 /* Change background color of buttons on hover */
@@ -59,14 +59,14 @@ body {font-family: Arial;}
 <h3>Search For Musician or Bands</h3>
 
 <div class="tab">
-  <button class="tablinks" onclick="openCity(event, 'London')">Looking for a Band</button>
-  <button class="tablinks" onclick="openCity(event, 'Paris')">Looking for a Musician</button>
+  <button class="tablinks" onclick="openCity(event, 'London')">Looking for a Band? Click here!</button>
+  <button class="tablinks" onclick="openCity(event, 'Paris')">Looking for a Musician? Click here!</button>
 </div>
-
+<br>
 <div id="London" class="tabcontent">
   <h3>Band Search</h3>
   <form action='search.php' method='GET'>
-              <label class='white'>Search:</label> <input type='text' name='item' /><br />
+              <label class='white'>Search:</label> <input type='text' name='band' /><br />
               <input type='submit' name='submit' value='Submit' />
               </form> 
 </div>
@@ -74,7 +74,7 @@ body {font-family: Arial;}
 <div id="Paris" class="tabcontent">
   <h3>Musician Search</h3>
   <form action='search.php' method='GET'>
-              <label class='white'>Search:</label> <input type='text' name='item' /><br />
+              <label class='white'>Search:</label> <input type='text' name='person' /><br />
               <input type='submit' name='submit' value='Submit' />
               </form> 
 </div>
