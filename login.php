@@ -23,6 +23,9 @@
       if($count == 1) {
         //session_register("myusername");
         $_SESSION['login_user'] = $myusername;
+        $sqll = "SELECT instrument FROM Person WHERE username = '$myusername'";
+        $resultt = mysqli_query($db,$sqll);
+        $_SESSION['instrument'] = $resultt;
 
          
          header("location: index.php");

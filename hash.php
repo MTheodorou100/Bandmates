@@ -59,12 +59,25 @@ body {font-family: Arial;}
 <h3>Search For Musician or Bands</h3>
 
 <div class="tab">
-
+  <button class="tablinks" onclick="openCity(event, 'Melbourne')">Feed</button>
   <button class="tablinks" onclick="openCity(event, 'London')">Looking for a Band? Click here!</button>
   <button class="tablinks" onclick="openCity(event, 'Paris')">Looking for a Musician? Click here!</button>
 
 </div>
 <br>
+<div id="Melbourne" class="tabcontent">
+  <h3>This is your Feed</h3>
+  <?php
+  if($db == false){
+    die("ERROR: Could not connect. " . mysqli_connect_error());
+  }
+
+  $user=$_SESSION['login_user'] // do a query first and pull a general amount of people with at least one matching criteria, then use an algorithm to sort it
+  
+  
+  ?>
+  </div>
+
 <div id="London" class="tabcontent">
   <h3>Band Search</h3>
   <form action='search.php' method='GET'>
