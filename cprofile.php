@@ -57,8 +57,12 @@ $lname= $_POST['lname'];
 $instrument= $_POST['instrument'];
 $genre= $_POST['genre'];
 $username= $_SESSION['login_user'];
+   $position = $_POST['position'];
+   $bio = $_POST['bio'];
+   $pexp = $_POST['pexp'];
+   $contact = $_POST['contact'];
 
-$sql = "UPDATE Person SET firstName='$_POST[fname]', surName='$_POST[lname]', instrument='$_POST[instrument]', genre='$_POST[genre]' WHERE username='$_SESSION[login_user]'";
+$sql = "UPDATE Person SET firstName='$_POST[fname]', surName='$_POST[lname]', instrument='$_POST[instrument]', genre='$_POST[genre]', prefPosition='$_POST[position]', bio='$_POST[bio]', preExp='$_POST[pexp]', email='$_POST[email]' WHERE username='$_SESSION[login_user]'";
   
 if ($conn->query($sql) === TRUE) {
 } else {
@@ -130,6 +134,8 @@ if ($conn->query($sql) === TRUE) {
     <div class="container">
         <h2 class="white">Success!</h2>
         <p class="white">Your profile has been created!</p>
+       <br>
+       <a href='profile.php'>Click Here to view profile</a>
 
     </div>    
         </section>
