@@ -59,8 +59,10 @@ body {font-family: Arial;}
 <h3>Search For Musician or Bands</h3>
 
 <div class="tab">
+
   <button class="tablinks" onclick="openCity(event, 'London')">Looking for a Band? Click here!</button>
   <button class="tablinks" onclick="openCity(event, 'Paris')">Looking for a Musician? Click here!</button>
+
 </div>
 <br>
 <div id="London" class="tabcontent">
