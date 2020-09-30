@@ -13,11 +13,41 @@
                 die("Connection failed: " . $conn->connect_error);
             }
 
+
             echo "<div>";
             echo "get band = " . $_GET['band'];
             echo "</div> <br>";
-
             $thisBandID = $_GET['band'];
+
+            //leader checking
+            $seshUser = $_SESSION['login_user'];
+            echo "seshUser = " . $seshUser;
+            $sqlLeaderCheck = "SELECT * FROM BandMembers WHERE personID in (SELECT personID FROM Person WHERE username = '$seshUser') AND bandID = '$thisBandID'";
+            $resultLeaderCheck = $conn->query($sqlLeaderCheck);
+
+            if($resultLeaderCheck->num_rows>0)
+            {
+                while($rowD = $resultLeaderCheck->fetch_assoc())
+                {
+                    $leaderBoolCheck = $rowD['leaderBool'];
+                    if($leaderBoolCheck == 1)
+                    {
+                        echo "this user is a leader";
+                    }
+                    else
+                    {
+                        echo "loser, not a leader";
+                    }
+                }
+            }
+            else
+            {
+                echo "<br>";
+                echo "you're not a member of this band";
+            }
+            //end leader checking
+
+
 
             $sqlBand = "SELECT * FROM Band WHERE bandID = '$thisBandID'";   //get band info
             $resultBand = $conn->query($sqlBand);
@@ -60,23 +90,23 @@
             }
 
 
-            $sqlGenres = "SELECT * FROM Genres";
-            $resultGenres = $conn->query($sqlGenres);
-            if ($resultGenres->num_rows > 0)
-            {
-                echo "<br> <div>";
-                echo "<form action=\"genreFormTest.php\" method=\"post\">";
-                while($rowC = $resultGenres->fetch_assoc())
-                {
-                    echo "<input type=\"checkbox\" id=\"" . $rowC["genreID"] . "\" name=\"" . $rowC["genreID"] . "\" value=\"" . $rowC["genreID"] . "\">";
-                    // echo "<input type=\"checkbox\" id=\"" . $rowC["genreID"] . "\" name=\"checkbox[]\" value=\"" . $rowC["genreID"] . "\">";
-                    echo "<label for=\"" . $rowC["genreID"] ."\"> " . $rowC["genreName"] . "</label> <br>";
-                    // echo $rowC["genreName"] . "<br>";
-                }
-                echo "<input type=\"submit\">";
-                echo "</div>";
-                echo "</form>";
-            }
+            // $sqlGenres = "SELECT * FROM Genres";
+            // $resultGenres = $conn->query($sqlGenres);
+            // if ($resultGenres->num_rows > 0)
+            // {
+            //     echo "<br> <div>";
+            //     echo "<form action=\"genreFormTest.php\" method=\"post\">";
+            //     while($rowC = $resultGenres->fetch_assoc())
+            //     {
+            //         echo "<input type=\"checkbox\" id=\"" . $rowC["genreID"] . "\" name=\"" . $rowC["genreID"] . "\" value=\"" . $rowC["genreID"] . "\">";
+            //         // echo "<input type=\"checkbox\" id=\"" . $rowC["genreID"] . "\" name=\"checkbox[]\" value=\"" . $rowC["genreID"] . "\">";
+            //         echo "<label for=\"" . $rowC["genreID"] ."\"> " . $rowC["genreName"] . "</label> <br>";
+            //         // echo $rowC["genreName"] . "<br>";
+            //     }
+            //     echo "<input type=\"submit\">";
+            //     echo "</div>";
+            //     echo "</form>";
+            // }
 
         ?>
     </body>
