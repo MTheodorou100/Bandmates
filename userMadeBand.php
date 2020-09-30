@@ -128,22 +128,25 @@
             {
                 // echo "You're logged in as: " . $_SESSION['login_user'];
 				// echo "<br> you're logged in, here's the form to make a band:";
-				var_dump($_POST);
+				// var_dump($_POST);	//echos all post vars
 				
 
                 echo "<br> Enter data to make a band:";
                 echo "  <form action=\"\" method=\"post\"> 
                             <label>Band Name</label>
                             <input name=\"bandName\" type=\"text\" placeholder=\"The Flavour Townspeople\" required>
-                            
-            
                             <br>
                             <label>Temporary Jam Band?</label>
                             <select name=\"bandJam\" require>
-                                <option value=\"0\">False</option>
-                                <option value=\"1\">True</option>
+                                <option value=\"0\">No</option>
+                                <option value=\"1\">Yes</option>
                             </select>
-							<br>";
+							<br>
+							<label>Show in feeds and searches?</label>
+                            <select name=\"feedBool\" require>
+								<option value=\"1\">Yes</option>
+								<option value=\"0\">No</option>
+							</select>";
 							
 				$sqlGenres = "SELECT * FROM Genres";
 				$resultGenres = $conn->query($sqlGenres);
@@ -174,14 +177,15 @@
                 $currentUsername = $_SESSION['login_user'];
                 $newBandName = $_POST['bandName'];
                 $newBandGenre = $_POST['bandGenre'];
-                $newBandJamBool = $_POST['bandJam'];
+				$newBandJamBool = $_POST['bandJam'];
+				$newBandFeedBool = $_POST['feedBool'];
 
                 //Make the band
-                $sql1 = "INSERT INTO Band (bandName, bandGenre, bandJamBool) VALUES ('$newBandName', '$newBandGenre', '$newBandJamBool')";
+                $sql1 = "INSERT INTO Band (bandName, bandGenre, bandJamBool, bandShowInFeedBool) VALUES ('$newBandName', '$newBandGenre', '$newBandJamBool', '$newBandFeedBool')";
                 if ($conn->query($sql1) === TRUE) //executes "$conn->query($sql);" to run the insert
                 {
                     $last_id = $conn->insert_id;
-                    echo "<br> last_id = ". $last_id . "<br>";
+                    // echo "<br> last_id = ". $last_id . "<br>";
                 } 
                 else 
                 {
@@ -224,7 +228,7 @@
 					if( isset($_POST[$loopVar]) )
 					{
 						$postVal = $_POST[$loopVar];
-						echo "<br> post(loopvar) = " . $postVal;
+						// echo "<br> post(loopvar) = " . $postVal;
 	
 						$sqlInsertBandGenres = "INSERT INTO BandGenres (bandID, genreID) VALUES ('$last_id', '$postVal')";    //insert the picked genres into BandGenres
 						// $sqlInsertLikedGenres = "INSERT INTO LikedGenres (personID, genreID) VALUES ($gPersonID, $postVal)";    //insert the picked genres into LikedGenres
@@ -240,7 +244,7 @@
 				}
 
 
-				echo "<br> bandName = " . $newBandName . "<br> bandGenre = " . $newBandGenre . "<br> bandLeader = " . $newBandLeader . "<br>";
+				// echo "<br> bandName = " . $newBandName . "<br> bandGenre = " . $newBandGenre . "<br> bandLeader = " . $newBandLeader . "<br>";
                 }
                 else        //if no form was sent, or loading page from external link
                 {
