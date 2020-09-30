@@ -127,31 +127,47 @@
             else        //display form if the user is logged in
             {
                 // echo "You're logged in as: " . $_SESSION['login_user'];
-                // echo "<br> you're logged in, here's the form to make a band:";
+				// echo "<br> you're logged in, here's the form to make a band:";
+				var_dump($_POST);
+				
+
                 echo "<br> Enter data to make a band:";
                 echo "  <form action=\"\" method=\"post\"> 
                             <label>Band Name</label>
                             <input name=\"bandName\" type=\"text\" placeholder=\"The Flavour Townspeople\" required>
-                            <br>
-                            <label>Band Genre</label>
-                            <select name=\"bandGenre\" require>
-                                <option value=\"Rock\">Rock</option>
-                                <option value=\"Jazz\">Jazz</option>
-                                <option value=\"Metal\">Metal</option>
-                                <option value=\"RnB\">RnB</option>
-                            </select>
+                            
+            
                             <br>
                             <label>Temporary Jam Band?</label>
                             <select name=\"bandJam\" require>
                                 <option value=\"0\">False</option>
                                 <option value=\"1\">True</option>
                             </select>
-                            <br>
-                            <input type=\"submit\">
-                        </form>";
+							<br>";
+							
+				$sqlGenres = "SELECT * FROM Genres";
+				$resultGenres = $conn->query($sqlGenres);
+				if ($resultGenres->num_rows > 0)
+				{
+					echo "<br> <div> Pick Your Liked Genres: <br>";
+					// echo "<form action=\"genreFormTest.php\" method=\"post\">";
+					while($rowC = $resultGenres->fetch_assoc())
+					{
+						echo "<input type=\"checkbox\" id=\"" . $rowC["genreID"] . "\" name=\"" . $rowC["genreID"] . "\" value=\"" . $rowC["genreID"] . "\">";
+						// echo "<input type=\"checkbox\" id=\"" . $rowC["genreID"] . "\" name=\"checkbox[]\" value=\"" . $rowC["genreID"] . "\">";
+						echo "<label for=\"" . $rowC["genreID"] ."\"> " . $rowC["genreName"] . "</label> <br>";
+						// echo $rowC["genreName"] . "<br>";
+					}
+					// echo "<input type=\"submit\">";
+					echo "</div>";
+					// echo "</form>";
+				}
+
+                echo "<input type=\"submit\"> </form>";
             }
 
-            if( (isset($_POST['bandName']) == true) and (isset($_POST['bandGenre']) == true) and (isset($_POST['bandJam']) == true) )      //ensures that the form was sent
+			// if( (isset($_POST['bandName']) == true) and (isset($_POST['bandGenre']) == true) and (isset($_POST['bandJam']) == true) )      //ensures that the form was sent
+			if( (isset($_POST['bandName']) == true) and (isset($_POST['bandJam']) == true) )      //ensures that the form was sent
             {
                 echo "<br> form submitted <br>";
                 
@@ -198,12 +214,38 @@
                     echo "Error: " . $sql2 . "<br>" . $conn->error;
                 }
 
-                echo "<br> bandName = " . $newBandName . "<br> bandGenre = " . $newBandGenre . "<br> bandLeader = " . $newBandLeader . "<br>";
-            }
-            else        //if no form was sent, or loading page from external link
-            {
-                echo "<br> form not submitted <br>";
-            }
+                //Set genres
+				$genreTable = "SELECT * FROM Genres";		//get genre table count
+				$resultGenre = $conn->query($genreTable);
+				$genreCount = $resultGenre->num_rows;
+	
+				for($loopVar = 1; $loopVar <= $genreCount; $loopVar++)
+				{
+					if( isset($_POST[$loopVar]) )
+					{
+						$postVal = $_POST[$loopVar];
+						echo "<br> post(loopvar) = " . $postVal;
+	
+						$sqlInsertBandGenres = "INSERT INTO BandGenres (bandID, genreID) VALUES ('$last_id', '$postVal')";    //insert the picked genres into BandGenres
+						// $sqlInsertLikedGenres = "INSERT INTO LikedGenres (personID, genreID) VALUES ($gPersonID, $postVal)";    //insert the picked genres into LikedGenres
+
+						if ($conn->query($sqlInsertBandGenres) === TRUE) //executes "$conn->query($sql);" to run the insert
+						{
+						} 
+						else 
+						{
+							echo "Error: " . $sqlInsertBandGenres . "<br>" . $conn->error;
+						}
+					}
+				}
+
+
+				echo "<br> bandName = " . $newBandName . "<br> bandGenre = " . $newBandGenre . "<br> bandLeader = " . $newBandLeader . "<br>";
+                }
+                else        //if no form was sent, or loading page from external link
+                {
+                    echo "<br> form not submitted <br>";
+                }
         ?>
           
  

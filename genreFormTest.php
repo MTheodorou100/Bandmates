@@ -26,7 +26,7 @@
                     echo "<br> post(loopvar) = " . $postVal;
 
                     $sqlInsertBandGenres = "INSERT INTO BandGenres (bandID, genreID) VALUES ($gBandID, $postVal)";    //insert the picked genres into BandGenres
-                    $sqlInsertLikedGenres = "INSERT INTO LikedGenres (personID, genreID) VALUES ($pBandID, $postVal)";    //insert the picked genres into LikeGenres
+                    $sqlInsertLikedGenres = "INSERT INTO LikedGenres (personID, genreID) VALUES ($pBandID, $postVal)";    //insert the picked genres into LikedGenres
                 }
             }
         ?>
