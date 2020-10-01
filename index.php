@@ -110,8 +110,7 @@
  <?php if ( $_SESSION['login_user']==null){
       echo "<h2>Find your ideal <br><span>Band</span><br>today!</h2>
         <div>
-          <a href='#about' class='btn-get-started scrollto'>Register as a Band</a>
-          <a href='register.php' class='btn-services scrollto'>Register as a Member</a>
+          <a href='register.php' class='btn-services scrollto'>Click Here to Register</a>
         </div>";} else {
              require_once('hash.php');
 
