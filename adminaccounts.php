@@ -92,7 +92,7 @@ td, th {
     </form>
         
                 <h2>Delete an Account:</h2>
-        <p>Eneter the Admin ID you would like to remove:</p>
+        <p>Enter the Admin ID you would like to remove:</p>
          <form action="" method="POST">
         Admin ID: <input type=text name=delid id="delid" required>
         <br/><br/>
