@@ -6,6 +6,28 @@
     <body>
     <script>
     </script>
+               <style>  
+h1 {
+  color: black;
+  font-family: verdana;
+}
+
+p {
+  font-family: verdana;
+}
+          
+input {
+   font-family: verdana;    
+}
+
+form {
+   font-family: verdana;   
+}
+h2 {
+  color: black;
+  font-family: verdana;
+}
+       </style>
     <h1>Admin Dashboard</h1>
             <title>Bandmates | Admin</title>
     <p>Welcome back <?php echo $_SESSION['aUser']; ?></p>

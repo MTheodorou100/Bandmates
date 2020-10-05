@@ -51,7 +51,25 @@ td, th {
   text-align: left;
   padding: 8px;
 }
+h1 {
+  color: black;
+  font-family: verdana;
+}
+h2 {
+  color: black;
+  font-family: verdana;
+}
+p {
+  font-family: verdana;
+}
+          
+input {
+   font-family: verdana;    
+}
 
+form {
+   font-family: verdana;   
+}
 }
 </style>
     <body>

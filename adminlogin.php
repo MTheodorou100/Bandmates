@@ -31,6 +31,28 @@
     <body>
     <script>
     </script>
+       <style>  
+h1 {
+  color: black;
+  font-family: verdana;
+}
+
+p {
+  font-family: verdana;
+}
+          
+input {
+   font-family: verdana;    
+}
+
+form {
+   font-family: verdana;   
+}
+h2 {
+  color: black;
+  font-family: verdana;
+}
+       </style>
            <title>Bandmates | Admin</title>
     <h1>Admin Dashboard</h1>
     <p>Login to the dashboard by providing details:</p>
