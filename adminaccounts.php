@@ -20,6 +20,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['delete']!=null) {
       $result = mysqli_query($db, $sql) or die(mysqli_error($db));
          header("location: adminaccounts.php");
   }
+if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['update']!=null) {
+        $myusername = mysqli_real_escape_string($db,$_POST['uuser_name']);
+      $mypassword = mysqli_real_escape_string($db,$_POST['upassword']); 
+      $sql = "UPDATE Admins SET aUsername = '$myusername', aPass = '$mypassword' WHERE idAdmins='$_POST[upid]'; ";
+      $result = mysqli_query($db, $sql) or die(mysqli_error($db));
+       header("location: adminaccounts.php");
+  }
 
 ?>
 <!DOCTYPE html> 
@@ -69,6 +76,19 @@ td, th {
         Password: <input type=password name=password id="password" minlength=6 required>
         <br><br/>
         <input type="submit" value="register" name="submit" id="registerButton"/>
+    </form>
+        
+        <h2>Update an Account:</h2>
+        <p>Enter an Admin ID you would like to update/make changes to:</p>
+         <form action="" method="POST">
+        Admin ID: <input type=text name=upid id="upid" required>
+        <br/><br/>
+        Username: <input type=text name=uuser_name id="uuser_name" required>
+        <br/><br/>
+        Password: <input type=password name=upassword id="upassword" minlength=6 required>
+        <br><br/>
+             
+        <input type="submit" value="update" name="update" id="updateButton"/>
     </form>
         
                 <h2>Delete an Account:</h2>
