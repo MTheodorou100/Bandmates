@@ -131,9 +131,9 @@
 }
 
 if ($_GET['person'] !=null) {
-  $band = ($_GET['person']);    
+  $person = ($_GET['person']);    
 
-  $sql = "SELECT * FROM Person WHERE instrument LIKE '%".$item."%' OR genre LIKE '%".$item."%'";
+  $sql = "SELECT * FROM Person WHERE instrument LIKE '%".$person."%' OR genre LIKE '%".$person."%'";
   $result = mysqli_query($db, $sql) or die(mysqli_error($db));
   
 
