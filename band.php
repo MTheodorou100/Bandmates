@@ -13,11 +13,11 @@
                 die("Connection failed: " . $conn->connect_error);
             }
 
-
             echo "<div>";
             echo "get band = " . $_GET['band'];
             echo "</div> <br>";
             $thisBandID = $_GET['band'];
+            $viewerRole = 0;        //viewerRole 0=nonMember, 1=member, 2=leader          
 
             //leader checking
             $seshUser = $_SESSION['login_user'];
@@ -30,13 +30,16 @@
                 while($rowD = $resultLeaderCheck->fetch_assoc())
                 {
                     $leaderBoolCheck = $rowD['leaderBool'];
+                    $leaderID = $rowD['personID'];
                     if($leaderBoolCheck == 1)
                     {
                         echo "this user is a leader";
+                        $viewerRole = 2;
                     }
                     else
                     {
                         echo "loser, not a leader";
+                        $viewerRole = 1;
                     }
                 }
             }
@@ -46,8 +49,39 @@
                 echo "you're not a member of this band";
             }
             //end leader checking
+            
+            //bandmember deleting
+            $sqlBandEditing = "SELECT * FROM Person WHERE personID in (SELECT personID FROM BandMembers WHERE bandID = '$thisBandID' AND personID != '$leaderID')";      //get band members except leader
+            $resultBandEditing = $conn->query($sqlBandEditing);
+   
+            if (isset($_POST['memberArray']))
+            {
+                $postArray = $_POST['memberArray'];
+                // echo(array_values($postArray));
+                $postArrayCount = count($postArray);
+                echo "<br> postArrayCount = ". $postArrayCount ."<br>";
+                for($loopVar = 0; $loopVar < $postArrayCount; $loopVar++)
+                {
+                    $loopPersonID = $postArray[$loopVar];
+                    echo "<br> deleting value... ". $loopPersonID ."<br>";
+                    $sqlBandDelete = "DELETE FROM bandMembers WHERE bandID = '$thisBandID' AND personID = '$loopPersonID'";
+                    // $sqlBandDelete = "DELETE FROM bandMembers WHERE bandID = 17 AND personID = 138";
+                    // $bandDeleteExecute = mysqli_query($conn, $sqlBandDelete);
+                    $deleteCheck = $conn->query($sqlBandDelete);
+                    // if ($deleteCheck === TRUE) 
+                    if ($conn->query($sqlBandDelete) === TRUE) 
+                    {
+                        echo "Record deleted successfully. <br><br>";
+                    } 
+                    else 
+                    {
+                        echo "Error deleting record. <br><br>";
+                    }
+                
+                }
+            }
 
-
+            //end bandmember deleting
 
             $sqlBand = "SELECT * FROM Band WHERE bandID = '$thisBandID'";   //get band info
             $resultBand = $conn->query($sqlBand);
@@ -65,7 +99,7 @@
                     echo "bandName = " . $row["bandName"] . "<br>";
                     echo "bandGenre = " . $row["bandGenre"] . "<br>";
                     echo "Jam Band? " . $row["bandJamBool"] . "<br>";
-                    echo "Are you the leader? MUST BE FIXED " . $row["bandJamBool"] . "<br>";
+                    // echo "Are you the leader? MUST BE FIXED " . $row["bandJamBool"] . "<br>";
                     echo "</div>";
 
                 }
@@ -83,30 +117,50 @@
                     echo "no results, there must be 0 band members";
                 }
                 echo "</div>";
+
+                // $sqlBandEditing = "SELECT * FROM Person WHERE personID in (SELECT personID FROM BandMembers WHERE bandID = '$thisBandID' AND personID != '$leaderID')";      //get band members except leader
+                // $resultBandEditing = $conn->query($sqlBandEditing);
+
+                //edit if leader
+                if($viewerRole == 2)    //viewerRole 0=nonMember, 1=member, 2=leader
+                {
+                    echo "<div>";
+                    echo "You're the leader, here's the editing interface:";
+                    echo "<br>";
+                    echo "Edit Band Details:";
+                    echo "<form action=\"\" method=\"post\">";
+                    echo "";
+                    if ($resultBandEditing->num_rows > 0)
+                    {
+                        echo "Kick Bandmembers:";
+                        echo "<br>";
+                        while ($rowE = $resultBandEditing->fetch_assoc())
+                        {
+                            // echo "<input type=\"checkbox\" id=\"" . $rowE["personID"] . "\" name=\"" . $rowE["personID"] . "\" value=\"" . $rowE["personID"] . "\">";
+                            echo "<input type=\"checkbox\" id=\"" . $rowE["personID"] . "\" name=\"memberArray[]\" value=\"" . $rowE["personID"] . "\">";
+                            echo "<label for=\"" . $rowE["personID"] ."\"> " . $rowE["username"] . "(" . $rowE["firstName"] . " " . $rowE["surName"] . ")</label> <br>";
+                        }
+                    }
+                    else
+                    {
+                        echo "you are the only person in this band, there are no one to kick from the band.";
+                    }
+
+                    echo "<input type=\"submit\">";
+                    echo "</form>";
+
+
+                    echo "</div>";
+                }
+                else
+                {
+
+                }
             }
             else
             {
                 echo "0 results";
             }
-
-
-            // $sqlGenres = "SELECT * FROM Genres";
-            // $resultGenres = $conn->query($sqlGenres);
-            // if ($resultGenres->num_rows > 0)
-            // {
-            //     echo "<br> <div>";
-            //     echo "<form action=\"genreFormTest.php\" method=\"post\">";
-            //     while($rowC = $resultGenres->fetch_assoc())
-            //     {
-            //         echo "<input type=\"checkbox\" id=\"" . $rowC["genreID"] . "\" name=\"" . $rowC["genreID"] . "\" value=\"" . $rowC["genreID"] . "\">";
-            //         // echo "<input type=\"checkbox\" id=\"" . $rowC["genreID"] . "\" name=\"checkbox[]\" value=\"" . $rowC["genreID"] . "\">";
-            //         echo "<label for=\"" . $rowC["genreID"] ."\"> " . $rowC["genreName"] . "</label> <br>";
-            //         // echo $rowC["genreName"] . "<br>";
-            //     }
-            //     echo "<input type=\"submit\">";
-            //     echo "</div>";
-            //     echo "</form>";
-            // }
 
         ?>
     </body>
