@@ -275,24 +275,6 @@
   <label class="white" for="email">Contact Email:</label>
   <input type="email" id="email" name="email" class="form-control">
 </div>
-
-            
-    <div class="position">
-  <label class="white" for="positionSelect">Preferred Position:</label>
-	<select name="position" id='position'>
-                    <option value="Guitarist">Guitarist</option>
-                    <option value="Drummer">Drummer</option>
-                    <option value="Lead Vocals">Lead Vocals</option>
-                    <option value="Keyboardist">Keyboardist</option>
-    </select>
-</div>
-
-
-<div class="email">
-  <label class="white" for="email">Contact Email:</label>
-  <input type="text" id="email" name="email" class="form-control">
-</div>
-
             <br>                       
  <button class="button-register" type="submit" href="home.html">Register</button>
          
