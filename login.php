@@ -40,6 +40,67 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    
+  <script type="text/javascript">
+      
+  function validate() 
+    {
+        var username = document.getElementById("uname");
+        var password = document.getElementById("pass");
+        
+        if(username.value.trim() =="")
+          {  
+            //alert("Blank username");
+            username.style.border = "solid 3px red";
+            document.getElementById("lbluser").style.visibility="visible";
+            return false;
+          }
+       else if(password.value.trim() =="")
+          {
+            //alert("Blank password");
+            password.style.border = "solid 3px red";
+            document.getElementById("lblpass").style.visibility="visible";
+            return false;  
+          }
+       else
+          {
+            return true;
+          }
+    }
+      
+  function liveuservalidate()
+      {
+          var username = document.getElementById("uname");
+          
+          if(username.value.trim() != "")
+          {
+              username.style.border = "solid 3px green";
+              document.getElementById("lbluser").style.visibility="hidden";
+          }
+        else
+          {
+              username.style.border = "solid 3px red";
+              document.getElementById("lbluser").style.visibility="visible";
+          }
+    }
+      
+  function livepassvalidate()
+      {
+          var password = document.getElementById("pass");
+          
+          if(password.value.trim() != "")
+          {
+              password.style.border = "solid 3px green";
+              document.getElementById("lblpass").style.visibility="hidden";
+          }
+        else
+          {
+              password.style.border = "solid 3px red";
+              document.getElementById("lblpass").style.visibility="visible";
+          }
+    }
+      
+    </script>
 
   <title>BandMates | Login</title>
   <meta content="" name="descriptison">
@@ -132,14 +193,16 @@
     <section id="intro" class="clearfix">
     <div class="container">
         <h2 class="white">Login</h2>
-        <form action="" method="post">
+        <form onsubmit="return validate()" action="" method="post">
             <div class="form-group">
                 <label class="white">Username</label>
-                <input type="text" name="username" >
+                <input id="uname" type="text" name="username" onchange="liveuservalidate()">
+                <label id="lbluser" style="color: red; visibility: hidden;"> Please enter a username</label>
             </div>    
             <div class="form-group">
                 <label class="white">Password</label>
-                <input type="password" name="password" >
+                <input id="pass" type="password" name="password" onchange="livepassvalidate()">
+                <label id="lblpass" style="color: red; visibility: hidden;"> Please enter a password</label>
                 <span class="help-block"></span>
             </div>
             <div class="form-group">
