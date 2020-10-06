@@ -80,8 +80,66 @@
                 
                 }
             }
-
             //end bandmember deleting
+
+            //band info editing
+            if ( ( isset($_POST['bandName'] ) ) )
+            {
+                $rBandName = $_POST['bandName'];
+                $sqlReplaceBandName = "UPDATE Band SET bandName = '$rBandName' WHERE bandID = '$thisBandID'";
+                if ($conn->query($sqlReplaceBandName) === TRUE) 
+                {
+                    // echo "(BandName changed successfully)";
+                } 
+                else 
+                {
+                    // echo "(bandName wasnt changed)";
+                }
+            }
+            else
+            {
+                // echo "(bandName wasnt changed)";
+            }
+
+            if ( ( isset($_POST['jamBool'] ) ) )
+            {
+                $rJamBool = $_POST['jamBool'];
+                $sqlReplaceJamBool = "UPDATE Band SET bandJamBool = '$rJamBool' WHERE bandID = '$thisBandID'";
+                if ($conn->query($sqlReplaceJamBool) === TRUE) 
+                {
+                    // echo "(jamBool changed successfully)";
+                } 
+                else 
+                {
+                    // echo "(jamBool wasnt changed)";
+                }
+            }
+            else
+            {
+                // echo "(jamBool wasnt changed)";
+            }
+
+            if ( ( isset($_POST['feedBool'] ) ) )
+            {
+                $rFeedBool = $_POST['feedBool'];
+                $sqlReplaceFeedBool = "UPDATE Band SET bandShowInFeedBool = '$rFeedBool' WHERE bandID = '$thisBandID'";
+                if ($conn->query($sqlReplaceFeedBool) === TRUE) 
+                {
+                    // echo "(feedBool changed successfully)";
+                } 
+                else 
+                {
+                    // echo "(feedBool wasnt changed)";
+                }
+            }
+            else
+            {
+                // echo "(feedBool wasnt changed)";
+            }
+            //end band info editing 
+
+            //update bandEditing after deletion
+            $resultBandEditing = $conn->query($sqlBandEditing);
 
             $sqlBand = "SELECT * FROM Band WHERE bandID = '$thisBandID'";   //get band info
             $resultBand = $conn->query($sqlBand);
@@ -97,11 +155,14 @@
                     echo "Band Details: <br>";
                     echo "bandID = " . $row["bandID"] . "<br>";
                     echo "bandName = " . $row["bandName"] . "<br>";
-                    echo "bandGenre = " . $row["bandGenre"] . "<br>";
+                    // echo "bandGenre = " . $row["bandGenre"] . "<br>";
                     echo "Jam Band? " . $row["bandJamBool"] . "<br>";
+                    echo "Showing in people's feeds? " . $row["bandShowInFeedBool"] . "<br>";
                     // echo "Are you the leader? MUST BE FIXED " . $row["bandJamBool"] . "<br>";
                     echo "</div>";
-
+                    $bandName = $row["bandName"];
+                    $jamBool = $row["bandJamBool"];
+                    $feedBool = $row["bandShowInFeedBool"];
                 }
                 echo "<div>";
                 if ($resultBandMembers->num_rows > 0)
@@ -124,12 +185,35 @@
                 //edit if leader
                 if($viewerRole == 2)    //viewerRole 0=nonMember, 1=member, 2=leader
                 {
+                    echo "<br>";
+                    echo "<br>";
+                    echo "<br>";
                     echo "<div>";
                     echo "You're the leader, here's the editing interface:";
                     echo "<br>";
+                    echo "(Leave as is if you don't to change the information)";
+                    echo "<br>";
                     echo "Edit Band Details:";
+                    echo "<br>";
                     echo "<form action=\"\" method=\"post\">";
-                    echo "";
+
+                    //input for editing bandName
+                    echo "<label for=\"bandName\">bandName: </label>";
+                    // echo "<input type=\"text\"  id=\"bandName\"     name=\"bandName\"   placeholder=\"" . $bandName . "\">";
+                    echo "<input type=\"text\"  id=\"bandName\"     name=\"bandName\"   placeholder=\"" . $bandName . "\"   value=\"" . $bandName . "\">";
+                    echo "<br>";
+
+                    //input for editing jam band bool
+                    echo "<label for=\"jamBool\">jamBool: </label>";
+                    echo "<input type=\"text\"  id=\"jamBool\"      name=\"jamBool\"    placeholder=\"" . $jamBool . "\"    value=\"" . $jamBool . "\">";
+                    echo "<br>";
+                    
+                    //input for editing show in feed bool
+                    echo "<label for=\"feedBool\">feedBool: </label>";
+                    echo "<input type=\"text\"  id=\"feedBool\"     name=\"feedBool\"   placeholder=\"" . $feedBool . "\"   value=\"" . $feedBool . "\">";
+                    echo "<br>";
+
+
                     if ($resultBandEditing->num_rows > 0)
                     {
                         echo "Kick Bandmembers:";
