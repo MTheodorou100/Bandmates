@@ -287,24 +287,6 @@
     </select>
 </div>
 
-            
-            <div class="bio">
-               
-  <label class="white" for="Bio">Bio (Tell us about yourself):</label>
-               <br>
-	<textarea name="bio" id='bio' rows="4" cols="50">
-
-    </textarea>
-</div>
-            
-<div class="pexp">
-   <br>
-  <label class="white" for="pexp">Write about your previous Band Experiences:</label>
-   <br>
-	<textarea name="pexp" id='pexp' rows="4" cols="50">
-
-    </textarea>
-</div>
 
 <div class="email">
   <label class="white" for="email">Contact Email:</label>
