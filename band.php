@@ -64,7 +64,7 @@
                 {
                     $loopPersonID = $postArray[$loopVar];
                     echo "<br> deleting value... ". $loopPersonID ."<br>";
-                    $sqlBandDelete = "DELETE FROM bandMembers WHERE bandID = '$thisBandID' AND personID = '$loopPersonID'";
+                    $sqlBandDelete = "DELETE FROM BandMembers WHERE bandID = '$thisBandID' AND personID = '$loopPersonID'";
                     // $sqlBandDelete = "DELETE FROM bandMembers WHERE bandID = 17 AND personID = 138";
                     // $bandDeleteExecute = mysqli_query($conn, $sqlBandDelete);
                     $deleteCheck = $conn->query($sqlBandDelete);
