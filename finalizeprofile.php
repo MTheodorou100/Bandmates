@@ -1,5 +1,14 @@
             <?php   
-            session_start();         
+            session_start();    
+$servername = utf8_encode("35.197.167.52");
+            $dbname = utf8_encode("bandmates");
+            $username = utf8_encode("root");
+            $password = utf8_encode("mypassword");
+            $conn = new mysqli($servername, $username, $password, $dbname);
+            if ($conn->connect_error) 
+            {
+                die("Connection failed: " . $conn->connect_error);
+            }
             ?>
 
 <html lang="en">
@@ -209,8 +218,8 @@
 
     <section id="intro" class="clearfix">
     <div class="container">
-        <h2 class="white">Edit Profile</h2>
-        <p class="white">Fill in your details to create your Profile</p>
+        <h2 class="white">Create Profile</h2>
+        <p class="white">Fill in your details to create and finalize your Profile</p>
    		 <form onsubmit="return validate()" action="cprofile.php" method='POST'>
 
   <label class="white" for="firstname">First Name:</label>
@@ -224,40 +233,50 @@
   <label id="lbllname" style="color: red; visibility: hidden;"> Please enter last name</label>
   <br><br>
              
+      <?php
+            $sqlInstruments = "SELECT * FROM Instruments";
+				$resultInstruments = $conn->query($sqlInstruments);
+				if ($resultInstruments->num_rows > 0)
+				{
+					echo "<br> <div> Pick Your Instruments: <br>";
+					// echo "<form action=\"genreFormTest.php\" method=\"post\">";
+					while($rowD = $resultInstruments->fetch_assoc())
+					{
+						echo "<input type=\"checkbox\" id=\"i" . $rowD["instrumentID"] . "\" name=\"instruments[]\" value=\"" . $rowD["instrumentID"] . "\">";
+						// echo "<input type=\"checkbox\" id=\"" . $rowC["genreID"] . "\" name=\"checkbox[]\" value=\"" . $rowC["genreID"] . "\">";
+						echo "<label for=\"i" . $rowD["instrumentID"] ."\"> " . $rowD["instrumentName"] . "</label> <br>";
+						// echo $rowC["genreName"] . "<br>";
+					}
+					// echo "<input type=\"submit\">";
+					echo "</div>";
+					// echo "</form>";
+        }
+    
+    
+                     echo "<div>";
+                    // $sqlGenres = "SELECT * FROM Genres";
+                    $sqlGenres = "SELECT * FROM Genres";
+				    $resultGenres = $conn->query($sqlGenres);
+                    if ($resultGenres->num_rows > 0)
+                    {
+                        echo "<br>Add Genres:<br>";
+                        // echo "<form action=\"genreFormTest.php\" method=\"post\">";
+                        while($rowC = $resultGenres->fetch_assoc())
+                        {
+                            echo "<input type=\"checkbox\" id=\"g" . $rowC["genreID"] . "\" name=\"genreArrayA[]\" value=\"" . $rowC["genreID"] . "\">";
+                            // echo "<input type=\"checkbox\" id=\"" . $rowC["genreID"] . "\" name=\"checkbox[]\" value=\"" . $rowC["genreID"] . "\">";
+                            echo "<label for=\"g" . $rowC["genreID"] ."\"> " . $rowC["genreName"] . "</label> <br>";
+                            // echo $rowC["genreName"] . "<br>";
+                        }
+                        // echo "<input type=\"submit\">";
+                        // echo "</div>";
+                        // echo "</form>";
+                    }
+             
+    ?>       
+             
              
 
-<div class="instrument">
-  <label class="white" for="instrumentSelect">Instrument Played:</label>
-	<select name="instrument" id='instrument'>
-                    <option value="Guitar">Guitar</option>
-                    <option value="Bass Guitar">Bass Guitar</option>
-                    <option value="Drums">Drums</option>
-                    <option value="Vocals">Vocals</option>
-    </select>
-    <br><br>
-</div>
-
-<div class="genre">
-  <label class="white" for="genreSelect">Preferred Genre:</label>
-	<select name="genre" id='genre'>
-                    <option value="Rock">Rock</option>
-                    <option value="Jazz">Jazz</option>
-                    <option value="Metal">Metal</option>
-                    <option value="RnB">RnB</option>
-    </select>
-    <br><br>
-</div>
-            
-    <div class="position">
-  <label class="white" for="positionSelect">Preferred Position:</label>
-	<select name="position" id='position'>
-                    <option value="Guitarist">Guitarist</option>
-                    <option value="Drummer">Drummer</option>
-                    <option value="Lead Vocals">Lead Vocals</option>
-                    <option value="Keyboardist">Keyboardist</option>
-    </select>
-    <br><br>
-</div>
              
     <div class="bio">
   <label class="white" for="Bio">Bio (Tell us about yourself):</label><br>
@@ -275,7 +294,8 @@
   <label class="white" for="email">Contact Email:</label>
   <input type="email" id="email" name="email" class="form-control">
 </div>
-            <br>                       
+            <br>   
+             
  <button class="button-register" type="submit" href="home.html">Register</button>
          
          </form>
@@ -283,11 +303,7 @@
         </section>
 </body>
     
-    
-    
-    
-    
-    
+   
     
     
       <footer id="footer">

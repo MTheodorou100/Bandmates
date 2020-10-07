@@ -24,7 +24,7 @@ if ($_POST['password']==$_POST['confirm_password']){
 $sql = "INSERT INTO Person (username, password)
 VALUES ('$_POST[username]', '$_POST[password]')";
 $_SESSION['login_user'] = $_POST['username'];
-header("Location: eprofile.php"); 
+header("Location: finalizeprofile.php"); 
 
 } else {
     header("Location: register.php");
@@ -37,8 +37,5 @@ if ($db->query($sql) === TRUE) {
 }
 
 ?>
-	<h1>The user has been registered!</h1>
-	<p> <a href="home.html">Click here</a> to return to main directory</p>
-	
 </body>
 </html>
