@@ -79,7 +79,7 @@ form {
              $v1 = mysqli_fetch_array($numPlayerGenresResult, MYSQL_ASSOC);
              
              //Retrieve Number of Matches
-             $numMatches = "SELECT COUNT(genreID) FROM BandGenres WHERE genreID IN (SELECT genreID FROM LikedGenres WHERE personID = ".$rowB['personID']." )";
+             $numMatches = "SELECT COUNT(genreID) FROM BandGenres WHERE genreID IN (SELECT genreID FROM LikedGenres WHERE personID = ".$rowB['personID']." ) AND bandID = 21";
              $numMatchesResult = mysqli_query($db, $numMatches) or die(mysqli_error($db));
              $v2 = mysqli_fetch_array($numMatchesResult, MYSQL_ASSOC);
              
@@ -97,6 +97,7 @@ form {
              echo "numMatchesResult:".$v2['COUNT(genreID)'];
              echo '<br>';
              echo "numBandGenreResult:".$v3['COUNT(genreID)'];
+             echo '<br>';
              
              $loopValB++;
          }
