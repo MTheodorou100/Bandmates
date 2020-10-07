@@ -193,7 +193,7 @@ button:hover, a:hover {
             </div>
 			<div class="form-group">
 				<p></p>
-             <center><a href='eprofile.php' class='button'>Edit Profile</a></center> 
+             <center><a href='editprofile.php' class='button'>Edit Profile</a></center> 
                 <span class="help-block"></span>
             </div>
     </div>    

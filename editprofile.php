@@ -1,14 +1,44 @@
             <?php   
             session_start();    
+
+if(isset($_POST['submit'])){
 $servername = utf8_encode("35.197.167.52");
-            $dbname = utf8_encode("bandmates");
-            $username = utf8_encode("root");
-            $password = utf8_encode("mypassword");
-            $conn = new mysqli($servername, $username, $password, $dbname);
-            if ($conn->connect_error) 
-            {
-                die("Connection failed: " . $conn->connect_error);
-            }
+$dbname = utf8_encode("bandmates");
+$username = utf8_encode("root");
+$password = utf8_encode("mypassword");
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}     
+
+$fname = $_POST['fname'];
+$lname= $_POST['lname'];
+$username= $_SESSION['login_user'];
+   $bio = $_POST['bio'];
+   $pexp = $_POST['pexp'];
+
+$sql = "UPDATE Person SET firstName='$_POST[fname]', surName='$_POST[lname]', bio='$_POST[bio]', preExp='$_POST[pexp]', email='$_POST[email]' WHERE username='$_SESSION[login_user]'";
+
+    
+     $sqlUserID = "SELECT personID FROM Person WHERE username='$_SESSION[login_user]';";
+      $usersListResult = mysqli_query($db, $sqlUserID) or die(mysqli_error($db));
+      $querysql = mysqli_fetch_array($usersListResult, MYSQL_ASSOC);
+                 
+    foreach($_POST['instruments'] as $loopInstrumentID) {
+        $sqlInstrumentAdd = "UPDATE Plays SET personID='$querysql[personID]', instrumentID='$loopInstrumentID' WHERE personID='$querysql[personID]';";
+        $insertIntoBandWants = mysqli_query($db, $sqlInstrumentAdd) or die(mysqli_error($db));
+    }
+    
+    foreach($_POST['genreArrayA'] as $loopGenreID) {
+        $sqlGenreAdd = "INSERT INTO LikedGenres (personID, genreID) VALUES ('$querysql[personID]','$loopGenreID');";
+        $insertIntoBandWants = mysqli_query($db, $sqlGenreAdd) or die(mysqli_error($db));
+    }
+
+   
+}
+
             ?>
 
 <html lang="en">
@@ -126,7 +156,7 @@ $servername = utf8_encode("35.197.167.52");
       
     </script>
 
-  <title>BandMates | Create a Profile</title>
+  <title>BandMates | Edit your Profile</title>
   <meta content="" name="descriptison">
   <meta content="" name="keywords">
 
@@ -218,8 +248,8 @@ $servername = utf8_encode("35.197.167.52");
 
     <section id="intro" class="clearfix">
     <div class="container">
-        <h2 class="white">Create Profile</h2>
-        <p class="white">Fill in your details to create and finalize your Profile</p>
+        <h2 class="white">Edit Profile</h2>
+        <p class="white">Fill in your details and modify your Profile</p>
    		 <form onsubmit="return validate()" action="cprofile.php" method='POST'>
 
   <label class="white" for="firstname">First Name:</label>
