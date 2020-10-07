@@ -91,13 +91,13 @@ form {
              //EchoTest
              echo $userArray[$loopValB][4];
              echo '<br>';
-//             echo '<br>';
-//             echo $v1['COUNT(genreID)'];
-//             echo '<br>';
-//             echo $v2['COUNT(genreID)'];
-//             echo '<br>';
-//             echo $v3['COUNT(genreID)'];
-//             
+             echo '<br>';
+             echo "numPlayerGenresResult:".$v1['COUNT(genreID)'];
+             echo '<br>';
+             echo "numMatchesResult:".$v2['COUNT(genreID)'];
+             echo '<br>';
+             echo "numBandGenreResult:".$v3['COUNT(genreID)'];
+             
              $loopValB++;
          }
         
