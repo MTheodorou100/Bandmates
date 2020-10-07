@@ -152,11 +152,12 @@
 				$resultGenres = $conn->query($sqlGenres);
 				if ($resultGenres->num_rows > 0)
 				{
-					echo "<br> <div> Pick Your Liked Genres: <br>";
+					echo "<br> <div> Pick Your Band Genres: <br>";
 					// echo "<form action=\"genreFormTest.php\" method=\"post\">";
 					while($rowC = $resultGenres->fetch_assoc())
 					{
-						echo "<input type=\"checkbox\" id=\"" . $rowC["genreID"] . "\" name=\"" . $rowC["genreID"] . "\" value=\"" . $rowC["genreID"] . "\">";
+            echo "<input type=\"checkbox\" id=\"" . $rowC["genreID"] . "\" name=\"" . $rowC["genreID"] . "\" value=\"" . $rowC["genreID"] . "\">";
+						// echo "<input type=\"checkbox\" id=\"" . $rowC["genreID"] . "\" name=\"genres[]\" value=\"" . $rowC["genreID"] . "\">";
 						// echo "<input type=\"checkbox\" id=\"" . $rowC["genreID"] . "\" name=\"checkbox[]\" value=\"" . $rowC["genreID"] . "\">";
 						echo "<label for=\"" . $rowC["genreID"] ."\"> " . $rowC["genreName"] . "</label> <br>";
 						// echo $rowC["genreName"] . "<br>";
@@ -164,7 +165,26 @@
 					// echo "<input type=\"submit\">";
 					echo "</div>";
 					// echo "</form>";
-				}
+        }
+        
+        $sqlInstruments = "SELECT * FROM Instruments";
+				$resultInstruments = $conn->query($sqlInstruments);
+				if ($resultInstruments->num_rows > 0)
+				{
+					echo "<br> <div> Pick Your Instruments: <br>";
+					// echo "<form action=\"genreFormTest.php\" method=\"post\">";
+					while($rowD = $resultInstruments->fetch_assoc())
+					{
+						echo "<input type=\"checkbox\" id=\"i" . $rowD["instrumentID"] . "\" name=\"instruments[]\" value=\"" . $rowD["instrumentID"] . "\">";
+						// echo "<input type=\"checkbox\" id=\"" . $rowC["genreID"] . "\" name=\"checkbox[]\" value=\"" . $rowC["genreID"] . "\">";
+						echo "<label for=\"i" . $rowD["instrumentID"] ."\"> " . $rowD["instrumentName"] . "</label> <br>";
+						// echo $rowC["genreName"] . "<br>";
+					}
+					// echo "<input type=\"submit\">";
+					echo "</div>";
+					// echo "</form>";
+        }
+
 
                 echo "<input type=\"submit\"> </form>";
             }
@@ -181,7 +201,7 @@
 				$newBandFeedBool = $_POST['feedBool'];
 
                 //Make the band
-                $sql1 = "INSERT INTO Band (bandName, bandGenre, bandJamBool, bandShowInFeedBool) VALUES ('$newBandName', '$newBandGenre', '$newBandJamBool', '$newBandFeedBool')";
+                $sql1 = "INSERT INTO Band (bandName, bandJamBool, bandShowInFeedBool) VALUES ('$newBandName', '$newBandJamBool', '$newBandFeedBool')";
                 if ($conn->query($sql1) === TRUE) //executes "$conn->query($sql);" to run the insert
                 {
                     $last_id = $conn->insert_id;
@@ -241,7 +261,21 @@
 							echo "Error: " . $sqlInsertBandGenres . "<br>" . $conn->error;
 						}
 					}
-				}
+        }
+        
+
+        //Set instruments
+        if (isset($_POST['instruments']))
+            {
+                $postInstruments = $_POST['instruments'];
+                $postInstrumentsCount = count($postInstruments);
+                for($loopVar = 0; $loopVar < $postInstrumentsCount; $loopVar++)
+                {
+                    $loopInstrumentID = $postInstruments[$loopVar];
+                    $sqlInstrumentAdd = "INSERT INTO BandWants (bandID, instrumentID) VALUES ('$last_id','$loopInstrumentID') ";
+                    $instrumentAdd = $conn->query($sqlInstrumentAdd);                
+                }
+            }
 
 
 				// echo "<br> bandName = " . $newBandName . "<br> bandGenre = " . $newBandGenre . "<br> bandLeader = " . $newBandLeader . "<br>";
