@@ -141,6 +141,92 @@
             //update bandEditing after deletion
             $resultBandEditing = $conn->query($sqlBandEditing);
 
+            //genre adding
+            if (isset($_POST['genreArrayA']))
+            {
+                $postGenreArray = $_POST['genreArrayA'];
+                $postGenreArrayCount = count($postGenreArray);
+                for($loopVar = 0; $loopVar < $postGenreArrayCount; $loopVar++)
+                {
+                    $loopGenreID = $postGenreArray[$loopVar];
+                    $sqlGenreAdd = "INSERT INTO BandGenres (bandID, genreID) VALUES ('$thisBandID','$loopGenreID') ";
+                    $genreAdd = $conn->query($sqlGenreAdd);
+                    // if ($conn->query($sqlGenreAdd) === TRUE) 
+                    // {
+                    //     echo "Genre(s) added successfully. <br><br>";
+                    // } 
+                    // else 
+                    // {
+                    //     echo "Error adding genre(s). <br><br>";
+                    // }
+                
+                }
+            }
+            else
+            {
+                // echo "(genreArray not posted)";
+            }
+            //end genre adding
+            //genre deleting
+            if (isset($_POST['genreArrayB']))
+            {
+                $postGenreArrayB = $_POST['genreArrayB'];
+                $postGenreArrayBCount = count($postGenreArrayB);
+                // echo "<br> postGenreArrayCount = ". $postGenreArrayBCount ."<br>";
+                for($loopVar = 0; $loopVar < $postGenreArrayBCount; $loopVar++)
+                {
+                    $loopGenreID = $postGenreArrayB[$loopVar];
+                    // echo "<br> deleting value... ". $loopPersonID ."<br>";
+                    $sqlGenreAddB = "DELETE FROM BandGenres WHERE bandID = '$thisBandID' AND genreID = '$loopGenreID' ";
+                    $genreDelete = $conn->query($sqlGenreAddB);
+                    // if ($conn->query($sqlGenreAddB) === TRUE) 
+                    // {
+                    //     echo "Genre(s) deleted successfully. <br><br>";
+                    // } 
+                    // else 
+                    // {
+                    //     echo "Error deleted genre(s). <br><br>";
+                    // }
+                
+                }
+            }
+            //end genre deleting
+
+
+
+            //instrument adding
+            if (isset($_POST['instrumentArrayA']))
+            {
+                $postInstrumentArrayA = $_POST['instrumentArrayA'];
+                $postInstrumentArrayACount = count($postInstrumentArrayA);
+                for($loopVar = 0; $loopVar < $postInstrumentArrayACount; $loopVar++)
+                {
+                    $loopInstrumentID = $postInstrumentArrayA[$loopVar];
+                    $sqlInstrumentAdd = "INSERT INTO BandWants (bandID, instrumentID) VALUES ('$thisBandID','$loopInstrumentID') ";
+                    $instrumentAdd = $conn->query($sqlInstrumentAdd);                
+                }
+            }
+            else
+            {
+                // echo "(instrumentArrayA not posted)";
+            }
+            //end instrument adding
+            //instrument deleting
+            if (isset($_POST['instrumentArrayB']))
+            {
+                $postInstrumentArrayB = $_POST['instrumentArrayB'];
+                $postInstrumentArrayBCount = count($postInstrumentArrayB);
+                for($loopVar = 0; $loopVar < $postInstrumentArrayBCount; $loopVar++)
+                {
+                    $loopInstrumentID = $postInstrumentArrayB[$loopVar];
+                    $sqlInstrumentDelete = "DELETE FROM BandWants WHERE bandID = '$thisBandID' AND instrumentID = '$loopInstrumentID' ";
+                    $genreDelete = $conn->query($sqlInstrumentDelete);
+                }
+            }
+            //end instrument deleting
+
+
+
             $sqlBand = "SELECT * FROM Band WHERE bandID = '$thisBandID'";   //get band info
             $resultBand = $conn->query($sqlBand);
 
@@ -198,18 +284,18 @@
                     echo "<form action=\"\" method=\"post\">";
 
                     //input for editing bandName
-                    echo "<label for=\"bandName\">bandName: </label>";
+                    echo "<label for=\"bandName\">bandName: </label> <br>";
                     // echo "<input type=\"text\"  id=\"bandName\"     name=\"bandName\"   placeholder=\"" . $bandName . "\">";
                     echo "<input type=\"text\"  id=\"bandName\"     name=\"bandName\"   placeholder=\"" . $bandName . "\"   value=\"" . $bandName . "\">";
                     echo "<br>";
 
                     //input for editing jam band bool
-                    echo "<label for=\"jamBool\">jamBool: </label>";
+                    echo "<label for=\"jamBool\">jamBool: </label> <br>";
                     echo "<input type=\"text\"  id=\"jamBool\"      name=\"jamBool\"    placeholder=\"" . $jamBool . "\"    value=\"" . $jamBool . "\">";
                     echo "<br>";
                     
                     //input for editing show in feed bool
-                    echo "<label for=\"feedBool\">feedBool: </label>";
+                    echo "<label for=\"feedBool\">feedBool: </label> <br>";
                     echo "<input type=\"text\"  id=\"feedBool\"     name=\"feedBool\"   placeholder=\"" . $feedBool . "\"   value=\"" . $feedBool . "\">";
                     echo "<br>";
 
@@ -230,6 +316,71 @@
                         echo "you are the only person in this band, there are no one to kick from the band.";
                     }
 
+
+                    echo "<br> Add and remove genres: <br>";
+                    echo "<div>";
+                    // $sqlGenres = "SELECT * FROM Genres";
+                    $sqlGenres = "SELECT * FROM Genres WHERE genreID NOT IN (SELECT genreID FROM BandGenres WHERE bandID = '$thisBandID')";
+				    $resultGenres = $conn->query($sqlGenres);
+                    if ($resultGenres->num_rows > 0)
+                    {
+                        echo "<br>Add Genres:<br>";
+                        // echo "<form action=\"genreFormTest.php\" method=\"post\">";
+                        while($rowC = $resultGenres->fetch_assoc())
+                        {
+                            echo "<input type=\"checkbox\" id=\"g" . $rowC["genreID"] . "\" name=\"genreArrayA[]\" value=\"" . $rowC["genreID"] . "\">";
+                            // echo "<input type=\"checkbox\" id=\"" . $rowC["genreID"] . "\" name=\"checkbox[]\" value=\"" . $rowC["genreID"] . "\">";
+                            echo "<label for=\"g" . $rowC["genreID"] ."\"> " . $rowC["genreName"] . "</label> <br>";
+                            // echo $rowC["genreName"] . "<br>";
+                        }
+                        // echo "<input type=\"submit\">";
+                        // echo "</div>";
+                        // echo "</form>";
+                    }
+                    $sqlGenresB = "SELECT * FROM Genres WHERE genreID IN (SELECT genreID FROM BandGenres WHERE bandID = '$thisBandID')";
+				    $resultGenresB = $conn->query($sqlGenresB);
+                    if ($resultGenresB->num_rows > 0)
+                    {
+                        // echo "<br> <div> Removed Your Current Genres: <br>";
+                        // echo "<form action=\"genreFormTest.php\" method=\"post\">";
+                        echo "<br>Remove Your Genres:<br>";
+                        while($rowF = $resultGenresB->fetch_assoc())
+                        {
+                            echo "<input type=\"checkbox\" id=\"g" . $rowF["genreID"] . "\" name=\"genreArrayB[]\" value=\"" . $rowF["genreID"] . "\">";
+                            echo "<label for=\"g" . $rowF["genreID"] ."\"> " . $rowF["genreName"] . "</label> <br>";
+                        }
+                        // echo "<input type=\"submit\">";
+                        // echo "</div>";
+                        // echo "</form>";
+                    }
+                    echo "</div>";
+
+                    echo "<br> Add and remove instruments/roles your band wants: <br>";
+                    echo "<div>";
+                    $sqlInstrumentsA = "SELECT * FROM Instruments WHERE instrumentID NOT IN (SELECT instrumentID FROM BandWants WHERE bandID = '$thisBandID')";
+				    $resultInstrumentsA = $conn->query($sqlInstrumentsA);
+                    if ($resultInstrumentsA->num_rows > 0)
+                    {
+                        echo "<br>Add instruments/roles:<br>";
+                        while($rowG = $resultInstrumentsA->fetch_assoc())
+                        {
+                            echo "<input type=\"checkbox\" id=\"i" . $rowG["instrumentID"] . "\" name=\"instrumentArrayA[]\" value=\"" . $rowG["instrumentID"] . "\">";
+                            echo "<label for=\"i" . $rowG["instrumentID"] ."\"> " . $rowG["instrumentName"] . "</label> <br>";
+                        }
+                    }
+                    $sqlInstrumentsB = "SELECT * FROM Instruments WHERE instrumentID IN (SELECT instrumentID FROM BandWants WHERE bandID = '$thisBandID')";
+				    $resultInstrumentsB = $conn->query($sqlInstrumentsB);
+                    if ($resultInstrumentsB->num_rows > 0)
+                    {
+                        echo "<br>Remove instruments/roles:<br>";
+                        while($rowH = $resultInstrumentsB->fetch_assoc())
+                        {
+                            echo "<input type=\"checkbox\" id=\"i" . $rowH["instrumentID"] . "\" name=\"instrumentArrayB[]\" value=\"" . $rowH["instrumentID"] . "\">";
+                            echo "<label for=\"i" . $rowH["instrumentID"] ."\"> " . $rowH["instrumentName"] . "</label> <br>";
+                        }
+                    }
+                    echo "</div>";
+                    echo "<br>";
                     echo "<input type=\"submit\">";
                     echo "</form>";
 
