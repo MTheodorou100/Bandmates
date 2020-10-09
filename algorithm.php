@@ -20,6 +20,14 @@
         
                 $loopValA++;
             }
+            //^ User Array Key:
+            //$userArray[0][0] = PersonID
+            //$userArray[0][1] = First Name
+            //$userArray[0][2] = SurName
+            //$userArray[0][3] = User Name
+            //$userArray[0][4] = Genre Score   
+
+
         
             //Step 2: Genre score loop (from 0 to 100)
 
@@ -60,7 +68,7 @@
                 echo '<br>';
                 echo "numBaGenres pre calc:".$numBaGenres;
                 echo '<br>';
-                echo '<br>';
+                // echo '<br>';
 
                 $newBaGenres    = $numBaGenres * 100;       //multiply by 100
                 $newMatches     = $numMatches * 100;
@@ -68,7 +76,7 @@
 
                 if($numPlGenres > $numBaGenres)    //check for difference   if statement A
                 {
-                    echo "reached if statement A <br>";
+                    echo "REACHED IF STATEMENT A <br>";
                     $temp = $numPlGenres  / $numBaGenres;
                     echo "temp rate = " .$temp."<br>";
                     $newBaGenres = $newBaGenres * $temp;
@@ -77,7 +85,7 @@
                 }
                 else if($numBaGenres > $numPlGenres)    //check for difference   if statement B
                 {
-                    echo "reached if statement B <br><br>";
+                    echo "REACHED IF STATEMENT B <br>";
                     $temp = $numBaGenres / $numPlGenres;
                     echo "temp rate = " .$temp."<br>";
                     $newPlGenres = $newPlGenres * $temp;
@@ -101,11 +109,11 @@
                 // echo '<br>';
                 // echo "Username: ".$userArray[$loopValB][3];
                 // echo '<br>';
-                echo "numPlGenres post calc:".$newPlGenres;
+                echo "newPlGenres:".$newPlGenres;
                 echo '<br>';
-                echo "numMatches post calc:".$newMatches;
+                echo "newMatches:".$newMatches;
                 echo '<br>';
-                echo "numBaGenres post calc:".$newBaGenres;
+                echo "newBaGenres:".$newBaGenres;
                 echo '<br>';
                 echo "Calculated genre score: ".$userArray[$loopValB][4];
                 echo '<br>';
@@ -121,17 +129,12 @@
             $scoreloopVal=0;
             $usersListResult = mysqli_query($db, $sqlUsersList) or die(mysqli_error($db));
             
-            while ($rowC = mysqli_fetch_array($usersListResult, MYSQL_ASSOC)){
-                $scoreArray[$scoreloopVal][0]+= $userArray[$scoreloopVal][4];
-                // $scoreArray[$scoreloopVal][0]+= $anotherScoreHere;
-                $scoreloopVal++;
-            }
-            //User Array Key:
-            //$userArray[0][0] = PersonID
-            //$userArray[0][1] = First Name
-            //$userArray[0][2] = SurName
-            //$userArray[0][3] = User Name
-            //$userArray[0][4] = Genre Score    
+            // while ($rowC = mysqli_fetch_array($usersListResult, MYSQL_ASSOC)){
+            //     $scoreArray[$scoreloopVal][0]+= $userArray[$scoreloopVal][4];
+            //     // $scoreArray[$scoreloopVal][0]+= $anotherScoreHere;
+            //     $scoreloopVal++;
+            // }
+             
         ?>
     </body>
 </html>  
