@@ -197,6 +197,10 @@
                 <label id="lblpass" style="color: red; visibility: hidden;"> Please enter a password</label>
                 <br><br>
                 
+            <label class="white" for="birthday">Birthday:</label>
+            <input type="date" id="birthday" name="birthday">
+          <br><br>
+          
                 <label class="white">Confirm Password</label>
                 <input name="confirm_password" id="confirmpass" type="password">
                 <label id="lblconpass" style="color: red; visibility: hidden;"> Please enter matching password</label>
@@ -206,7 +210,7 @@
                 <input type="submit" class="btn btn-primary" value="Submit">
                 <input type="reset" class="btn btn-default" value="Reset">
             </div>
-            <p class="white" >Already have an account? <a href="login.html">Login here</a>.</p>
+            <p class="white" >Already have an account? <a href="login.php">Login here</a>.</p>
         </form>
     </div>    
         </section>

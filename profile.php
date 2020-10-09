@@ -12,6 +12,10 @@
   $result = mysqli_query($db, $sql) or die(mysqli_error($db));
   
   $row = mysqli_fetch_array($result, MYSQL_ASSOC);
+
+      $sqlUserID = "SELECT personID FROM Person WHERE username='$_SESSION[login_user]';";
+      $usersListResult = mysqli_query($db, $sqlUserID) or die(mysqli_error($db));
+      $querysql = mysqli_fetch_array($usersListResult, MYSQL_ASSOC);
     
       
      
@@ -65,7 +69,7 @@ button:hover, a:hover {
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>BandMates | Login</title>
+  <title>BandMates | My Profile</title>
   <meta content="" name="descriptison">
   <meta content="" name="keywords">
 
@@ -159,9 +163,23 @@ button:hover, a:hover {
       <div class="card">
   <img src="assets/img/empty.png" style="width:100%">
   <h1><?php echo $row['firstName']; ?> <?php echo $row['surName'];?></h1>
-  <p class="title"> <?php echo $row['prefPosition'];?></p>
-        <p><b>Genres:</b> <?php echo $row['genre'];?></p>
-        <p><b>Instruments:</b> <?php echo $row['instrument'];?></p>
+        <p><b>Genres:</b> 
+          <?php 
+          $genresql = "SELECT genreName FROM Genres WHERE genreID IN (SELECT genreID FROM LikedGenres WHERE personID=$querysql[personID])";
+          $resultGenre = mysqli_query($db, $genresql) or die(mysqli_error($db));
+          while ($rowA = mysqli_fetch_array($resultGenre, MYSQL_ASSOC)){
+            echo $rowA['genreName']." ";
+          }?>
+          
+        </p>
+        <p><b>Instruments:</b> 
+          <?php 
+          $instrumentsql = "SELECT instrumentName FROM Instruments WHERE instrumentID IN (SELECT instrumentID FROM Plays WHERE personID=$querysql[personID])";
+          $resultinstrument = mysqli_query($db, $instrumentsql) or die(mysqli_error($db));
+          while ($rowA = mysqli_fetch_array($resultinstrument, MYSQL_ASSOC)){
+            echo $rowA['instrumentName']." ";
+          }?>
+        </p>
          <center><p><b>Bio</b></p></center> 
 				<p> <?php echo $row['bio'];?></p>
          <center><p><b>Previous Experience</b></p></center>
@@ -175,7 +193,7 @@ button:hover, a:hover {
             </div>
 			<div class="form-group">
 				<p></p>
-             <center><a href='eprofile.php' class='button'>Edit Profile</a></center> 
+             <center><a href='editprofile.php' class='button'>Edit Profile</a></center> 
                 <span class="help-block"></span>
             </div>
     </div>    
