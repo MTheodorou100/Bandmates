@@ -29,7 +29,14 @@
                 ";
                 while ($rowC = mysqli_fetch_array($usersBandsResult, MYSQL_ASSOC))
                 {
-                    echo "<option name='selectedBand' value='" . $rowC['bandID'] . "'>" . $rowC['bandName'] . "</option>";
+                    if ($rowC['bandID']==$_POST['selectedBand'])
+                    {
+                        echo "<option name='selectedBand' value='" . $rowC['bandID'] . "' selected>" . $rowC['bandName'] . "</option>";
+                    }
+                    else 
+                    {
+                        echo "<option name='selectedBand' value='" . $rowC['bandID'] . "'>" . $rowC['bandName'] . "</option>";
+                    }
                 }
                 echo "
                 </select>
