@@ -25,7 +25,7 @@
             //$userArray[0][1] = First Name
             //$userArray[0][2] = SurName
             //$userArray[0][3] = User Name
-            //$userArray[0][4] = Genre Score   
+            //$userArray[0][4] = Score   
 
 
         
@@ -57,17 +57,17 @@
                 // $numBaGenres   =   6;
                 // $numMatches     =   4;
 
-                echo "personID: ".$userArray[$loopValB][0];
-                echo '<br>';
-                echo "Username: ".$userArray[$loopValB][3];
-                echo '<br>';
-                echo '<br>';
-                echo "numPlGenres pre calc:".$numPlGenres;
-                echo '<br>';
-                echo "numMatches pre calc:".$numMatches;
-                echo '<br>';
-                echo "numBaGenres pre calc:".$numBaGenres;
-                echo '<br>';
+                // echo "personID: ".$userArray[$loopValB][0];
+                // echo '<br>';
+                // echo "Username: ".$userArray[$loopValB][3];
+                // echo '<br>';
+                // echo '<br>';
+                // echo "numPlGenres pre calc:".$numPlGenres;
+                // echo '<br>';
+                // echo "numMatches pre calc:".$numMatches;
+                // echo '<br>';
+                // echo "numBaGenres pre calc:".$numBaGenres;
+                // echo '<br>';
                 // echo '<br>';
 
                 $newBaGenres    = $numBaGenres * 100;       //multiply by 100
@@ -76,18 +76,18 @@
 
                 if($numPlGenres > $numBaGenres)    //check for difference   if statement A
                 {
-                    echo "REACHED IF STATEMENT A <br>";
+                    // echo "REACHED IF STATEMENT A <br>";
                     $temp = $numPlGenres  / $numBaGenres;
-                    echo "temp rate = " .$temp."<br>";
+                    // echo "temp rate = " .$temp."<br>";
                     $newBaGenres = $newBaGenres * $temp;
                     $newMatches = $newMatches * $temp;
                     $newPlGenres = $newPlGenres;
                 }
                 else if($numBaGenres > $numPlGenres)    //check for difference   if statement B
                 {
-                    echo "REACHED IF STATEMENT B <br>";
+                    // echo "REACHED IF STATEMENT B <br>";
                     $temp = $numBaGenres / $numPlGenres;
-                    echo "temp rate = " .$temp."<br>";
+                    // echo "temp rate = " .$temp."<br>";
                     $newPlGenres = $newPlGenres * $temp;
                     $newMatches = $newMatches * $temp;
                     $newBaGenres = $newBaGenres;
@@ -97,8 +97,8 @@
                 //$genreScore = $numMatchesResult / (($numPlayerGenres+$numBandGenreResult)-$numMatchesResult);
                 // $genreScore = $numMatches / (($numPlGenres+$numBaGenres)-$numMatches);
                 $genreScore = ($newMatches / (($newPlGenres+$newBaGenres)-$newMatches))*100;
-                echo "genreScore = ".$newMatches."/((".$newPlGenres."+".$newBaGenres.")-".$newMatches.")";
-                echo "<br>";
+                // echo "genreScore = ".$newMatches."/((".$newPlGenres."+".$newBaGenres.")-".$newMatches.")";
+                // echo "<br>";
                 $userArray[$loopValB][4] = $genreScore;
                 
                 
@@ -109,32 +109,58 @@
                 // echo '<br>';
                 // echo "Username: ".$userArray[$loopValB][3];
                 // echo '<br>';
-                echo "newPlGenres:".$newPlGenres;
-                echo '<br>';
-                echo "newMatches:".$newMatches;
-                echo '<br>';
-                echo "newBaGenres:".$newBaGenres;
-                echo '<br>';
-                echo "Calculated genre score: ".$userArray[$loopValB][4];
-                echo '<br>';
-                echo '<br>';
-                echo '<br>';
-                echo '<br>';
+                // echo "newPlGenres:".$newPlGenres;
+                // echo '<br>';
+                // echo "newMatches:".$newMatches;
+                // echo '<br>';
+                // echo "newBaGenres:".$newBaGenres;
+                // echo '<br>';
+                // echo "Calculated genre score: ".$userArray[$loopValB][4];
+                // echo '<br>';
+                // echo '<br>';
+                // echo '<br>';
+                // echo '<br>';
                 
                 $loopValB++;
             }
             
-            //Step 5: Put the scores together and sort the users in order of best to worst
-            $scoreArray;//1st box is index ie which person, 2nd box is where personID and score is stored (“0” and “1” respectively)
-            $scoreloopVal=0;
-            $usersListResult = mysqli_query($db, $sqlUsersList) or die(mysqli_error($db));
-            
-            // while ($rowC = mysqli_fetch_array($usersListResult, MYSQL_ASSOC)){
-            //     $scoreArray[$scoreloopVal][0]+= $userArray[$scoreloopVal][4];
-            //     // $scoreArray[$scoreloopVal][0]+= $anotherScoreHere;
-            //     $scoreloopVal++;
-            // }
-             
+            //Step 5: Put the scores together and sort the users in order of best to worst         
+            for ($x = 0; $x < count($userArray); $x++)
+            {
+                for ($y = $x+1; $y < count($userArray); $y++)
+                {
+                    if ($userArray[$x][4]<$userArray[$y][4])    //check if the current nested iteration of the array is lesser
+                    {
+                        for ($z = 0; $z <= 4; $z++)     //move the data into the sorted spot for each user
+                        {
+                            $temp = $userArray[$y][$z];
+                            $userArray[$y][$z] = $userArray[$x][$z];
+                            $userArray[$x][$z] = $temp;
+                        }
+                    }
+                }
+            }
+
+            for($a = 0; $a < count($userArray); $a++)
+            {
+                echo "<div>";
+                if($a==0)
+                {
+                    echo "BEST MATCH";
+                    echo "<br>";
+                }
+                else
+                {
+                    echo "Match No. " . ($a+1);
+                    echo "<br>";
+                }
+                echo $userArray[$a][3];
+                echo "<br>";
+                echo $userArray[$a][4];
+                echo "</div>";
+                echo "<br>";
+                
+            }            
         ?>
     </body>
 </html>  
