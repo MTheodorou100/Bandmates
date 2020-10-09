@@ -23,6 +23,10 @@
       if($count == 1) {
         //session_register("myusername");
         $_SESSION['login_user'] = $myusername;
+        $now = new DateTime();
+	    $newDate = $now->format('Y-m-d H:i:s');
+        $sql2 = "UPDATE Person SET lastLoginTime='$newDate' WHERE username='$_SESSION[login_user]'";
+        $result = mysqli_query($db, $sql2) or die(mysqli_error($db));
 
          
          header("location: index.php");

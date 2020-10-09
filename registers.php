@@ -21,8 +21,12 @@ if ($_POST['password']==$_POST['confirm_password']){
 //echo($hash);
 //$sql = "INSERT INTO Person (username, password)
 //VALUES ('$_POST[username]', $hash)";
-$sql = "INSERT INTO Person (username, password)
-VALUES ('$_POST[username]', '$_POST[password]')";
+	
+	$now = new DateTime();
+	$newDate = $now->format('Y-m-d H:i:s');
+	
+$sql = "INSERT INTO Person (username, password, dateOfBirth,lastLoginTime)
+VALUES ('$_POST[username]', '$_POST[password]', '$_POST[birthday]', '$newDate')";
 $_SESSION['login_user'] = $_POST['username'];
 header("Location: finalizeprofile.php"); 
 
