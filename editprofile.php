@@ -1,6 +1,6 @@
             <?php   
             session_start();    
-
+include("config.php");
 if(isset($_POST['submit'])){
 $servername = utf8_encode("35.197.167.52");
 $dbname = utf8_encode("bandmates");
@@ -20,23 +20,34 @@ $username= $_SESSION['login_user'];
    $pexp = $_POST['pexp'];
 
 $sql = "UPDATE Person SET firstName='$_POST[fname]', surName='$_POST[lname]', bio='$_POST[bio]', preExp='$_POST[pexp]', email='$_POST[email]' WHERE username='$_SESSION[login_user]'";
-
+$result = mysqli_query($db, $sql) or die(mysqli_error($db));
     
      $sqlUserID = "SELECT personID FROM Person WHERE username='$_SESSION[login_user]';";
       $usersListResult = mysqli_query($db, $sqlUserID) or die(mysqli_error($db));
       $querysql = mysqli_fetch_array($usersListResult, MYSQL_ASSOC);
                  
     foreach($_POST['instruments'] as $loopInstrumentID) {
-        $sqlInstrumentAdd = "UPDATE Plays SET personID='$querysql[personID]', instrumentID='$loopInstrumentID' WHERE personID='$querysql[personID]';";
-        $insertIntoBandWants = mysqli_query($db, $sqlInstrumentAdd) or die(mysqli_error($db));
+        $sqlInstrumentDelete = "DELETE FROM Plays WHERE personID='$querysql[personID]'AND instrumentID='$loopInstrumentID';";
+        $InsDel = mysqli_query($db, $sqlInstrumentDelete) or die(mysqli_error($db));
     }
     
     foreach($_POST['genreArrayA'] as $loopGenreID) {
+       //$sqlGenreDelete = "INSERT INTO LikedGenres (personID, genreID) VALUES ('$querysql[personID]','$loopGenreID');";
+       $sqlGenreDelete = "DELETE FROM LikedGenres WHERE personID='$querysql[personID]'AND genreID='$loopGenreID';";
+        $GenDel = mysqli_query($db, $sqlGenreDelete) or die(mysqli_error($db));
+    }
+  
+  foreach($_POST['instruments2'] as $loopInstrumentID) {
+        $sqlInstrumentAdd = "INSERT INTO Plays (personID, instrumentID) VALUES ('$querysql[personID]','$loopInstrumentID');";
+        $insertIntoBandWants = mysqli_query($db, $sqlInstrumentAdd) or die(mysqli_error($db));
+    }
+    
+    foreach($_POST['genreArray2'] as $loopGenreID) {
         $sqlGenreAdd = "INSERT INTO LikedGenres (personID, genreID) VALUES ('$querysql[personID]','$loopGenreID');";
         $insertIntoBandWants = mysqli_query($db, $sqlGenreAdd) or die(mysqli_error($db));
     }
 
-   
+   header("location: profile.php");
 }
 
             ?>
@@ -250,7 +261,7 @@ $sql = "UPDATE Person SET firstName='$_POST[fname]', surName='$_POST[lname]', bi
     <div class="container">
         <h2 class="white">Edit Profile</h2>
         <p class="white">Fill in your details and modify your Profile</p>
-   		 <form onsubmit="return validate()" action="cprofile.php" method='POST'>
+   		 <form onsubmit="return validate()" action="" method='POST'>
 
   <label class="white" for="firstname">First Name:</label>
 
@@ -263,47 +274,9 @@ $sql = "UPDATE Person SET firstName='$_POST[fname]', surName='$_POST[lname]', bi
   <label id="lbllname" style="color: red; visibility: hidden;"> Please enter last name</label>
   <br><br>
              
-      <?php
-            $sqlInstruments = "SELECT * FROM Instruments";
-				$resultInstruments = $conn->query($sqlInstruments);
-				if ($resultInstruments->num_rows > 0)
-				{
-					echo "<br> <div> Pick Your Instruments: <br>";
-					// echo "<form action=\"genreFormTest.php\" method=\"post\">";
-					while($rowD = $resultInstruments->fetch_assoc())
-					{
-						echo "<input type=\"checkbox\" id=\"i" . $rowD["instrumentID"] . "\" name=\"instruments[]\" value=\"" . $rowD["instrumentID"] . "\">";
-						// echo "<input type=\"checkbox\" id=\"" . $rowC["genreID"] . "\" name=\"checkbox[]\" value=\"" . $rowC["genreID"] . "\">";
-						echo "<label for=\"i" . $rowD["instrumentID"] ."\"> " . $rowD["instrumentName"] . "</label> <br>";
-						// echo $rowC["genreName"] . "<br>";
-					}
-					// echo "<input type=\"submit\">";
-					echo "</div>";
-					// echo "</form>";
-        }
-    
-    
-                     echo "<div>";
-                    // $sqlGenres = "SELECT * FROM Genres";
-                    $sqlGenres = "SELECT * FROM Genres";
-				    $resultGenres = $conn->query($sqlGenres);
-                    if ($resultGenres->num_rows > 0)
-                    {
-                        echo "<br>Add Genres:<br>";
-                        // echo "<form action=\"genreFormTest.php\" method=\"post\">";
-                        while($rowC = $resultGenres->fetch_assoc())
-                        {
-                            echo "<input type=\"checkbox\" id=\"g" . $rowC["genreID"] . "\" name=\"genreArrayA[]\" value=\"" . $rowC["genreID"] . "\">";
-                            // echo "<input type=\"checkbox\" id=\"" . $rowC["genreID"] . "\" name=\"checkbox[]\" value=\"" . $rowC["genreID"] . "\">";
-                            echo "<label for=\"g" . $rowC["genreID"] ."\"> " . $rowC["genreName"] . "</label> <br>";
-                            // echo $rowC["genreName"] . "<br>";
-                        }
-                        // echo "<input type=\"submit\">";
-                        // echo "</div>";
-                        // echo "</form>";
-                    }
-             
-    ?>       
+           
+        
+           
              
              
 
@@ -325,8 +298,108 @@ $sql = "UPDATE Person SET firstName='$_POST[fname]', surName='$_POST[lname]', bi
   <input type="email" id="email" name="email" class="form-control">
 </div>
             <br>   
+           <h2 class="white">Modify Instruments</h2>   
+           <?php
+           $servername = utf8_encode("35.197.167.52");
+           $dbname = utf8_encode("bandmates");
+           $username = utf8_encode("root");
+           $password = utf8_encode("mypassword");
+           $conn = new mysqli($servername, $username, $password, $dbname);
+           if ($conn->connect_error) {
+             die("Connection failed: " . $conn->connect_error);
+           }     
+            $sqlUserID = "SELECT personID FROM Person WHERE username='$_SESSION[login_user]';";
+            $usersListResult = mysqli_query($db, $sqlUserID) or die(mysqli_error($db));
+            $querysql = mysqli_fetch_array($usersListResult, MYSQL_ASSOC);
+           
+            $sqlInstruments = "SELECT * FROM Instruments WHERE instrumentID IN (SELECT instrumentID FROM Plays WHERE personID='$querysql[personID]')";
+				$resultInstruments = $conn->query($sqlInstruments);
+				if ($resultInstruments->num_rows > 0)
+				{
+					echo "<div> Select Instruments to Remove from your profile: <br>";
+					// echo "<form action=\"genreFormTest.php\" method=\"post\">";
+					while($rowD = $resultInstruments->fetch_assoc())
+					{
+						echo "<input type=\"checkbox\" id=\"i" . $rowD["instrumentID"] . "\" name=\"instruments[]\" value=\"" . $rowD["instrumentID"] . "\">";
+						// echo "<input type=\"checkbox\" id=\"" . $rowC["genreID"] . "\" name=\"checkbox[]\" value=\"" . $rowC["genreID"] . "\">";
+						echo "<label for=\"i" . $rowD["instrumentID"] ."\"> " . $rowD["instrumentName"] . "</label> <br>";
+						// echo $rowC["genreName"] . "<br>";
+					}
+					// echo "<input type=\"submit\">";
+					echo "</div>";
+					// echo "</form>";
+        }
+           
+           $sqlInstruments2 = "SELECT * FROM Instruments WHERE instrumentID NOT IN (SELECT instrumentID FROM Plays WHERE personID='$querysql[personID]')";
+				$resultInstruments2 = $conn->query($sqlInstruments2);
+				if ($resultInstruments->num_rows > 0)
+				{
+					echo "<div> Select Instruments to Add to your profile: <br>";
+					// echo "<form action=\"genreFormTest.php\" method=\"post\">";
+					while($rowD = $resultInstruments2->fetch_assoc())
+					{
+						echo "<input type=\"checkbox\" id=\"i" . $rowD["instrumentID"] . "\" name=\"instruments2[]\" value=\"" . $rowD["instrumentID"] . "\">";
+						// echo "<input type=\"checkbox\" id=\"" . $rowC["genreID"] . "\" name=\"checkbox[]\" value=\"" . $rowC["genreID"] . "\">";
+						echo "<label for=\"i" . $rowD["instrumentID"] ."\"> " . $rowD["instrumentName"] . "</label> <br>";
+						// echo $rowC["genreName"] . "<br>";
+					}
+					// echo "<input type=\"submit\">";
+					echo "</div>";
+					// echo "</form>";
+        }
+    
+    
+    
+                     echo "<div>";
+           
+           echo "<h2 class=white>Modify Genres</h2>";
+                    // $sqlGenres = "SELECT * FROM Genres";
+            $sqlUserID = "SELECT personID FROM Person WHERE username='$_SESSION[login_user]';";
+            $usersListResult = mysqli_query($db, $sqlUserID) or die(mysqli_error($db));
+           
+                    $sqlGenres = "SELECT * FROM Genres WHERE genreID IN (SELECT genreID FROM LikedGenres WHERE personID='$querysql[personID]')";
+				    $resultGenres = $conn->query($sqlGenres);
+                    if ($resultGenres->num_rows > 0)
+                    {
+                        echo "Select Genres to Remove from your profile:<br>";
+                        // echo "<form action=\"genreFormTest.php\" method=\"post\">";
+                        while($rowC = $resultGenres->fetch_assoc())
+                        {
+                            echo "<input type=\"checkbox\" id=\"g" . $rowC["genreID"] . "\" name=\"genreArrayA[]\" value=\"" . $rowC["genreID"] . "\">";
+                            // echo "<input type=\"checkbox\" id=\"" . $rowC["genreID"] . "\" name=\"checkbox[]\" value=\"" . $rowC["genreID"] . "\">";
+                            echo "<label for=\"g" . $rowC["genreID"] ."\"> " . $rowC["genreName"] . "</label> <br>";
+                            // echo $rowC["genreName"] . "<br>";
+                        }
+                        // echo "<input type=\"submit\">";
+                        // echo "</div>";
+                        // echo "</form>";
+                    }
+           
+           
+            $sqlUserID = "SELECT personID FROM Person WHERE username='$_SESSION[login_user]';";
+            $usersListResult = mysqli_query($db, $sqlUserID) or die(mysqli_error($db));
+           
+                    $sqlGenres2 = "SELECT * FROM Genres WHERE genreID NOT IN (SELECT genreID FROM LikedGenres WHERE personID='$querysql[personID]')";
+				    $resultGenres2 = $conn->query($sqlGenres2);
+                    if ($resultGenres2->num_rows > 0)
+                    {
+                        echo "Select Genres to Add to your profile:<br>";
+                        // echo "<form action=\"genreFormTest.php\" method=\"post\">";
+                        while($rowC = $resultGenres2->fetch_assoc())
+                        {
+                            echo "<input type=\"checkbox\" id=\"g" . $rowC["genreID"] . "\" name=\"genreArray2[]\" value=\"" . $rowC["genreID"] . "\">";
+                            // echo "<input type=\"checkbox\" id=\"" . $rowC["genreID"] . "\" name=\"checkbox[]\" value=\"" . $rowC["genreID"] . "\">";
+                            echo "<label for=\"g" . $rowC["genreID"] ."\"> " . $rowC["genreName"] . "</label> <br>";
+                            // echo $rowC["genreName"] . "<br>";
+                        }
+                        // echo "<input type=\"submit\">";
+                        // echo "</div>";
+                        // echo "</form>";
+                    }
              
- <button class="button-register" type="submit" href="home.html">Register</button>
+    ?>  
+             
+ <button class="button-register" name="submit" type="submit" href="">Make Changes</button>
          
          </form>
     </div>    
