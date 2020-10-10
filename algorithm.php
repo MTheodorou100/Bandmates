@@ -27,6 +27,7 @@
                 <form action='' method='post'>
                 <select name ='selectedBand'>
                 ";
+                
                 while ($rowC = mysqli_fetch_array($usersBandsResult, MYSQL_ASSOC))
                 {
                     if ($rowC['bandID']==$_POST['selectedBand'])
@@ -43,7 +44,6 @@
                 <input type='submit' value='Submit'>
                 </form>
                 </div>";
-
                 if(isset($_POST['selectedBand']))
                 {
                     $selectedBandID = $_POST['selectedBand'];
@@ -55,7 +55,7 @@
                     }
 
                     echo "Looking at candidates for " . $selectedBandName;
-                
+                    
 
     //Step 1: Get all users that play any instruments the band wants
 
@@ -78,6 +78,10 @@
                         $userArray[$loopValA][9] = 0;
                         $userArray[$loopValA][10] = 0;
                         $loopValA++;
+                    }
+                            if ($loopValA==0){
+                        echo "<br>";
+                        echo "Oh no! Looks like there's no candidates for " . $selectedBandName;
                     }
                     //^ User Array Key:
                     //$userArray[][0] = PersonID
@@ -146,8 +150,10 @@
                     
 
         //Step 3: get login scores (based off recency of last login)
-
-                    $fraction = 100/(count($userArray)-1);
+                if ($loopValA>0){
+                    if ($loopValA==1){ 
+                    $fraction = 100/(count($userArray));
+                    } else {$fraction = 100/(count($userArray)-1);}
                     for ($x = 0; $x < count($userArray); $x++)              //sort userArray by most recent date 
                     {
                         for ($y = $x+1; $y < count($userArray); $y++)
@@ -166,12 +172,14 @@
 
                         $userArray[$x][9] = $loginScore;
                     }
+                }
 
 
         //Step 4: get age scores (based off how close the age of the matches are to the viewer)
 
                     // $viewerAge = 25;     //commented out as it is now set via sql and session
 
+                    if ($loopValA>0){
                     for ($x = 0; $x < count($userArray); $x++)  //get differences between userArray ages and viewerAge
                     {
                         if ($viewerAge > $userArray[$x][6])
@@ -188,7 +196,8 @@
                         }
                         $userArray[$x][7] = $ageDifference;
                     }
-
+                    }
+                    if ($loopValA>0){
                     //run sorting for age score distribution
                     for ($x = 0; $x < count($userArray); $x++)              //sort userArray by closest age
                     {
@@ -208,10 +217,11 @@
 
                         $userArray[$x][10] = $ageScore;
                     }
+                    }
 
 
         //Step 5: Put the scores together and sort the users in order of best match to worst         
-        
+                if ($loopValA>0){
                     for($a = 0; $a < count($userArray); $a++)
                     {
                         $gScore = $userArray[$a][8];
@@ -267,11 +277,14 @@
                         echo "<br>";
                     }    
                 }
+                }
             }  
             else        //if not logged in (session username not set)
             {
                 echo "You must be logged in to see user matches for your band!";
             }
+
+                
         ?>
     </body>
 </html>  
