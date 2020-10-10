@@ -110,15 +110,13 @@
  <?php if ( $_SESSION['login_user']==null){
       echo "<h2>Find your ideal <br><span>Band</span><br>today!</h2>
         <div>
-          <a href='#about' class='btn-get-started scrollto'>Register as a Band</a>
-          <a href='register.php' class='btn-services scrollto'>Register as a Member</a>
+          <a href='register.php' class='btn-services scrollto'>Click Here to Register</a>
         </div>";} else {
-             echo "<h2> Search for your Ideal Band! </h2>
-             <form action='search.php' method='GET'>
-                <label class='white'>Search:</label> <input type='text' name='item' /><br />
-                <input type='submit' name='submit' value='Submit' />
-            </form>";
-            
+             require_once('hash.php');
+
+              
+
+                       
 }?>
           
  
@@ -226,6 +224,20 @@
     xmlhttp.open("GET","search.php?q="+str,true);
     xmlhttp.send();
   }
+}
+
+function openSearch(evt, searchName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(searchName).style.display = "block";
+  evt.currentTarget.className += " active";
 }
 </script>
 

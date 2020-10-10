@@ -12,8 +12,14 @@
   $result = mysqli_query($db, $sql) or die(mysqli_error($db));
   
   $row = mysqli_fetch_array($result, MYSQL_ASSOC);
+
+
+      $sqlUserID = "SELECT personID FROM Person WHERE username='$_SESSION[login_user]';";
+      $usersListResult = mysqli_query($db, $sqlUserID) or die(mysqli_error($db));
+      $querysql = mysqli_fetch_array($usersListResult, MYSQL_ASSOC);
+
     
-      
+     
      
       
 ?>
@@ -39,17 +45,18 @@
   font-size: 18px;
 }
 
-button {
+
+.button {
+  background-color: #050514;
   border: none;
-  outline: 0;
-  display: inline-block;
-  padding: 8px;
   color: white;
-  background-color: #000;
+  padding: 15px 32px;
   text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
   cursor: pointer;
-  width: 100%;
-  font-size: 18px;
 }
 
 a {
@@ -65,7 +72,7 @@ button:hover, a:hover {
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>BandMates | Login</title>
+  <title>BandMates | My Profile</title>
   <meta content="" name="descriptison">
   <meta content="" name="keywords">
 
@@ -159,28 +166,38 @@ button:hover, a:hover {
       <div class="card">
   <img src="assets/img/empty.png" style="width:100%">
   <h1><?php echo $row['firstName']; ?> <?php echo $row['surName'];?></h1>
-  <p class="title">//Band Position//</p>
-        <p><b>Genres:</b> <?php echo $row['genre'];?></p>
-        <p><b>Instruments:</b> <?php echo $row['instrument'];?></p>
 
-  <div style="margin: 24px 0;">
-    <a href="#"><i class="fa fa-dribbble"></i></a> 
-    <a href="#"><i class="fa fa-twitter"></i></a>  
-    <a href="#"><i class="fa fa-linkedin"></i></a>  
-    <a href="#"><i class="fa fa-facebook"></i></a> 
-  </div>
-  <p><button>Contact</button></p>
+        <p><b>Genres:</b> 
+          <?php 
+          $genresql = "SELECT genreName FROM Genres WHERE genreID IN (SELECT genreID FROM LikedGenres WHERE personID=$querysql[personID])";
+          $resultGenre = mysqli_query($db, $genresql) or die(mysqli_error($db));
+          while ($rowA = mysqli_fetch_array($resultGenre, MYSQL_ASSOC)){
+            echo $rowA['genreName']." ";
+          }?>
+          
+        </p>
+        <p><b>Instruments:</b> 
+          <?php 
+          $instrumentsql = "SELECT instrumentName FROM Instruments WHERE instrumentID IN (SELECT instrumentID FROM Plays WHERE personID=$querysql[personID])";
+          $resultinstrument = mysqli_query($db, $instrumentsql) or die(mysqli_error($db));
+          while ($rowA = mysqli_fetch_array($resultinstrument, MYSQL_ASSOC)){
+            echo $rowA['instrumentName']." ";
+          }?>
+        </p>
+         <center><p><b>Bio</b></p></center> 
+				<p> <?php echo $row['bio'];?></p>
+         <center><p><b>Previous Experience</b></p></center>
+         <p> <?php echo $row['preExp'];?></p>
+         <center><p><b>Contact Email</b></p></center>
+         <p> <?php echo $row['email'];?></p>
+
 </div>
 			<div class="form-group">
-                <label class="white">Bio</label>
-				<p></p>
-            
                 <span class="help-block"></span>
             </div>
 			<div class="form-group">
-                <label class="white">Previous Experience</label>
 				<p></p>
-            
+             <center><a href='editprofile.php' class='button'>Edit Profile</a></center> 
                 <span class="help-block"></span>
             </div>
     </div>    

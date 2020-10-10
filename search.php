@@ -112,9 +112,28 @@
     die("ERROR: Could not connect. " . mysqli_connect_error());
   }
 
-  $item = ($_GET['item']);    
+  if ($_GET['band'] != null) {
+  $band = ($_GET['band']);    
 
-  $sql = "SELECT * FROM Person WHERE instrument LIKE '%".$item."%' OR genre LIKE '%".$item."%'";
+  $sql = "SELECT * FROM Band WHERE bandName LIKE '%".$band."%' OR bandGenre LIKE '%".$band."%'";
+  $result = mysqli_query($db, $sql) or die(mysqli_error($db));
+  
+
+  if (mysqli_num_rows($result) > 0) {
+    // output data of each row
+    while($row = mysqli_fetch_array($result, MYSQL_ASSOC)) {
+      $results = "Name: " . $row["bandName"]. " " . $row["bandGenre"]. "<br>";
+      echo $results;
+    }
+  } else {
+    echo "0 results";
+  }
+}
+
+if ($_GET['person'] !=null) {
+  $person = ($_GET['person']);    
+
+  $sql = "SELECT * FROM Person WHERE instrument LIKE '%".$person."%' OR genre LIKE '%".$person."%'";
   $result = mysqli_query($db, $sql) or die(mysqli_error($db));
   
 
@@ -127,7 +146,7 @@
   } else {
     echo "0 results";
   }
-  
+}
   $db->close();
 ?>
           

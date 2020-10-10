@@ -188,17 +188,21 @@
         <p class="white">Please fill this form to create an account.</p>
         <form onsubmit="return validate()" action="registers.php" method="post">
                 <label class="white">Username</label>
-                <input id="uname" type="text" onchange="liveuservalidate()">
+                <input name="username" id="uname" type="text" onchange="liveuservalidate()">
                 <label id="lbluser" style="color: red; visibility: hidden;"> Please enter a username</label>
                 <br><br>
             
                 <label class="white">Password</label>
-                <input id="pass" type="password" onchange="livepassvalidate()">
+                <input name="password" id="pass" type="password" onchange="livepassvalidate()">
                 <label id="lblpass" style="color: red; visibility: hidden;"> Please enter a password</label>
                 <br><br>
                 
+            <label class="white" for="birthday">Birthday:</label>
+            <input type="date" id="birthday" name="birthday">
+          <br><br>
+          
                 <label class="white">Confirm Password</label>
-                <input id="confirmpass" type="password">
+                <input name="confirm_password" id="confirmpass" type="password">
                 <label id="lblconpass" style="color: red; visibility: hidden;"> Please enter matching password</label>
                 <br><br>
             
@@ -206,7 +210,7 @@
                 <input type="submit" class="btn btn-primary" value="Submit">
                 <input type="reset" class="btn btn-default" value="Reset">
             </div>
-            <p class="white" >Already have an account? <a href="login.html">Login here</a>.</p>
+            <p class="white" >Already have an account? <a href="login.php">Login here</a>.</p>
         </form>
     </div>    
         </section>

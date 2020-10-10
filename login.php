@@ -23,6 +23,10 @@
       if($count == 1) {
         //session_register("myusername");
         $_SESSION['login_user'] = $myusername;
+        $now = new DateTime();
+	    $newDate = $now->format('Y-m-d H:i:s');
+        $sql2 = "UPDATE Person SET lastLoginTime='$newDate' WHERE username='$_SESSION[login_user]'";
+        $result = mysqli_query($db, $sql2) or die(mysqli_error($db));
 
          
          header("location: index.php");
@@ -139,7 +143,7 @@
             </div>    
             <div class="form-group">
                 <label class="white">Password</label>
-                <input class="white" type="password" name="password" >
+                <input type="password" name="password" >
                 <span class="help-block"></span>
             </div>
             <div class="form-group">

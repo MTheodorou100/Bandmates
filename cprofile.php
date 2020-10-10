@@ -38,9 +38,8 @@
   ======================================================== -->
 </head>
 
-	<?php
-
-session_start();  
+	<?php  
+    include("config.php");
 $servername = utf8_encode("35.197.167.52");
 $dbname = utf8_encode("bandmates");
 $username = utf8_encode("root");
@@ -54,12 +53,30 @@ if ($conn->connect_error) {
 
 $fname = $_POST['fname'];
 $lname= $_POST['lname'];
-$instrument= $_POST['instrument'];
-$genre= $_POST['genre'];
 $username= $_SESSION['login_user'];
+   $bio = $_POST['bio'];
+   $pexp = $_POST['pexp'];
 
-$sql = "UPDATE Person SET firstName='$_POST[fname]', surName='$_POST[lname]', instrument='$_POST[instrument]', genre='$_POST[genre]' WHERE username='$_SESSION[login_user]'";
-  
+$sql = "UPDATE Person SET firstName='$_POST[fname]', surName='$_POST[lname]', bio='$_POST[bio]', preExp='$_POST[pexp]', email='$_POST[email]' WHERE username='$_SESSION[login_user]'";
+
+    
+     $sqlUserID = "SELECT personID FROM Person WHERE username='$_SESSION[login_user]';";
+      $usersListResult = mysqli_query($db, $sqlUserID) or die(mysqli_error($db));
+      $querysql = mysqli_fetch_array($usersListResult, MYSQL_ASSOC);
+                 
+    foreach($_POST['instruments'] as $loopInstrumentID) {
+        $sqlInstrumentAdd = "INSERT INTO Plays (personID, instrumentID) VALUES ('$querysql[personID]','$loopInstrumentID');";
+        $insertIntoBandWants = mysqli_query($db, $sqlInstrumentAdd) or die(mysqli_error($db));
+    }
+    
+    foreach($_POST['genreArrayA'] as $loopGenreID) {
+        $sqlGenreAdd = "INSERT INTO LikedGenres (personID, genreID) VALUES ('$querysql[personID]','$loopGenreID');";
+        $insertIntoBandWants = mysqli_query($db, $sqlGenreAdd) or die(mysqli_error($db));
+    }
+
+    
+    
+    
 if ($conn->query($sql) === TRUE) {
 } else {
   echo "Error: " . $sql . "<br>" . $conn->error;
@@ -67,7 +84,8 @@ if ($conn->query($sql) === TRUE) {
 ?>
 
   <body>
-
+      
+          
  <?php
     if ( $_SESSION['login_user']==null){
     echo "<header id='header' class='fixed-top'>
@@ -130,6 +148,8 @@ if ($conn->query($sql) === TRUE) {
     <div class="container">
         <h2 class="white">Success!</h2>
         <p class="white">Your profile has been created!</p>
+       <br>
+       <a href='profile.php'>Click Here to view profile</a>
 
     </div>    
         </section>

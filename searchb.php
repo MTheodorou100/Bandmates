@@ -1,14 +1,16 @@
-            <?php   
-            session_start();         
-            ?>
+<!DOCTYPE html>
 
 <html lang="en">
-
+  <?php
+    error_reporting(E_ERROR | E_PARSE);
+  session_start();
+  include("config.php");
+  ?>
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>BandMates | Create a Profile</title>
+  <title>BandMates | Home</title>
   <meta content="" name="descriptison">
   <meta content="" name="keywords">
 
@@ -40,8 +42,7 @@
 
 <body>
 
-  <!-- ======= Header ======= -->
- <?php
+    <?php
     if ( $_SESSION['login_user']==null){
     echo "<header id='header' class='fixed-top'>
     <div class='container'>
@@ -96,59 +97,54 @@
     }
     
     ?> 
-        
 
-    <section id="intro" class="clearfix">
-    <div class="container">
-        <h2 class="white">Edit Profile</h2>
-        <p class="white">Fill in your details to create your Profile</p>
-   		 <form class="form-register" action="cprofile.php" method='POST'>
+  <!-- ======= Intro Section ======= -->
+  <section id="intro" class="clearfix">
+    <div class="container" data-aos="fade-up">
 
-<div class="fname">
-  <label class="white" for="firstname">First Name:</label>
-  <input type="text" id="fname" name="fname" class="form-control">
-</div>
+      <div class="intro-img" data-aos="zoom-out" data-aos-delay="200" style="color:white;">
+        <img src="assets/img/intro-img.svg" alt="" class="img-fluid">
+      </div>
+        <div class='intro-info' data-aos='zoom-in' data-aos-delay='100'>
+  
+        <?php
+  if($db == false){
+    die("ERROR: Could not connect. " . mysqli_connect_error());
+  }
 
-<div class="lname">
-  <label class="white"  for="lastname">Last Name:</label>
-  <input type="text" id="lname" name="lname" class="form-control">
-</div>
+  $item = ($_GET['item']);    
 
-<div class="instrument">
-  <label class="white" for="instrumentSelect">Instrument Played:</label>
-	<select name="instrument" id='instrument'>
-                    <option value="Guitar">Guitar</option>
-                    <option value="Bass Guitar">Bass Guitar</option>
-                    <option value="Drums">Drums</option>
-                    <option value="Vocals">Vocals</option>
-    </select>
-</div>
+  $sql = "SELECT * FROM Band WHERE bandGenre LIKE '%".$item."%' OR bandName LIKE '%".$item."%'";
+  $result = mysqli_query($db, $sql) or die(mysqli_error($db));
+  
 
-<div class="genre">
-  <label class="white" for="genreSelect">Preferred Genre:</label>
-	<select name="genre" id='genre'>
-                    <option value="Rock">Rock</option>
-                    <option value="Jazz">Jazz</option>
-                    <option value="Metal">Metal</option>
-                    <option value="RnB">RnB</option>
-    </select>
-</div>
-                           
- <button class="button-register" type="submit" href="home.html">Register</button>
-         
-         </form>
-    </div>    
-        </section>
-</body>
-    
-    
-    
-    
-    
-    
-    
-    
-      <footer id="footer">
+  if (mysqli_num_rows($result) > 0) {
+    // output data of each row
+    while($row = mysqli_fetch_array($result, MYSQL_ASSOC)) {
+      $results = "Name: " . $row["bandName"]. " " . $row["bandGenre"]. "<br>";
+      echo $results;
+    }
+  } else {
+    echo "0 results";
+  }
+  
+  $db->close();
+?>
+          
+ 
+        </div>
+      </div>
+
+    </div>
+  </section><!-- End Intro Section -->
+
+  <main id="main">
+
+   
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
     <div class="footer-top">
       <div class="container">
         <div class="row">
@@ -206,4 +202,41 @@
       </div>
     </div>
   </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/jquery/jquery.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/counterup/counterup.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
+  <script src="assets/vendor/waypoints/jquery.waypoints.min.js"></script>
+  <script src="assets/vendor/venobox/venobox.min.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+  <script> 
+  function showUser(str) {
+  if (str == "") {
+    document.getElementById("txtHint").innerHTML = "";
+    return;
+  } else {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("txtHint").innerHTML = this.responseText;
+      }
+    };
+    xmlhttp.open("GET","search.php?q="+str,true);
+    xmlhttp.send();
+  }
+}
+</script>
+
+</body>
+
 </html>
