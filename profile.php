@@ -13,11 +13,13 @@
   
   $row = mysqli_fetch_array($result, MYSQL_ASSOC);
 
+
       $sqlUserID = "SELECT personID FROM Person WHERE username='$_SESSION[login_user]';";
       $usersListResult = mysqli_query($db, $sqlUserID) or die(mysqli_error($db));
       $querysql = mysqli_fetch_array($usersListResult, MYSQL_ASSOC);
+
     
-      
+     
      
       
 ?>
@@ -42,6 +44,7 @@
   color: grey;
   font-size: 18px;
 }
+
 
 .button {
   background-color: #050514;
@@ -163,6 +166,7 @@ button:hover, a:hover {
       <div class="card">
   <img src="assets/img/empty.png" style="width:100%">
   <h1><?php echo $row['firstName']; ?> <?php echo $row['surName'];?></h1>
+
         <p><b>Genres:</b> 
           <?php 
           $genresql = "SELECT genreName FROM Genres WHERE genreID IN (SELECT genreID FROM LikedGenres WHERE personID=$querysql[personID])";
