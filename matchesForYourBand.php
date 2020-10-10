@@ -137,14 +137,14 @@
                         $newMatches     = $numMatches * 100;
                         $newPlGenres    = $numPlGenres * 100;
 
-                        if($numPlGenres > $numBaGenres)    //check for difference   if statement A
+                        if($numPlGenres > $numBaGenres AND $numBaGenres>0)    //check for difference   if statement A
                         {
                             $temp = $numPlGenres  / $numBaGenres;
                             $newBaGenres = $newBaGenres * $temp;
                             $newMatches = $newMatches * $temp;
                             $newPlGenres = $newPlGenres;
                         }
-                        else if($numBaGenres > $numPlGenres)    //check for difference   if statement B
+                        else if($numBaGenres > $numPlGenres AND $numPlGenres>0)    //check for difference   if statement B
                         {
                             $temp = $numBaGenres / $numPlGenres;
                             $newPlGenres = $newPlGenres * $temp;

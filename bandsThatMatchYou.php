@@ -50,17 +50,17 @@
 
                         // echo $loopValA;
                         // echo "<br>";
-                        echo "[".$loopValA."][". 0 ."] = " . $userArray[$loopValA][0] . "<br>";
-                        echo "[".$loopValA."][". 1 ."] = " . $userArray[$loopValA][1] . "<br>";
-                        echo "[".$loopValA."][". 2 ."] = " . $userArray[$loopValA][2] . "<br>";
-                        echo "[".$loopValA."][". 3 ."] = " . $userArray[$loopValA][3] . "<br>";
-                        echo "[".$loopValA."][". 4 ."] = " . $userArray[$loopValA][4] . "<br>";
-                        echo "[".$loopValA."][". 5 ."] = " . $userArray[$loopValA][5] . "<br>";
-                        echo "[".$loopValA."][". 6 ."] = " . $userArray[$loopValA][6] . "<br>";
-                        echo "[".$loopValA."][". 7 ."] = " . $userArray[$loopValA][7] . "<br>";
-                        echo "[".$loopValA."][". 8 ."] = " . $userArray[$loopValA][8] . "<br>";
-                        echo "[".$loopValA."][". 9 ."] = " . $userArray[$loopValA][9] . "<br>";
-                        echo "[".$loopValA."][". 10 ."] = " . $userArray[$loopValA][10] . "<br><br>";
+                        // echo "[".$loopValA."][". 0 ."] = " . $userArray[$loopValA][0] . "<br>";
+                        // echo "[".$loopValA."][". 1 ."] = " . $userArray[$loopValA][1] . "<br>";
+                        // echo "[".$loopValA."][". 2 ."] = " . $userArray[$loopValA][2] . "<br>";
+                        // echo "[".$loopValA."][". 3 ."] = " . $userArray[$loopValA][3] . "<br>";
+                        // echo "[".$loopValA."][". 4 ."] = " . $userArray[$loopValA][4] . "<br>";
+                        // echo "[".$loopValA."][". 5 ."] = " . $userArray[$loopValA][5] . "<br>";
+                        // echo "[".$loopValA."][". 6 ."] = " . $userArray[$loopValA][6] . "<br>";
+                        // echo "[".$loopValA."][". 7 ."] = " . $userArray[$loopValA][7] . "<br>";
+                        // echo "[".$loopValA."][". 8 ."] = " . $userArray[$loopValA][8] . "<br>";
+                        // echo "[".$loopValA."][". 9 ."] = " . $userArray[$loopValA][9] . "<br>";
+                        // echo "[".$loopValA."][". 10 ."] = " . $userArray[$loopValA][10] . "<br><br>";
 
 
                         $loopValA++;
@@ -68,7 +68,7 @@
                     if ($loopValA==0)
                     {
                         echo "<br>";
-                        echo "Oh no! Looks like there's no candidates for " . $selectedBandName;
+                        echo "Oh no! Looks like there's no candidates...";
                     }
                     //^ Band Array Key:
                     //$userArray[][0] = bandID
@@ -126,14 +126,14 @@
                         $newMatches     = $numMatches * 100;
                         $newPlGenres    = $numPlGenres * 100;
 
-                        if($numPlGenres > $numBaGenres)    //check for difference   if statement A
+                        if($numPlGenres > $numBaGenres AND $numBaGenres>0)    //check for difference AND make sure not dividing by zero
                         {
                             $temp = $numPlGenres  / $numBaGenres;
                             $newBaGenres = $newBaGenres * $temp;
                             $newMatches = $newMatches * $temp;
                             $newPlGenres = $newPlGenres;
                         }
-                        else if($numBaGenres > $numPlGenres)    //check for difference   if statement B
+                        else if($numBaGenres > $numPlGenres AND $numPlGenres>0)    //check for difference AND make sure not dividing by zero
                         {
                             $temp = $numBaGenres / $numPlGenres;
                             $newPlGenres = $newPlGenres * $temp;
@@ -250,7 +250,7 @@
                     {
                         for ($y = $x+1; $y < count($userArray); $y++)
                         {
-                            if ($userArray[$x][4]<$userArray[$y][4])    //check if the current nested iteration of the array is lesser
+                            if ($userArray[$x][6]<$userArray[$y][6])    //check if the current nested iteration of the array is lesser
                             {
                                 for ($z = 0; $z <= 10; $z++)     //move the data into the sorted spot for each user
                                 {
