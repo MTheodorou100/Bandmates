@@ -1,5 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
+  <?php
+    error_reporting(E_ERROR | E_PARSE);
+//   session_start();
+  include("config.php");
+  ?>
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>BandMates | Your Feed</title>
+  <meta content="" name="descriptison">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="assets/vendor/ionicons/css/ionicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+  <link href="assets/vendor/venobox/venobox.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: NewBiz - v2.1.0
+  * Template URL: https://bootstrapmade.com/newbiz-bootstrap-business-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+    <?php
+    if ( $_SESSION['login_user']==null){
+    echo "<header id='header' class='fixed-top'>
+    <div class='container'>
+
+      <div class='logo float-left'>
+        <!-- Uncomment below if you prefer to use an text logo -->
+        <!-- <h1><a href='index.html'>NewBiz</a></h1> -->
+        <a href='index.php'><img src='assets/img/logo.png' alt='' class='img-fluid'></a>
+      </div>
+
+      <nav class='main-nav float-right d-none d-lg-block'>
+        <ul>
+
+          
+          <li class='active'><a href='index.php'>Home</a></li>
+          <li><a href='login.php'>Login</a></li>
+          <li><a href='register.php'>Register</a></li>
+            <li><a href='service.php'>Terms of Service</a></li>
+             <li><a href='policy.php'>Privacy Policy</a></li>
+        </ul>
+      </nav><!-- .main-nav -->
+      </div>
+    </header>";
+    } else {
+        echo "<header id='header' class='fixed-top'>
+    <div class='container'>
+
+      <div class='logo float-left'>
+        <!-- Uncomment below if you prefer to use an text logo -->
+        <!-- <h1><a href='index.html'>NewBiz</a></h1> -->
+        <a href='index.php'><img src='assets/img/logo.png' alt='' class='img-fluid'></a>
+        <a href='index.php'>Logged in as ".$_SESSION['login_user']." </a>                               
+      </div>
+
+
+      <nav class='main-nav float-right d-none d-lg-block'>
+        <ul>
+
+          
+        <li ><a href='index.php'>Home</a></li>
+        <li ><a href='makeBand.php'>Create a Band</a></li>
+        <li class='active'><a href='viewMyBands.php'>View my Bands</a></li>
+          <li><a href='service.php'>Terms of Service</a></li>
+           <li><a href='policy.php'>Privacy Policy</a></li>
+           <li><a href='profile.php'>My Profile</a></li>
+           <li><a href='signout.php'> Sign Out </a></li>
+             
+        </ul>
+        
+        
+      </nav><!-- .main-nav -->
+      </div>
+    </header>";
+    }
+    
+    ?> 
     <body>
         <h1>
             viewBands Page

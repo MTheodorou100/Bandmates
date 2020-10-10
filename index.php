@@ -84,6 +84,8 @@
 
           
           <li class='active'><a href='index.php'>Home</a></li>
+          <li><a href='makeBand.php'>Create a Band</a></li>
+          <li><a href='viewMyBands.php'>View my Bands</a></li>
             <li><a href='service.php'>Terms of Service</a></li>
              <li><a href='policy.php'>Privacy Policy</a></li>
              <li><a href='profile.php'>My Profile</a></li>

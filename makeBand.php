@@ -184,11 +184,13 @@
         <ul>
 
           
-          <li class='active'><a href='index.php'>Home</a></li>
-            <li><a href='service.php'>Terms of Service</a></li>
-             <li><a href='policy.php'>Privacy Policy</a></li>
-             <li><a href='profile.php'>My Profile</a></li>
-             <li><a href='signout.php'> Sign Out </a></li>
+        <li ><a href='index.php'>Home</a></li>
+        <li class='active'><a href='makeBand.php'>Create a Band</a></li>
+        <li><a href='viewMyBands.php'>View my Bands</a></li>
+          <li><a href='service.php'>Terms of Service</a></li>
+           <li><a href='policy.php'>Privacy Policy</a></li>
+           <li><a href='profile.php'>My Profile</a></li>
+           <li><a href='signout.php'> Sign Out </a></li>
              
         </ul>
         
@@ -218,48 +220,51 @@
 	}
 	else        //display form if the user is logged in
 	{
-		echo "<br> Enter data to make a band:";
+    echo " <h1>Create a Band</h1>";
 		echo "  <form action=\"\" method=\"post\"> 
-		<label>Band Name</label>
+		<label>Band Name: </label>
 		<input name=\"bandName\" type=\"text\" placeholder=\"The Flavour Townspeople\" required>
-		<br>
-		<label>Temporary Jam Band?</label>
+		<br><br><br>
+		<label>Temporary Jam Band? <br></label>
 		<select name=\"bandJam\" require>
 		<option value=\"0\">No</option>
 		<option value=\"1\">Yes</option>
 		</select>
-		<br>
-		<label>Show in feeds and searches?</label>
+		<br><br><br>
+		<label>Show in feeds and searches? <br></label>
 		<select name=\"feedBool\" require>
 		<option value=\"1\">Yes</option>
 		<option value=\"0\">No</option>
-		</select>";
+		</select> <br><br>";
 
 		$sqlGenres = "SELECT * FROM Genres";
 		$resultGenres = $conn->query($sqlGenres);
 		if ($resultGenres->num_rows > 0)
 		{
-			echo "<br> <div> Pick Your Band Genres: <br>";
+			echo "<br> <div><h3> Pick Your Band Genres:</h3> <br><br>";
 			while($rowC = $resultGenres->fetch_assoc())
 			{
-				echo "<input type=\"checkbox\" id=\"" . $rowC["genreID"] . "\" name=\"" . $rowC["genreID"] . "\" value=\"" . $rowC["genreID"] . "\">";			//display genre checkboxes
+        echo "<input type=\"checkbox\" id=\"" . $rowC["genreID"] . "\" name=\"" . $rowC["genreID"] . "\" value=\"" . $rowC["genreID"] . "\">";			//display genre checkboxes
+        echo " ";
 				echo "<label for=\"" . $rowC["genreID"] ."\"> " . $rowC["genreName"] . "</label> <br>";
 			}
-			echo "</div>";
+			echo "</div> <br>";
 		}
 
 		$sqlInstruments = "SELECT * FROM Instruments";
 		$resultInstruments = $conn->query($sqlInstruments);
 		if ($resultInstruments->num_rows > 0)
 		{
-			echo "<br> <div> Pick Your Instruments: <br>";
+			echo "<br> <div> <h3>Select what instruments you want to find for the band :</h3> <br>";
 			while($rowD = $resultInstruments->fetch_assoc())
 			{
-				echo "<input type=\"checkbox\" id=\"i" . $rowD["instrumentID"] . "\" name=\"instruments[]\" value=\"" . $rowD["instrumentID"] . "\">";			//display instrument checkboxes
+        echo "<input type=\"checkbox\" id=\"i" . $rowD["instrumentID"] . "\" name=\"instruments[]\" value=\"" . $rowD["instrumentID"] . "\">";			//display instrument checkboxes
+        echo " ";
 				echo "<label for=\"i" . $rowD["instrumentID"] ."\"> " . $rowD["instrumentName"] . "</label> <br>";
 			}
 			echo "</div>";
-		}
+    }
+    echo "<br>";
 		echo "<input type=\"submit\"> </form>";
 	}
 ?>
