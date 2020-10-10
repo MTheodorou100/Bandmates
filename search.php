@@ -123,7 +123,17 @@
     // output data of each row
     while($row = mysqli_fetch_array($result, MYSQL_ASSOC)) {
       $results = "Name: " . $row["bandName"]. " " . $row["bandGenre"]. "<br>";
-      echo $results;
+      foreach ($results as $id) {
+        <div class="card" style="width: 18rem;">
+        <div class="card-body">
+        <h5 class="card-title">$row["bandName"]</h5>
+        <h6 class="card-subtitle mb-2 text-muted">$row["bandGenre"]</h6>
+        <p class="card-text">""</p>
+        <a href="#" class="card-link">Card link</a>
+        <a href="#" class="card-link">Another link</a>
+        </div>
+        </div>
+      }
     }
   } else {
     echo "0 results";
