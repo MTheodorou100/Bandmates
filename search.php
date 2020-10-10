@@ -14,6 +14,11 @@
   <meta content="" name="descriptison">
   <meta content="" name="keywords">
 
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
   <!-- Favicons -->
   <link href="assets/img/favicon.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
@@ -115,7 +120,7 @@
   if ($_GET['band'] != null) {
   $band = ($_GET['band']);    
 
-  $sql = "SELECT * FROM Band WHERE bandName LIKE '%".$band."%' OR bandGenre LIKE '%".$band."%'";
+  $sql = "SELECT * FROM Band WHERE bandName LIKE '%".$band."%' ";
   $result = mysqli_query($db, $sql) or die(mysqli_error($db));
   
 
@@ -123,8 +128,22 @@
     // output data of each row
     while($row = mysqli_fetch_array($result, MYSQL_ASSOC)) {
       $results = "Name: " . $row["bandName"]. " " . $row["bandGenre"]. "<br>";
-      echo $results;
+      foreach ($results as $id) {
+        echo '<div class="card bg-primary" style="width: 12rem;">
+        <div class="card-body">
+        <h5 class="card-title">' . $id['bandName'] . '</h5>
+        <h6 class="card-subtitle mb-2 text-muted"></h6>
+        <p class="card-text">' . $id['bandGenre'] . '</p>
+        <a href="#" class="card-link">Card link</a>
+        <a href="#" class="card-link">Another link</a>
+        </div>
+        </div>
+        </div>
+        <?php
+        echo "hello"';
+      }
     }
+ 
   } else {
     echo "0 results";
   }

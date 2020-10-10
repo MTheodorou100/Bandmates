@@ -1,4 +1,4 @@
-            <?php   
+<?php   
             session_start();    
 $servername = utf8_encode("35.197.167.52");
             $dbname = utf8_encode("bandmates");
@@ -130,6 +130,13 @@ $servername = utf8_encode("35.197.167.52");
   <meta content="" name="descriptison">
   <meta content="" name="keywords">
 
+  <style>
+label {
+    color: white;
+}
+
+</style>
+
   <!-- Favicons -->
   <link href="assets/img/favicon.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
@@ -163,16 +170,13 @@ $servername = utf8_encode("35.197.167.52");
     if ( $_SESSION['login_user']==null){
     echo "<header id='header' class='fixed-top'>
     <div class='container'>
-
       <div class='logo float-left'>
         <!-- Uncomment below if you prefer to use an text logo -->
         <!-- <h1><a href='index.html'>NewBiz</a></h1> -->
         <a href='index.php'><img src='assets/img/logo.png' alt='' class='img-fluid'></a>
       </div>
-
       <nav class='main-nav float-right d-none d-lg-block'>
         <ul>
-
           
           <li class='active'><a href='index.php'>Home</a></li>
           <li><a href='login.php'>Login</a></li>
@@ -186,18 +190,14 @@ $servername = utf8_encode("35.197.167.52");
     } else {
         echo "<header id='header' class='fixed-top'>
     <div class='container'>
-
       <div class='logo float-left'>
         <!-- Uncomment below if you prefer to use an text logo -->
         <!-- <h1><a href='index.html'>NewBiz</a></h1> -->
         <a href='index.php'><img src='assets/img/logo.png' alt='' class='img-fluid'></a>
         <a href='index.php'>Logged in as ".$_SESSION['login_user']." </a>                               
       </div>
-
-
       <nav class='main-nav float-right d-none d-lg-block'>
         <ul>
-
           
           <li class='active'><a href='index.php'>Home</a></li>
             <li><a href='service.php'>Terms of Service</a></li>
@@ -238,11 +238,12 @@ $servername = utf8_encode("35.197.167.52");
 				$resultInstruments = $conn->query($sqlInstruments);
 				if ($resultInstruments->num_rows > 0)
 				{
-					echo "<br> <div> Pick Your Instruments: <br>";
+					echo "<br> <div><label> Pick Your Instruments:</label> <br>";
 					// echo "<form action=\"genreFormTest.php\" method=\"post\">";
 					while($rowD = $resultInstruments->fetch_assoc())
 					{
-						echo "<input type=\"checkbox\" id=\"i" . $rowD["instrumentID"] . "\" name=\"instruments[]\" value=\"" . $rowD["instrumentID"] . "\">";
+            echo "<input type=\"checkbox\" id=\"i" . $rowD["instrumentID"] . "\" name=\"instruments[]\" value=\"" . $rowD["instrumentID"] . "\">";
+            echo " ";
 						// echo "<input type=\"checkbox\" id=\"" . $rowC["genreID"] . "\" name=\"checkbox[]\" value=\"" . $rowC["genreID"] . "\">";
 						echo "<label for=\"i" . $rowD["instrumentID"] ."\"> " . $rowD["instrumentName"] . "</label> <br>";
 						// echo $rowC["genreName"] . "<br>";
@@ -259,11 +260,12 @@ $servername = utf8_encode("35.197.167.52");
 				    $resultGenres = $conn->query($sqlGenres);
                     if ($resultGenres->num_rows > 0)
                     {
-                        echo "<br>Add Genres:<br>";
+                        echo "<br><label>Add Genres:</label><br>";
                         // echo "<form action=\"genreFormTest.php\" method=\"post\">";
                         while($rowC = $resultGenres->fetch_assoc())
                         {
                             echo "<input type=\"checkbox\" id=\"g" . $rowC["genreID"] . "\" name=\"genreArrayA[]\" value=\"" . $rowC["genreID"] . "\">";
+                            echo " ";
                             // echo "<input type=\"checkbox\" id=\"" . $rowC["genreID"] . "\" name=\"checkbox[]\" value=\"" . $rowC["genreID"] . "\">";
                             echo "<label for=\"g" . $rowC["genreID"] ."\"> " . $rowC["genreName"] . "</label> <br>";
                             // echo $rowC["genreName"] . "<br>";

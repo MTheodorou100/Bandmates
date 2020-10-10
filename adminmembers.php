@@ -90,7 +90,6 @@ form {
             echo "<th>".$row['firstName']."</th>";
             echo "<th>".$row['surName']."</th>";
             echo "<th>".$row['username']."</th>";
-            echo "<th>".$row['password']."</th>";
              echo "<th>".$row['email']."</th>";
         echo "</tr>";
 }?>
@@ -103,8 +102,6 @@ form {
          <form action="" method="POST">
         Username: <input type=text name=user_name id="user_name" required>
         <br/><br/>
-        Password: <input type=password name=password id="password" minlength=6 required>
-        <br><br/>
         First Name: <input type=text name=first_name id="first_name" required>
         <br/><br/>
         Last Name: <input type=text name=last_name id="last_name" required>
@@ -121,8 +118,6 @@ form {
         <br/><br/>
         Username: <input type=text name=uuser_name id="uuser_name" required>
         <br/><br/>
-        Password: <input type=password name=upassword id="upassword" minlength=6 required>
-        <br><br/>
         First Name: <input type=text name=ufirst_name id="ufirst_name" required>
         <br/><br/>
         Last Name: <input type=text name=ulast_name id="ulast_name" required>
