@@ -2,8 +2,8 @@
 <html lang="en">
     <body>
 
-        <a href="user.php?user=56">go to test user (56)</a>
-        <br>
+        <!-- <a href="user.php?user=56">go to test user (56)</a> -->
+        <!-- <br> -->
 
         <?php
             session_start();  
@@ -46,8 +46,8 @@
             {
                 echo "0 results";
             }
-            //Get the user's bands
-            $sqlBands = "SELECT * FROM Band WHERE bandID in (SELECT bandID FROM BandMembers WHERE personID = '$personID')";
+            //Get the user's bands that this profile isn't a part of
+            $sqlBands = "SELECT * FROM Band WHERE bandID in (SELECT bandID FROM BandMembers WHERE personID = '$personID') AND NOT bandID in (SELECT bandID FROM BandMembers WHERE personID = '$thisPersonID')";
             $resultBands = $conn->query($sqlBands);
 
 
@@ -60,7 +60,7 @@
                     echo "personID = " . $rowA["personID"] . "<br>";
                     echo "first name = " . $rowA["firstName"] . "<br>";
                     echo "surname = " . $rowA["surName"] . "<br>";
-                    echo "genre = " . $rowA["genre"] . "<br>";
+                    // echo "genre = " . $rowA["genre"] . "<br>";
                     echo "bio = " . $rowA["bio"] . "<br>";
                     echo "previous experience = " . $rowA["preExp"] . "<br>";
                     echo "email = " . $rowA["email"] . "<br>";
@@ -82,7 +82,7 @@
                     }
                     else
                     {
-                        echo "0 results - you have no bands";
+                        echo "0 results - you have no bands that this user isn't a part of";
                     }
                     
                     echo "</div>";
@@ -91,7 +91,7 @@
             }
             else
             {
-                echo "0 results";
+                echo "0 results - you have no bands that this user isn't a part of";
             }
 
         ?>

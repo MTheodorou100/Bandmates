@@ -253,10 +253,11 @@
                 echo "<div>";
                 if ($resultBandMembers->num_rows > 0)
                 {
-                    echo "Band Members: <br>";
+                    echo "<br> Band Members: <br>";
                     while($rowB = $resultBandMembers->fetch_assoc())
                     {
-                        echo $rowB["firstName"] . "<br>";
+                        // echo $rowB["firstName"] . "<br>";
+                        echo "<a href='viewProfile.php?user=" . $rowB["personID"] . "'>" . $rowB["firstName"] . " " . $rowB["surName"] . "</a> <br>";
                     }
                 }
                 else
@@ -265,8 +266,6 @@
                 }
                 echo "</div>";
 
-                // $sqlBandEditing = "SELECT * FROM Person WHERE personID in (SELECT personID FROM BandMembers WHERE bandID = '$thisBandID' AND personID != '$leaderID')";      //get band members except leader
-                // $resultBandEditing = $conn->query($sqlBandEditing);
 
                 //edit if leader
                 if($viewerRole == 2)    //viewerRole 0=nonMember, 1=member, 2=leader
@@ -306,7 +305,6 @@
                         echo "<br>";
                         while ($rowE = $resultBandEditing->fetch_assoc())
                         {
-                            // echo "<input type=\"checkbox\" id=\"" . $rowE["personID"] . "\" name=\"" . $rowE["personID"] . "\" value=\"" . $rowE["personID"] . "\">";
                             echo "<input type=\"checkbox\" id=\"" . $rowE["personID"] . "\" name=\"memberArray[]\" value=\"" . $rowE["personID"] . "\">";
                             echo "<label for=\"" . $rowE["personID"] ."\"> " . $rowE["username"] . "(" . $rowE["firstName"] . " " . $rowE["surName"] . ")</label> <br>";
                         }
@@ -319,39 +317,28 @@
 
                     echo "<br> Add and remove genres: <br>";
                     echo "<div>";
-                    // $sqlGenres = "SELECT * FROM Genres";
+
                     $sqlGenres = "SELECT * FROM Genres WHERE genreID NOT IN (SELECT genreID FROM BandGenres WHERE bandID = '$thisBandID')";
 				    $resultGenres = $conn->query($sqlGenres);
                     if ($resultGenres->num_rows > 0)
                     {
                         echo "<br>Add Genres:<br>";
-                        // echo "<form action=\"genreFormTest.php\" method=\"post\">";
                         while($rowC = $resultGenres->fetch_assoc())
                         {
                             echo "<input type=\"checkbox\" id=\"g" . $rowC["genreID"] . "\" name=\"genreArrayA[]\" value=\"" . $rowC["genreID"] . "\">";
-                            // echo "<input type=\"checkbox\" id=\"" . $rowC["genreID"] . "\" name=\"checkbox[]\" value=\"" . $rowC["genreID"] . "\">";
                             echo "<label for=\"g" . $rowC["genreID"] ."\"> " . $rowC["genreName"] . "</label> <br>";
-                            // echo $rowC["genreName"] . "<br>";
                         }
-                        // echo "<input type=\"submit\">";
-                        // echo "</div>";
-                        // echo "</form>";
                     }
                     $sqlGenresB = "SELECT * FROM Genres WHERE genreID IN (SELECT genreID FROM BandGenres WHERE bandID = '$thisBandID')";
 				    $resultGenresB = $conn->query($sqlGenresB);
                     if ($resultGenresB->num_rows > 0)
                     {
-                        // echo "<br> <div> Removed Your Current Genres: <br>";
-                        // echo "<form action=\"genreFormTest.php\" method=\"post\">";
                         echo "<br>Remove Your Genres:<br>";
                         while($rowF = $resultGenresB->fetch_assoc())
                         {
                             echo "<input type=\"checkbox\" id=\"g" . $rowF["genreID"] . "\" name=\"genreArrayB[]\" value=\"" . $rowF["genreID"] . "\">";
                             echo "<label for=\"g" . $rowF["genreID"] ."\"> " . $rowF["genreName"] . "</label> <br>";
                         }
-                        // echo "<input type=\"submit\">";
-                        // echo "</div>";
-                        // echo "</form>";
                     }
                     echo "</div>";
 

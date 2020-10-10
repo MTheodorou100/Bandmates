@@ -58,10 +58,10 @@
                         echo "<div>";
                         echo "bandID = " . $row["bandID"] . "<br>";
                         echo "bandName = " . $row["bandName"] . "<br>";
-                        echo "bandGenre = " . $row["bandGenre"] . "<br>";
-                        echo "Are you the leader? MUST BE FIXED " . $row["bandJamBool"] . "<br>";
+                        // echo "bandGenre = " . $row["bandGenre"] . "<br>";
+                        // echo "Are you the leader? MUST BE FIXED " . $row["bandJamBool"] . "<br>";
                         // echo "(edit link)";
-                        echo "<a href=\"band.php?band=" . $row["bandID"] . "\">edit link</a>";
+                        echo "<a href=\"band.php?band=" . $row["bandID"] . "\">View Band</a>";
                         echo "</div>";
                         echo "<br>";
                     }
