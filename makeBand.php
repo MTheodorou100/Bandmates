@@ -13,8 +13,6 @@
 	//putting in band into the database
 	if( (isset($_POST['bandName']) == true) and (isset($_POST['bandJam']) == true) )      //ensures that the form was sent
 	{
-		// echo "<br> form submitted <br>";
-
 		$currentUsername = $_SESSION['login_user'];
 		$newBandName = $_POST['bandName'];
 		$newBandGenre = $_POST['bandGenre'];
@@ -26,7 +24,6 @@
 		if ($conn->query($sql1) === TRUE) //executes "$conn->query($sql);" to run the insert
 		{
 			$last_id = $conn->insert_id;
-			// echo "<br> last_id = ". $last_id . "<br>";
 		} 
 		else 
 		{
@@ -69,10 +66,8 @@
 			if( isset($_POST[$loopVar]) )
 			{
 				$postVal = $_POST[$loopVar];
-				// echo "<br> post(loopvar) = " . $postVal;
 
 				$sqlInsertBandGenres = "INSERT INTO BandGenres (bandID, genreID) VALUES ('$last_id', '$postVal')";    //insert the picked genres into BandGenres
-				// $sqlInsertLikedGenres = "INSERT INTO LikedGenres (personID, genreID) VALUES ($gPersonID, $postVal)";    //insert the picked genres into LikedGenres
 
 				if ($conn->query($sqlInsertBandGenres) === TRUE) //executes "$conn->query($sql);" to run the insert
 				{
@@ -97,11 +92,7 @@
 				$instrumentAdd = $conn->query($sqlInstrumentAdd);                
 			}
 		}
-
-		header("Location: viewMyBands.php");
-
-
-		// echo "<br> bandName = " . $newBandName . "<br> bandGenre = " . $newBandGenre . "<br> bandLeader = " . $newBandLeader . "<br>";
+		header("Location: viewMyBands.php");		//send the viewer to view their bands
 	}
 	else        //if no form was sent, or loading page from external link
 	{
@@ -220,16 +211,6 @@
 		
   
 <?php
-	// session_start();  
-	// $servername = utf8_encode("35.197.167.52");
-	// $dbname = utf8_encode("bandmates");
-	// $username = utf8_encode("root");
-	// $password = utf8_encode("mypassword");
-	// $conn = new mysqli($servername, $username, $password, $dbname);
-	// if ($conn->connect_error) 
-	// {
-	// 	die("Connection failed: " . $conn->connect_error);
-	// }
 
 	if (isset($_SESSION['login_user']) == false)        //dont display form unless the user is logged in
 	{
@@ -237,10 +218,6 @@
 	}
 	else        //display form if the user is logged in
 	{
-		// echo "You're logged in as: " . $_SESSION['login_user'];
-		// echo "<br> you're logged in, here's the form to make a band:";
-		// var_dump($_POST);	//echos all post vars
-
 		echo "<br> Enter data to make a band:";
 		echo "  <form action=\"\" method=\"post\"> 
 		<label>Band Name</label>
@@ -263,18 +240,12 @@
 		if ($resultGenres->num_rows > 0)
 		{
 			echo "<br> <div> Pick Your Band Genres: <br>";
-			// echo "<form action=\"genreFormTest.php\" method=\"post\">";
 			while($rowC = $resultGenres->fetch_assoc())
 			{
-				echo "<input type=\"checkbox\" id=\"" . $rowC["genreID"] . "\" name=\"" . $rowC["genreID"] . "\" value=\"" . $rowC["genreID"] . "\">";
-				// echo "<input type=\"checkbox\" id=\"" . $rowC["genreID"] . "\" name=\"genres[]\" value=\"" . $rowC["genreID"] . "\">";
-				// echo "<input type=\"checkbox\" id=\"" . $rowC["genreID"] . "\" name=\"checkbox[]\" value=\"" . $rowC["genreID"] . "\">";
+				echo "<input type=\"checkbox\" id=\"" . $rowC["genreID"] . "\" name=\"" . $rowC["genreID"] . "\" value=\"" . $rowC["genreID"] . "\">";			//display genre checkboxes
 				echo "<label for=\"" . $rowC["genreID"] ."\"> " . $rowC["genreName"] . "</label> <br>";
-				// echo $rowC["genreName"] . "<br>";
 			}
-			// echo "<input type=\"submit\">";
 			echo "</div>";
-			// echo "</form>";
 		}
 
 		$sqlInstruments = "SELECT * FROM Instruments";
@@ -282,22 +253,15 @@
 		if ($resultInstruments->num_rows > 0)
 		{
 			echo "<br> <div> Pick Your Instruments: <br>";
-			// echo "<form action=\"genreFormTest.php\" method=\"post\">";
 			while($rowD = $resultInstruments->fetch_assoc())
 			{
-				echo "<input type=\"checkbox\" id=\"i" . $rowD["instrumentID"] . "\" name=\"instruments[]\" value=\"" . $rowD["instrumentID"] . "\">";
-				// echo "<input type=\"checkbox\" id=\"" . $rowC["genreID"] . "\" name=\"checkbox[]\" value=\"" . $rowC["genreID"] . "\">";
+				echo "<input type=\"checkbox\" id=\"i" . $rowD["instrumentID"] . "\" name=\"instruments[]\" value=\"" . $rowD["instrumentID"] . "\">";			//display instrument checkboxes
 				echo "<label for=\"i" . $rowD["instrumentID"] ."\"> " . $rowD["instrumentName"] . "</label> <br>";
-				// echo $rowC["genreName"] . "<br>";
 			}
-			// echo "<input type=\"submit\">";
 			echo "</div>";
-			// echo "</form>";
 		}
 		echo "<input type=\"submit\"> </form>";
 	}
-
-	
 ?>
           
  

@@ -16,9 +16,6 @@
                 die("Connection failed: " . $conn->connect_error);
             }
             
-            
-
-
 
             if (isset($_SESSION['login_user']) == false)        //dont display unless the user is logged in
             {

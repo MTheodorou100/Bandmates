@@ -15,11 +15,6 @@
                 die("Connection failed: " . $conn->connect_error);
             }
 
-            // session_start();
-            // echo "<br>";
-
-            // echo "post inviteeID" . $_POST['inviteeID'];
-            // echo "post band = " . $_POST['band'];
 
             $bandID = $_POST['band'];
             $newBandMember = $_POST['inviteeID'];
@@ -27,7 +22,7 @@
             //Make the user a bandmember
             $leaderBoolean = 0;
             $sql2 = "INSERT INTO BandMembers (bandID, personID, leaderBool) VALUES ('$bandID', '$newBandMember', '$leaderBoolean')";
-            if ($conn->query($sql2) === TRUE) //executes "$conn->query($sql);" to run the insert
+            if ($conn->query($sql2) === TRUE)   //executes "$conn->query($sql2);" to run the insert
             {
                 // echo "Person added to band!";
                 header("Location: band.php?band=".$bandID);
