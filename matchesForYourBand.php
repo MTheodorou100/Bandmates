@@ -66,7 +66,8 @@
                     echo "Looking at candidates for " . $selectedBandName;
                     
 
-    //Step 1: Get all users that play any instruments the band wants
+                    //Step 1: Get all users that play any instruments the band wants
+                    //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
                     $sqlUsersList = "SELECT * FROM Person WHERE personID IN (SELECT personID FROM Plays WHERE instrumentID IN (SELECT instrumentID FROM BandWants WHERE bandID = $selectedBandID)) AND personID != $personID;";
                     $usersListResult = mysqli_query($db, $sqlUsersList) or die(mysqli_error($db));
@@ -107,11 +108,12 @@
 
 
                 
-        //Step 2: Genre score loop (from 0 to 100)
+                    //Step 2: Genre score loop (from 0 to 100)
+                    //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
                     //Retrieve Number of Band Genres
                     $usersListResult = mysqli_query($db, $sqlUsersList) or die(mysqli_error($db));
-                    $numBandGenres = "SELECT COUNT(genreID) FROM BandGenres WHERE bandID = 21;";
+                    $numBandGenres = "SELECT COUNT(genreID) FROM BandGenres WHERE bandID = $selectedBandID;";
                     $numBandGenreResult = mysqli_query($db, $numBandGenres) or die(mysqli_error($db));
                     $v3 = mysqli_fetch_array($numBandGenreResult, MYSQL_ASSOC);
                     $numBaGenres = $v3['COUNT(genreID)'];
@@ -126,7 +128,7 @@
                         $numPlGenres = $v1['COUNT(genreID)'];
                         
                         //Retrieve Number of Matches
-                        $numMatches = "SELECT COUNT(genreID) FROM BandGenres WHERE genreID IN (SELECT genreID FROM LikedGenres WHERE personID = ".$rowB['personID']." ) AND bandID = 21";
+                        $numMatches = "SELECT COUNT(genreID) FROM BandGenres WHERE genreID IN (SELECT genreID FROM LikedGenres WHERE personID = ".$rowB['personID']." ) AND bandID = '$selectedBandID'";
                         $numMatchesResult = mysqli_query($db, $numMatches) or die(mysqli_error($db));
                         $v2 = mysqli_fetch_array($numMatchesResult, MYSQL_ASSOC);
                         $numMatches = $v2['COUNT(genreID)'];
@@ -158,18 +160,25 @@
                     }
                     
 
-        //Step 3: get login scores (based off recency of last login)
+                //Step 3: get login scores (based off recency of last login)
+                //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
                 if ($loopValA>0){
-                    if ($loopValA==1){ 
-                    $fraction = 100/(count($userArray));
-                    } else {$fraction = 100/(count($userArray)-1);}
+                    if ($loopValA==1)
+                    { 
+                        $fraction = 100/(count($userArray));
+                    } 
+                    else 
+                    {
+                        $fraction = 100/(count($userArray)-1);
+                    }
                     for ($x = 0; $x < count($userArray); $x++)              //sort userArray by most recent date 
                     {
                         for ($y = $x+1; $y < count($userArray); $y++)
                         {
                             if ($userArray[$x][5]<$userArray[$y][5])
                             {
-                                for ($z = 0; $z <= 4; $z++)     //move the data into the sorted spot for each user
+                                for ($z = 0; $z <= 10; $z++)     //move the data into the sorted spot for each user
                                 {
                                     $temp = $userArray[$y][$z];
                                     $userArray[$y][$z] = $userArray[$x][$z];
@@ -184,7 +193,8 @@
                 }
 
 
-        //Step 4: get age scores (based off how close the age of the matches are to the viewer)
+                    //Step 4: get age scores (based off how close the age of the matches are to the viewer)
+                    //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
                     // $viewerAge = 25;     //commented out as it is now set via sql and session
 
@@ -214,7 +224,7 @@
                         {
                             if ($userArray[$x][7]<$userArray[$y][7])
                             {
-                                for ($z = 0; $z <= 4; $z++)     //move the data into the sorted spot for each user
+                                for ($z = 0; $z <= 10; $z++)     //move the data into the sorted spot for each user
                                 {
                                     $temp = $userArray[$y][$z];
                                     $userArray[$y][$z] = $userArray[$x][$z];
@@ -229,7 +239,9 @@
                     }
 
 
-        //Step 5: Put the scores together and sort the users in order of best match to worst         
+                //Step 5: Put the scores together and sort the users in order of best match to worst
+                //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------         
+                
                 if ($loopValA>0){
                     for($a = 0; $a < count($userArray); $a++)
                     {
@@ -247,7 +259,7 @@
                         {
                             if ($userArray[$x][4]<$userArray[$y][4])    //check if the current nested iteration of the array is lesser
                             {
-                                for ($z = 0; $z <= 4; $z++)     //move the data into the sorted spot for each user
+                                for ($z = 0; $z <= 10; $z++)     //move the data into the sorted spot for each user
                                 {
                                     $temp = $userArray[$y][$z];
                                     $userArray[$y][$z] = $userArray[$x][$z];
