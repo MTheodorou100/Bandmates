@@ -171,6 +171,13 @@ $result = mysqli_query($db, $sql) or die(mysqli_error($db));
   <meta content="" name="descriptison">
   <meta content="" name="keywords">
 
+  <style>
+label {
+    color: white;
+}
+
+</style>
+
   <!-- Favicons -->
   <link href="assets/img/favicon.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
@@ -316,11 +323,12 @@ $result = mysqli_query($db, $sql) or die(mysqli_error($db));
 				$resultInstruments = $conn->query($sqlInstruments);
 				if ($resultInstruments->num_rows > 0)
 				{
-					echo "<div> Select Instruments to Remove from your profile: <br>";
+					echo "<div><label> Select Instruments to Remove from your profile:</label> <br>";
 					// echo "<form action=\"genreFormTest.php\" method=\"post\">";
 					while($rowD = $resultInstruments->fetch_assoc())
 					{
-						echo "<input type=\"checkbox\" id=\"i" . $rowD["instrumentID"] . "\" name=\"instruments[]\" value=\"" . $rowD["instrumentID"] . "\">";
+            echo "<input type=\"checkbox\" id=\"i" . $rowD["instrumentID"] . "\" name=\"instruments[]\" value=\"" . $rowD["instrumentID"] . "\">";
+            echo " ";
 						// echo "<input type=\"checkbox\" id=\"" . $rowC["genreID"] . "\" name=\"checkbox[]\" value=\"" . $rowC["genreID"] . "\">";
 						echo "<label for=\"i" . $rowD["instrumentID"] ."\"> " . $rowD["instrumentName"] . "</label> <br>";
 						// echo $rowC["genreName"] . "<br>";
@@ -334,11 +342,12 @@ $result = mysqli_query($db, $sql) or die(mysqli_error($db));
 				$resultInstruments2 = $conn->query($sqlInstruments2);
 				if ($resultInstruments->num_rows > 0)
 				{
-					echo "<div> Select Instruments to Add to your profile: <br>";
+					echo "<div><label> Select Instruments to Add to your profile:</label> <br>";
 					// echo "<form action=\"genreFormTest.php\" method=\"post\">";
 					while($rowD = $resultInstruments2->fetch_assoc())
 					{
-						echo "<input type=\"checkbox\" id=\"i" . $rowD["instrumentID"] . "\" name=\"instruments2[]\" value=\"" . $rowD["instrumentID"] . "\">";
+            echo "<input type=\"checkbox\" id=\"i" . $rowD["instrumentID"] . "\" name=\"instruments2[]\" value=\"" . $rowD["instrumentID"] . "\">";
+            echo " ";
 						// echo "<input type=\"checkbox\" id=\"" . $rowC["genreID"] . "\" name=\"checkbox[]\" value=\"" . $rowC["genreID"] . "\">";
 						echo "<label for=\"i" . $rowD["instrumentID"] ."\"> " . $rowD["instrumentName"] . "</label> <br>";
 						// echo $rowC["genreName"] . "<br>";
@@ -361,11 +370,12 @@ $result = mysqli_query($db, $sql) or die(mysqli_error($db));
 				    $resultGenres = $conn->query($sqlGenres);
                     if ($resultGenres->num_rows > 0)
                     {
-                        echo "Select Genres to Remove from your profile:<br>";
+                        echo "<label>Select Genres to Remove from your profile:</label><br>";
                         // echo "<form action=\"genreFormTest.php\" method=\"post\">";
                         while($rowC = $resultGenres->fetch_assoc())
                         {
                             echo "<input type=\"checkbox\" id=\"g" . $rowC["genreID"] . "\" name=\"genreArrayA[]\" value=\"" . $rowC["genreID"] . "\">";
+                            echo " ";
                             // echo "<input type=\"checkbox\" id=\"" . $rowC["genreID"] . "\" name=\"checkbox[]\" value=\"" . $rowC["genreID"] . "\">";
                             echo "<label for=\"g" . $rowC["genreID"] ."\"> " . $rowC["genreName"] . "</label> <br>";
                             // echo $rowC["genreName"] . "<br>";
@@ -383,11 +393,12 @@ $result = mysqli_query($db, $sql) or die(mysqli_error($db));
 				    $resultGenres2 = $conn->query($sqlGenres2);
                     if ($resultGenres2->num_rows > 0)
                     {
-                        echo "Select Genres to Add to your profile:<br>";
+                        echo "<label>Select Genres to Add to your profile:</label><br>";
                         // echo "<form action=\"genreFormTest.php\" method=\"post\">";
                         while($rowC = $resultGenres2->fetch_assoc())
                         {
                             echo "<input type=\"checkbox\" id=\"g" . $rowC["genreID"] . "\" name=\"genreArray2[]\" value=\"" . $rowC["genreID"] . "\">";
+                            echo " ";
                             // echo "<input type=\"checkbox\" id=\"" . $rowC["genreID"] . "\" name=\"checkbox[]\" value=\"" . $rowC["genreID"] . "\">";
                             echo "<label for=\"g" . $rowC["genreID"] ."\"> " . $rowC["genreName"] . "</label> <br>";
                             // echo $rowC["genreName"] . "<br>";
@@ -398,8 +409,9 @@ $result = mysqli_query($db, $sql) or die(mysqli_error($db));
                     }
              
     ?>  
+    <br>
              
- <button class="button-register" name="submit" type="submit" href="">Make Changes</button>
+ <button class="btn btn-success" name="submit" type="submit" href="">Make Changes</button>
          
          </form>
     </div>    

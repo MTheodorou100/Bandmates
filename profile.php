@@ -38,6 +38,10 @@
   font-family: arial;
 }
 
+.h1 {
+  color: white;
+}
+
 .title {
   color: grey;
   font-size: 18px;
@@ -159,8 +163,8 @@ button:hover, a:hover {
 
     <section id="intro" class="clearfix">
     <div class="container">
-     <center><h2 class="white"><?php echo $row['username']; ?></h2><br></center> 
-      <div class="card">
+     <center><h2 class="white">Your Profile</h2><br></center> 
+      <div class="card bg-primary">
   <img src="assets/img/empty.png" style="width:100%">
   <h1><?php echo $row['firstName']; ?> <?php echo $row['surName'];?></h1>
         <p><b>Genres:</b> 
