@@ -24,43 +24,43 @@
 
                     $sqlBandList = "SELECT * FROM Band WHERE bandID IN (SELECT bandID FROM BandWants WHERE instrumentID IN (SELECT instrumentID FROM Plays WHERE personID = $personID) AND NOT bandID IN (SELECT bandID FROM BandMembers WHERE personID = $personID)) AND bandShowInFeedBool = 1;";
                     $bandListResult = mysqli_query($db, $sqlBandList) or die(mysqli_error($db));
-                    $userArray;
+                    $bandArray;
                     
                     $loopValA = 0;
                     while ($row = mysqli_fetch_array($bandListResult, MYSQL_ASSOC))
                     {
-                        $userArray[$loopValA][0] = $row['bandID'];
-                        $userArray[$loopValA][1] = $row['bandName'];
-                        $userArray[$loopValA][2] = $row['bandJamBool'];
-                        $userArray[$loopValA][3] = 0;   //genre score
-                        $userArray[$loopValA][4] = 0;   //login score
-                        $userArray[$loopValA][5] = 0;   //age score
-                        $userArray[$loopValA][6] = 0;   //total score
+                        $bandArray[$loopValA][0] = $row['bandID'];
+                        $bandArray[$loopValA][1] = $row['bandName'];
+                        $bandArray[$loopValA][2] = $row['bandJamBool'];
+                        $bandArray[$loopValA][3] = 0;   //genre score
+                        $bandArray[$loopValA][4] = 0;   //login score
+                        $bandArray[$loopValA][5] = 0;   //age score
+                        $bandArray[$loopValA][6] = 0;   //total score
                         
                         $bandIDTemp = $row['bandID'];
                         $sqlBandLeaderID = "SELECT * FROM Person WHERE personID IN (SELECT personID FROM BandMembers WHERE bandID = '$bandIDTemp' AND leaderBool = 1)";     //getting the leader of the band's ID
                         $bandLeaderResult = mysqli_query($db, $sqlBandLeaderID) or die(mysqli_error($db));
                         while ($rowC = mysqli_fetch_array($bandLeaderResult, MYSQL_ASSOC))
                         {
-                            $userArray[$loopValA][7] = $rowC['personID'];
-                            $userArray[$loopValA][8] = date_diff(date_create($rowC['dateOfBirth']), date_create('today'))->y;;
-                            $userArray[$loopValA][9] = $rowC['lastLoginTime'];
+                            $bandArray[$loopValA][7] = $rowC['personID'];
+                            $bandArray[$loopValA][8] = date_diff(date_create($rowC['dateOfBirth']), date_create('today'))->y;;
+                            $bandArray[$loopValA][9] = $rowC['lastLoginTime'];
                         }
-                        $userArray[$loopValA][10] = 0;
+                        $bandArray[$loopValA][10] = 0;
 
                         // echo $loopValA;
                         // echo "<br>";
-                        // echo "[".$loopValA."][". 0 ."] = " . $userArray[$loopValA][0] . "<br>";
-                        // echo "[".$loopValA."][". 1 ."] = " . $userArray[$loopValA][1] . "<br>";
-                        // echo "[".$loopValA."][". 2 ."] = " . $userArray[$loopValA][2] . "<br>";
-                        // echo "[".$loopValA."][". 3 ."] = " . $userArray[$loopValA][3] . "<br>";
-                        // echo "[".$loopValA."][". 4 ."] = " . $userArray[$loopValA][4] . "<br>";
-                        // echo "[".$loopValA."][". 5 ."] = " . $userArray[$loopValA][5] . "<br>";
-                        // echo "[".$loopValA."][". 6 ."] = " . $userArray[$loopValA][6] . "<br>";
-                        // echo "[".$loopValA."][". 7 ."] = " . $userArray[$loopValA][7] . "<br>";
-                        // echo "[".$loopValA."][". 8 ."] = " . $userArray[$loopValA][8] . "<br>";
-                        // echo "[".$loopValA."][". 9 ."] = " . $userArray[$loopValA][9] . "<br>";
-                        // echo "[".$loopValA."][". 10 ."] = " . $userArray[$loopValA][10] . "<br><br>";
+                        // echo "[".$loopValA."][". 0 ."] = " . $bandArray[$loopValA][0] . "<br>";
+                        // echo "[".$loopValA."][". 1 ."] = " . $bandArray[$loopValA][1] . "<br>";
+                        // echo "[".$loopValA."][". 2 ."] = " . $bandArray[$loopValA][2] . "<br>";
+                        // echo "[".$loopValA."][". 3 ."] = " . $bandArray[$loopValA][3] . "<br>";
+                        // echo "[".$loopValA."][". 4 ."] = " . $bandArray[$loopValA][4] . "<br>";
+                        // echo "[".$loopValA."][". 5 ."] = " . $bandArray[$loopValA][5] . "<br>";
+                        // echo "[".$loopValA."][". 6 ."] = " . $bandArray[$loopValA][6] . "<br>";
+                        // echo "[".$loopValA."][". 7 ."] = " . $bandArray[$loopValA][7] . "<br>";
+                        // echo "[".$loopValA."][". 8 ."] = " . $bandArray[$loopValA][8] . "<br>";
+                        // echo "[".$loopValA."][". 9 ."] = " . $bandArray[$loopValA][9] . "<br>";
+                        // echo "[".$loopValA."][". 10 ."] = " . $bandArray[$loopValA][10] . "<br><br>";
 
 
                         $loopValA++;
@@ -71,21 +71,21 @@
                         echo "Oh no! Looks like there's no candidates...";
                     }
                     //^ Band Array Key:
-                    //$userArray[][0] = bandID
-                    //$userArray[][1] = band name
-                    //$userArray[][2] = band jam boolean value
+                    //$bandArray[][0] = bandID
+                    //$bandArray[][1] = band name
+                    //$bandArray[][2] = band jam boolean value
 
-                    //$userArray[][3] = genre score
-                    //$userArray[][4] = login score   
-                    //$userArray[][5] = age score
-                    //$userArray[][6] = total score
+                    //$bandArray[][3] = genre score
+                    //$bandArray[][4] = login score   
+                    //$bandArray[][5] = age score
+                    //$bandArray[][6] = total score
 
-                    //$userArray[][7] = band leader ID
-                    //$userArray[][8] = band leader's age in years
-                    //$userArray[][9] = band leader's lastLoginTime
-                    //$userArray[][10] = age difference between viewer and band leader
+                    //$bandArray[][7] = band leader ID
+                    //$bandArray[][8] = band leader's age in years
+                    //$bandArray[][9] = band leader's lastLoginTime
+                    //$bandArray[][10] = age difference between viewer and band leader
 
-                    // var_dump($userArray);
+                    // var_dump($bandArray);
                     
                     //Step 2: Genre score loop (from 0 to 100)
                     //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -143,7 +143,7 @@
                         
                         $genreScore = ($newMatches / (($newPlGenres+$newBaGenres)-$newMatches))*100;
 
-                        $userArray[$loopValB][3] = $genreScore;
+                        $bandArray[$loopValB][3] = $genreScore;
                         
                         $loopValB++;
                     }
@@ -156,29 +156,29 @@
                 {
                     if ($loopValA==1)
                     { 
-                        $fraction = 100/(count($userArray));
+                        $fraction = 100/(count($bandArray));
                     } 
                     else 
                     {
-                        $fraction = 100/(count($userArray)-1);
+                        $fraction = 100/(count($bandArray)-1);
                     }
-                    for ($x = 0; $x < count($userArray); $x++)              //sort userArray by most recent date 
+                    for ($x = 0; $x < count($bandArray); $x++)              //sort bandArray by most recent date 
                     {
-                        for ($y = $x+1; $y < count($userArray); $y++)
+                        for ($y = $x+1; $y < count($bandArray); $y++)
                         {
-                            if ($userArray[$x][9]<$userArray[$y][9])
+                            if ($bandArray[$x][9]<$bandArray[$y][9])
                             {
                                 for ($z = 0; $z <= 10; $z++)     //move the data into the sorted spot for each user
                                 {
-                                    $temp = $userArray[$y][$z];
-                                    $userArray[$y][$z] = $userArray[$x][$z];
-                                    $userArray[$x][$z] = $temp;
+                                    $temp = $bandArray[$y][$z];
+                                    $bandArray[$y][$z] = $bandArray[$x][$z];
+                                    $bandArray[$x][$z] = $temp;
                                 }
                             }
                         }
                         $loginScore = (0 - ($fraction*$x)) + 100;
 
-                        $userArray[$x][4] = $loginScore;
+                        $bandArray[$x][4] = $loginScore;
                     }
                 }
 
@@ -190,43 +190,43 @@
 
                     if ($loopValA>0)
                     {
-                        for ($x = 0; $x < count($userArray); $x++)  //get differences between userArray ages and viewerAge
+                        for ($x = 0; $x < count($bandArray); $x++)  //get differences between bandArray ages and viewerAge
                         {
-                            if ($viewerAge > $userArray[$x][8])
+                            if ($viewerAge > $bandArray[$x][8])
                             {
-                                $ageDifference = $viewerAge - $userArray[$x][8];
+                                $ageDifference = $viewerAge - $bandArray[$x][8];
                             }
-                            else if ($viewerAge < $userArray[$x][8])
+                            else if ($viewerAge < $bandArray[$x][8])
                             {
-                                $ageDifference = $userArray[$x][8] - $viewerAge;
+                                $ageDifference = $bandArray[$x][8] - $viewerAge;
                             }
                             else 
                             {
                                 $ageDifference = 0;
                             }
-                            $userArray[$x][10] = $ageDifference;
+                            $bandArray[$x][10] = $ageDifference;
                         }
                     }
                     if ($loopValA>0)
                     {
                         //run sorting for age score distribution
-                        for ($x = 0; $x < count($userArray); $x++)              //sort userArray by closest age
+                        for ($x = 0; $x < count($bandArray); $x++)              //sort bandArray by closest age
                         {
-                            for ($y = $x+1; $y < count($userArray); $y++)
+                            for ($y = $x+1; $y < count($bandArray); $y++)
                             {
-                                if ($userArray[$x][10]<$userArray[$y][10])
+                                if ($bandArray[$x][10]<$bandArray[$y][10])
                                 {
                                     for ($z = 0; $z <= 10; $z++)     //move the data into the sorted spot for each user
                                     {
-                                        $temp = $userArray[$y][$z];
-                                        $userArray[$y][$z] = $userArray[$x][$z];
-                                        $userArray[$x][$z] = $temp;
+                                        $temp = $bandArray[$y][$z];
+                                        $bandArray[$y][$z] = $bandArray[$x][$z];
+                                        $bandArray[$x][$z] = $temp;
                                     }
                                 }
                             }
                             $ageScore = (0 - ($fraction*$x)) + 100;
 
-                            $userArray[$x][5] = $ageScore;
+                            $bandArray[$x][5] = $ageScore;
                         }
                     }
 
@@ -236,33 +236,33 @@
 
                 if ($loopValA>0)
                 {
-                    for($a = 0; $a < count($userArray); $a++)
+                    for($a = 0; $a < count($bandArray); $a++)
                     {
-                        $gScore = $userArray[$a][3];
-                        $lScore = $userArray[$a][4];
-                        $aScore = $userArray[$a][5];
+                        $gScore = $bandArray[$a][3];
+                        $lScore = $bandArray[$a][4];
+                        $aScore = $bandArray[$a][5];
                         $tScore = $gScore + $lScore + $aScore;
-                        $userArray[$a][6] = $tScore;
+                        $bandArray[$a][6] = $tScore;
                     }    
 
 
-                    for ($x = 0; $x < count($userArray); $x++)
+                    for ($x = 0; $x < count($bandArray); $x++)
                     {
-                        for ($y = $x+1; $y < count($userArray); $y++)
+                        for ($y = $x+1; $y < count($bandArray); $y++)
                         {
-                            if ($userArray[$x][6]<$userArray[$y][6])    //check if the current nested iteration of the array is lesser
+                            if ($bandArray[$x][6]<$bandArray[$y][6])    //check if the current nested iteration of the array is lesser
                             {
                                 for ($z = 0; $z <= 10; $z++)     //move the data into the sorted spot for each user
                                 {
-                                    $temp = $userArray[$y][$z];
-                                    $userArray[$y][$z] = $userArray[$x][$z];
-                                    $userArray[$x][$z] = $temp;
+                                    $temp = $bandArray[$y][$z];
+                                    $bandArray[$y][$z] = $bandArray[$x][$z];
+                                    $bandArray[$x][$z] = $temp;
                                 }
                             }
                         }
                     }
 
-                    for($a = 0; $a < count($userArray); $a++)
+                    for($a = 0; $a < count($bandArray); $a++)
                     {
                         echo "<div>";
                         if($a==0)
@@ -276,17 +276,17 @@
                             echo "<br>";
                         }
 
-                        echo $userArray[$a][0];
+                        echo $bandArray[$a][0];
                         echo "<br>";
-                        echo "band name: " . $userArray[$a][1];
+                        echo "band name: " . $bandArray[$a][1];
                         echo "<br>";
-                        echo "GenreScore: " . $userArray[$a][3];
+                        echo "GenreScore: " . $bandArray[$a][3];
                         echo "<br>";
-                        echo "LoginScore: " . $userArray[$a][4];
+                        echo "LoginScore: " . $bandArray[$a][4];
                         echo "<br>";
-                        echo "AgeScore: " . $userArray[$a][5];
+                        echo "AgeScore: " . $bandArray[$a][5];
                         echo "<br>";
-                        echo "Total score: " . $userArray[$a][6];
+                        echo "Total score: " . $bandArray[$a][6];
                         echo "</div>";
                         echo "<br>";
                     }    
