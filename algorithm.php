@@ -20,7 +20,9 @@
 
                 $sqlUsersBands = "SELECT * FROM Band WHERE bandID IN (SELECT bandID FROM BandMembers WHERE personID = '$personID')";  //select all bands
                 $usersBandsResult = mysqli_query($db, $sqlUsersBands) or die(mysqli_error($db));
-
+                $resultSize = mysqli_num_rows($usersBandsResult);
+                
+                if ($resultSize!=0){
                 echo "
                 <div>
                 Pick one of your bands to see the best candidates available
@@ -44,6 +46,13 @@
                 <input type='submit' value='Submit'>
                 </form>
                 </div>";
+                } else{
+                    echo "
+                <div>
+                It doesn't look like you're in any bands!
+                </div>";
+                }
+                    
                 if(isset($_POST['selectedBand']))
                 {
                     $selectedBandID = $_POST['selectedBand'];
