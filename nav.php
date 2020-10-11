@@ -66,6 +66,7 @@ if ( $_SESSION['login_user']==null){
            <div class='dropdown-menu' aria-labelledby='navbarDropdown'>
              <a class='dropdown-item' href='profile.php'>View my Profile</a>
              <a class='dropdown-item' href='viewMyBands.php'>My Bands</a>
+             <a class='dropdown-item' href='myRequests.php'>My Requests</a>
              <div class='dropdown-divider'></div>
              <a class='dropdown-item' href='signout.php'>Sign Out</a>
            </div></li>
