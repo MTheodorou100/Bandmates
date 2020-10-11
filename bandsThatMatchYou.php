@@ -1,4 +1,5 @@
 <html>
+
 <?php require_once('header.php'); ?>
 
 <body>
@@ -6,6 +7,7 @@
 <?php require_once('nav.php'); ?>  
 <section id="intro" class="clearfix">
     <div class="container"> 
+
         <?php
             session_start();
         
@@ -306,8 +308,10 @@
 
                 
         ?>
+
           </div>    
         </section>
         <?php require_once('footer.php'); ?>
+
     </body>
 </html>  
