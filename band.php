@@ -4,15 +4,48 @@
 <body>
 <section id="intro" class="clearfix">
     <div class="container" data-aos="fade-up">
+    <style>
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+}
 
-      <div class="intro-img" data-aos="zoom-out" data-aos-delay="200">
-        <img src="assets/img/intro-img.svg" alt="" class="img-fluid">
-      </div>
-      <style>
-    .body {
-        color: white;
-    }
-      </style>
+.h1 {
+  color: white;
+}
+
+.title {
+  color: grey;
+  font-size: 18px;
+}
+
+
+.button {
+  background-color: #050514;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  font-size: 22px;
+  color: black;
+}
+
+button:hover, a:hover {
+  opacity: 0.7;
+}
+</style>
 
       
     <body>
@@ -28,41 +61,12 @@
                 die("Connection failed: " . $conn->connect_error);
             }
 
-            echo "<div>";
-            echo "get band = " . $_GET['band'];
-            echo "</div> <br>";
+
             $thisBandID = $_GET['band'];
             $viewerRole = 0;        //viewerRole 0=nonMember, 1=member, 2=leader          
 
             //leader checking
-            $seshUser = $_SESSION['login_user'];
-            echo "seshUser = " . $seshUser;
-            $sqlLeaderCheck = "SELECT * FROM BandMembers WHERE personID in (SELECT personID FROM Person WHERE username = '$seshUser') AND bandID = '$thisBandID'";
-            $resultLeaderCheck = $conn->query($sqlLeaderCheck);
-
-            if($resultLeaderCheck->num_rows>0)
-            {
-                while($rowD = $resultLeaderCheck->fetch_assoc())
-                {
-                    $leaderBoolCheck = $rowD['leaderBool'];
-                    $leaderID = $rowD['personID'];
-                    if($leaderBoolCheck == 1)
-                    {
-                        echo " this user is a leader";
-                        $viewerRole = 2;
-                    }
-                    else
-                    {
-                        echo " not the leader of the band";
-                        $viewerRole = 1;
-                    }
-                }
-            }
-            else
-            {
-                echo "<br>";
-                echo "you're not a member of this band";
-            }
+            
             //end leader checking
             
             //bandmember deleting
@@ -240,6 +244,13 @@
             }
             //end instrument deleting
 
+            if ($row["bandJamBool"]== 0) {
+                $jam = yes;
+            } else {
+                $jam = no;
+            }
+
+
 
 
             $sqlBand = "SELECT * FROM Band WHERE bandID = '$thisBandID'";   //get band info
@@ -252,21 +263,13 @@
             {
                 while($row = $resultBand->fetch_assoc())
                 {
-                    echo "<div>";
-                    echo "Band Details: <br>";
-                    echo "bandID = " . $row["bandID"] . "<br>";
-                    echo "bandName = " . $row["bandName"] . "<br>";
+                    echo "
+                     <center><h2 class='white'>Band Profile</h2><br></center> 
+                      <div class='card bg-primary'>";
+                      echo " <h1>" . $row["bandName"] . "</h1>";
                     // echo "bandGenre = " . $row["bandGenre"] . "<br>";
-                    echo "Jam Band? " . $row["bandJamBool"] . "<br>";
-                    echo "Showing in people's feeds? " . $row["bandShowInFeedBool"] . "<br>";
-                    // echo "Are you the leader? MUST BE FIXED " . $row["bandJamBool"] . "<br>";
-                    echo "</div>";
-                    $bandName = $row["bandName"];
-                    $jamBool = $row["bandJamBool"];
-                    $feedBool = $row["bandShowInFeedBool"];
-                }
-                echo "<div>";
-                if ($resultBandMembers->num_rows > 0)
+                    echo "Jam Band: " . $jam . "<br>";
+                    if ($resultBandMembers->num_rows > 0)
                 {
                     echo "<br> Band Members: <br>";
                     while($rowB = $resultBandMembers->fetch_assoc())
@@ -279,12 +282,55 @@
                 {
                     echo "no results, there must be 0 band members";
                 }
+                }
+
+                    // echo "Are you the leader? MUST BE FIXED " . $row["bandJamBool"] . "<br>";
+                    echo "</div>";
+                    $bandName = $row["bandName"];
+                    $jamBool = $row["bandJamBool"];
+                    $feedBool = $row["bandShowInFeedBool"];
+                    
+                echo "<div>";
+                echo "</div>";
+                echo "</div>";
                 echo "</div>";
 
 
                 //edit if leader
                 if($viewerRole == 2)    //viewerRole 0=nonMember, 1=member, 2=leader
                 {
+
+                    echo "<div>";
+                    echo "get band = " . $_GET['band'];
+                    echo "</div> <br>";
+                    $seshUser = $_SESSION['login_user'];
+            echo "seshUser = " . $seshUser;
+            $sqlLeaderCheck = "SELECT * FROM BandMembers WHERE personID in (SELECT personID FROM Person WHERE username = '$seshUser') AND bandID = '$thisBandID'";
+            $resultLeaderCheck = $conn->query($sqlLeaderCheck);
+
+            if($resultLeaderCheck->num_rows>0)
+            {
+                while($rowD = $resultLeaderCheck->fetch_assoc())
+                {
+                    $leaderBoolCheck = $rowD['leaderBool'];
+                    $leaderID = $rowD['personID'];
+                    if($leaderBoolCheck == 1)
+                    {
+                        echo " this user is a leader";
+                        $viewerRole = 2;
+                    }
+                    else
+                    {
+                        echo " not the leader of the band";
+                        $viewerRole = 1;
+                    }
+                }
+            }
+            else
+            {
+                echo "<br>";
+                echo "you're not a member of this band";
+            }
                     echo "<br>";
                     echo "<br>";
                     echo "<br>";
