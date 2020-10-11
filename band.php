@@ -13,7 +13,7 @@
   font-family: arial;
 }
 
-.h1 {
+.h1 {band
   color: white;
 }
 
@@ -66,7 +66,24 @@ button:hover, a:hover {
             $viewerRole = 0;        //viewerRole 0=nonMember, 1=member, 2=leader          
 
             //leader checking
-            
+            if($resultLeaderCheck->num_rows>0)
+            {
+                while($rowD = $resultLeaderCheck->fetch_assoc())
+                {
+                    $leaderBoolCheck = $rowD['leaderBool'];
+                    $leaderID = $rowD['personID'];
+                    if($leaderBoolCheck == 1)
+                    {
+                       
+                        $viewerRole = 2;
+                    }
+                    else
+                    {
+                       
+                        $viewerRole = 1;
+                    }
+                }
+            }
             //end leader checking
             
             //bandmember deleting
@@ -275,7 +292,7 @@ button:hover, a:hover {
                     while($rowB = $resultBandMembers->fetch_assoc())
                     {
                         // echo $rowB["firstName"] . "<br>";
-                        echo "<a href='viewProfile.php?user=" . $rowB["personID"] . "'>" . $rowB["firstName"] . " " . $rowB["surName"] . "</a> <br>";
+                        echo "<a href='viewProfile.php?user=" . $rowB["personID"] . "'>" . $rowB["firstName"] . " " . $rowB["surName"] . "</a> <br>"; //need to set a session id to veiw the profile
                     }
                 }
                 else
@@ -308,29 +325,7 @@ button:hover, a:hover {
             $sqlLeaderCheck = "SELECT * FROM BandMembers WHERE personID in (SELECT personID FROM Person WHERE username = '$seshUser') AND bandID = '$thisBandID'";
             $resultLeaderCheck = $conn->query($sqlLeaderCheck);
 
-            if($resultLeaderCheck->num_rows>0)
-            {
-                while($rowD = $resultLeaderCheck->fetch_assoc())
-                {
-                    $leaderBoolCheck = $rowD['leaderBool'];
-                    $leaderID = $rowD['personID'];
-                    if($leaderBoolCheck == 1)
-                    {
-                        echo " this user is a leader";
-                        $viewerRole = 2;
-                    }
-                    else
-                    {
-                        echo " not the leader of the band";
-                        $viewerRole = 1;
-                    }
-                }
-            }
-            else
-            {
-                echo "<br>";
-                echo "you're not a member of this band";
-            }
+
                     echo "<br>";
                     echo "<br>";
                     echo "<br>";

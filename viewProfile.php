@@ -1,10 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-    <body>
+<?php require_once('header.php'); ?>
+
+<body>
+
+<?php require_once('nav.php'); ?>
+<style>
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+}
+
+.h1 {
+  color: white;
+}
+
+.title {
+  color: grey;
+  font-size: 18px;
+}
+
+
+.button {
+  background-color: #050514;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  font-size: 22px;
+  color: black;
+}
+
+button:hover, a:hover {
+  opacity: 0.7;
+}
+</style> 
 
         <!-- <a href="user.php?user=56">go to test user (56)</a> -->
         <!-- <br> -->
-
+        <section id="intro" class="clearfix">
+    <div class="container" data-aos="fade-up">
+        <div class='intro-info' data-aos='zoom-in' data-aos-delay='100'>
         <?php
             session_start();  
             $servername = utf8_encode("35.197.167.52");
@@ -19,11 +67,11 @@
 
             // $_SESSION['login_user']
 
-            echo "you're logged in as: " . $_SESSION['login_user'];
+            //echo "you're logged in as: " . $_SESSION['login_user'];
 
-            echo "<div>";
-            echo "get user = " . $_GET['user'];
-            echo "</div> <br>";
+            //echo "<div>";
+            //echo "get user = " . $_GET['user'];
+            //echo "</div> <br>";
 
             $thisPersonID = $_GET['user'];
 
@@ -56,14 +104,14 @@
             {
                 while($rowA = $resultUser->fetch_assoc())
                 {
+                    echo "<div class='card bg-primary'>";
                     echo "<div>";
-                    echo "personID = " . $rowA["personID"] . "<br>";
-                    echo "first name = " . $rowA["firstName"] . "<br>";
-                    echo "surname = " . $rowA["surName"] . "<br>";
+                    //echo "personID = " . $rowA["personID"] . "<br>";
+                    echo "<br><h1>Name:  " . $rowA["firstName"] . " " . $rowA["surName"] . "</h1><br>";
                     // echo "genre = " . $rowA["genre"] . "<br>";
-                    echo "bio = " . $rowA["bio"] . "<br>";
-                    echo "previous experience = " . $rowA["preExp"] . "<br>";
-                    echo "email = " . $rowA["email"] . "<br>";
+                    echo "BIO: " . $rowA["bio"] . "<br>";
+                    echo "Experience: " . $rowA["preExp"] . "<br>";
+                    echo "Email: " . $rowA["email"] . "<br>";
 
                     echo "<br> Add this user to one of your bands: <br>";
 
@@ -95,5 +143,9 @@
             }
 
         ?>
+        </div>    
+        </section>
+
+        <?php require_once('footer.php'); ?>
     </body>
 </html>
