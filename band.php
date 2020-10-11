@@ -1,3 +1,4 @@
+  
 <!DOCTYPE html>
 <?php require_once('header.php'); ?>
 <?php require_once('nav.php'); ?>
@@ -60,15 +61,10 @@ button:hover, a:hover {
             {
                 die("Connection failed: " . $conn->connect_error);
             }
-        
-            
+
 
             $thisBandID = $_GET['band'];
             $viewerRole = 0;        //viewerRole 0=nonMember, 1=member, 2=leader          
-
-            $bandsListResult = mysqli_query($db, $thisBandID) or die(mysqli_error($conn));
-            $querysql = mysqli_fetch_array($bandssListResult, MYSQL_ASSOC);
-
 
             //leader checking
             if($resultLeaderCheck->num_rows>0)
@@ -273,6 +269,8 @@ button:hover, a:hover {
             }
 
 
+
+
             $sqlBand = "SELECT * FROM Band WHERE bandID = '$thisBandID'";   //get band info
             $resultBand = $conn->query($sqlBand);
 
@@ -289,14 +287,6 @@ button:hover, a:hover {
                       echo " <h1>" . $row["bandName"] . "</h1>";
                     // echo "bandGenre = " . $row["bandGenre"] . "<br>";
                     echo "Jam Band: " . $jam . "<br>";
-                    echo "<b>Genres:</b> ";
-
-                    $genresql = "SELECT genreName FROM Genres WHERE genreID IN (SELECT genreID FROM BandGenres WHERE bandID=$thisBandID)";
-                    $resultGenre = mysqli_query($conn, $genresql) or die(mysqli_error($conn));
-                    while ($rowA = mysqli_fetch_array($resultGenre, MYSQL_ASSOC)){
-                      echo $rowA['genreName']." ";
-                    }
-
                     if ($resultBandMembers->num_rows > 0)
                 {
                     echo "<br> Band Members: <br>";
@@ -310,7 +300,8 @@ button:hover, a:hover {
                 {
                     echo "no results, there must be 0 band members";
                 }
-              
+                }
+
                     // echo "Are you the leader? MUST BE FIXED " . $row["bandJamBool"] . "<br>";
                     echo "</div>";
                     $bandName = $row["bandName"];
@@ -321,7 +312,7 @@ button:hover, a:hover {
                 echo "</div>";
                 echo "</div>";
                 echo "</div>";
-        }
+
 
                 //edit if leader
                 if($viewerRole == 2)    //viewerRole 0=nonMember, 1=member, 2=leader
@@ -445,12 +436,15 @@ button:hover, a:hover {
 
                     echo "</div>";
                 }
+                else
+                {
+
+                }
             }
             else
             {
                 echo "0 results";
             }
-        
 
         ?>
     </div>
