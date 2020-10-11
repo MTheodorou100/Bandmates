@@ -15,12 +15,12 @@
             }
 
 
-            $bandID = $_POST['band'];
-            $newBandMember = $_POST['inviteeID'];
+            $bandID = $_POST['join'];
+            $newBandMember = $_POST['uid'];
 
-            //Request to Add BandMember
-            $personAccept = 0;
-            $bandAccept = 1;
+            //Request to Join
+            $personAccept = 1;
+            $bandAccept = 0;
             //$sql2 = "INSERT INTO BandMembers (bandID, personID, leaderBool) VALUES ('$bandID', '$newBandMember', '$leaderBoolean')";
             $sql2 = "INSERT INTO Requests (bandID, personID, bandAccept, personAccept) VALUES ('$bandID', '$newBandMember', '$bandAccept', '$personAccept')";
             if ($conn->query($sql2) === TRUE)   //executes "$conn->query($sql2);" to run the insert
