@@ -19,8 +19,7 @@
       echo "<h2>Find your ideal <br><span>Band</span><br>today!</h2>
         <div>
           <a href='register.php' class='btn-services scrollto'>Click Here to Register</a>
-        </div>";} else {
-             require_once('hash.php');
+        </div>";
                     
 }?>
           

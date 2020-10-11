@@ -16,7 +16,7 @@ if ( $_SESSION['login_user']==null){
         <li><a href='index.php'>Home</a></li>
         <li><a href='service.php'>Terms of Service</a></li>
          <li><a href='policy.php'>Privacy Policy</a></li>
-         <li><a href='profile.php'>My Profile</a></li>
+         <li><a href='register.php'>Register</a></li>
          <li><a href='login.php'> Login </a></li>
              
         </ul>
@@ -41,6 +41,7 @@ if ( $_SESSION['login_user']==null){
              <li ><a href='index.php'>Home</a></li>
              
         <li><a href='makeBand.php'>Create a Band</a></li>
+        <li><a href='seachC.php'>Search</a></li>
            
            <li class='nav-item dropdown'>
            <a class='nav-link dropdown-toggle' href='#' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
