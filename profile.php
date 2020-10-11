@@ -14,6 +14,7 @@
   $row = mysqli_fetch_array($result, MYSQL_ASSOC);
 
 
+
       $sqlUserID = "SELECT personID FROM Person WHERE username='$_SESSION[login_user]';";
       $usersListResult = mysqli_query($db, $sqlUserID) or die(mysqli_error($db));
       $querysql = mysqli_fetch_array($usersListResult, MYSQL_ASSOC);
@@ -29,6 +30,7 @@
 
 <html lang="en">
 <title>BandMates | Profile</title>
+
 <head>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
@@ -39,6 +41,7 @@
   text-align: center;
   font-family: arial;
 }
+
 
 .h1 {
   color: white;
@@ -61,6 +64,7 @@
   font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
+
 }
 
 a {
@@ -117,11 +121,14 @@ button:hover, a:hover {
 			<div class="form-group">
 				<p></p>
              <center><a href='editprofile.php' class='button'>Edit Profile</a></center> 
+
                 <span class="help-block"></span>
             </div>
     </div>    
         </section>
 </body>
+
  
 <?php require_once('footer.php'); ?>
+
 </html>

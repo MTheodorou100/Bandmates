@@ -6,7 +6,6 @@
 <body>
 
 <?php require_once('nav.php'); ?>
-
   <!-- ======= Intro Section ======= -->
   <section id="intro" class="clearfix">
     <div class="container" data-aos="fade-up">
@@ -18,6 +17,7 @@
  <?php if ( $_SESSION['login_user']==null){
       echo "<h2>Find your ideal <br><span>Band</span><br>today!</h2>
         <div>
+
           <a href='register.php' class='btn-services scrollto'>Click Here to Register</a>
         </div>";
                     

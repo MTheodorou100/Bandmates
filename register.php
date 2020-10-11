@@ -4,6 +4,8 @@
 <title>BandMates | Register</title>
 <head>
 
+
+
     
   <script type="text/javascript">
     
@@ -105,11 +107,14 @@
         <p class="white">Please fill this form to create an account.</p>
         <form onsubmit="return validate()" action="registers.php" method="post">
                 <label class="white">Username</label>
+
                 <input name="username" id="uname" type="text" onchange="liveuservalidate()">
+
                 <label id="lbluser" style="color: red; visibility: hidden;"> Please enter a username</label>
                 <br><br>
             
                 <label class="white">Password</label>
+
                 <input name="password" id="pass" type="password" onchange="livepassvalidate()">
                 <label id="lblpass" style="color: red; visibility: hidden;"> Please enter a password</label>
                 <br><br>
@@ -120,6 +125,7 @@
           
                 <label class="white">Confirm Password</label>
                 <input name="confirm_password" id="confirmpass" type="password">
+
                 <label id="lblconpass" style="color: red; visibility: hidden;"> Please enter matching password</label>
                 <br><br>
             
