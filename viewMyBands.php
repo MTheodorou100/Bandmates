@@ -66,7 +66,7 @@
                         // echo "bandGenre = " . $row["bandGenre"] . "<br>";
                         // echo "Are you the leader? MUST BE FIXED " . $row["bandJamBool"] . "<br>";
                         // echo "(edit link)";
-                        echo "<a href=\"band.php?band=" . $row["bandID"] . "\">View Band</a>";
+                        echo "<a class='btn btn-primary' href=\"band.php?band=" . $row["bandID"] . "\">View Band</a>";
                         echo "</div>";
                         echo "<br><br>";
                     }
