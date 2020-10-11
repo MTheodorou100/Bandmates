@@ -102,103 +102,11 @@
 
 <!DOCTYPE html>
 
-<html lang="en">
-  <?php
-    error_reporting(E_ERROR | E_PARSE);
-//   session_start();
-  include("config.php");
-  ?>
-<head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title>BandMates | Your Feed</title>
-  <meta content="" name="descriptison">
-  <meta content="" name="keywords">
-
-  <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
-
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-  <link href="assets/vendor/ionicons/css/ionicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
-  <link href="assets/vendor/venobox/venobox.css" rel="stylesheet">
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-
-  <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
-
-  <!-- =======================================================
-  * Template Name: NewBiz - v2.1.0
-  * Template URL: https://bootstrapmade.com/newbiz-bootstrap-business-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
-</head>
+<?php require_once('header.php'); ?>
 
 <body>
+<?php require_once('nav.php'); ?>
 
-    <?php
-    if ( $_SESSION['login_user']==null){
-    echo "<header id='header' class='fixed-top'>
-    <div class='container'>
-
-      <div class='logo float-left'>
-        <!-- Uncomment below if you prefer to use an text logo -->
-        <!-- <h1><a href='index.html'>NewBiz</a></h1> -->
-        <a href='index.php'><img src='assets/img/logo.png' alt='' class='img-fluid'></a>
-      </div>
-
-      <nav class='main-nav float-right d-none d-lg-block'>
-        <ul>
-
-          
-          <li class='active'><a href='index.php'>Home</a></li>
-          <li><a href='login.php'>Login</a></li>
-          <li><a href='register.php'>Register</a></li>
-            <li><a href='service.php'>Terms of Service</a></li>
-             <li><a href='policy.php'>Privacy Policy</a></li>
-        </ul>
-      </nav><!-- .main-nav -->
-      </div>
-    </header>";
-    } else {
-        echo "<header id='header' class='fixed-top'>
-    <div class='container'>
-
-      <div class='logo float-left'>
-        <!-- Uncomment below if you prefer to use an text logo -->
-        <!-- <h1><a href='index.html'>NewBiz</a></h1> -->
-        <a href='index.php'><img src='assets/img/logo.png' alt='' class='img-fluid'></a>
-        <a href='index.php'>Logged in as ".$_SESSION['login_user']." </a>                               
-      </div>
-
-
-      <nav class='main-nav float-right d-none d-lg-block'>
-        <ul>
-
-          
-          <li class='active'><a href='index.php'>Home</a></li>
-            <li><a href='service.php'>Terms of Service</a></li>
-             <li><a href='policy.php'>Privacy Policy</a></li>
-             <li><a href='profile.php'>My Profile</a></li>
-             <li><a href='signout.php'> Sign Out </a></li>
-             
-        </ul>
-        
-        
-      </nav><!-- .main-nav -->
-      </div>
-    </header>";
-    }
-    
-    ?> 
 
   <!-- ======= Intro Section ======= -->
   <section id="intro" class="clearfix">
@@ -218,48 +126,51 @@
 	}
 	else        //display form if the user is logged in
 	{
-		echo "<br> Enter data to make a band:";
+    echo " <h1>Create a Band</h1>";
 		echo "  <form action=\"\" method=\"post\"> 
-		<label>Band Name</label>
+		<label>Band Name: </label>
 		<input name=\"bandName\" type=\"text\" placeholder=\"The Flavour Townspeople\" required>
-		<br>
-		<label>Temporary Jam Band?</label>
+		<br><br><br>
+		<label>Temporary Jam Band? <br></label>
 		<select name=\"bandJam\" require>
 		<option value=\"0\">No</option>
 		<option value=\"1\">Yes</option>
 		</select>
-		<br>
-		<label>Show in feeds and searches?</label>
+		<br><br><br>
+		<label>Show in feeds and searches? <br></label>
 		<select name=\"feedBool\" require>
 		<option value=\"1\">Yes</option>
 		<option value=\"0\">No</option>
-		</select>";
+		</select> <br><br>";
 
 		$sqlGenres = "SELECT * FROM Genres";
 		$resultGenres = $conn->query($sqlGenres);
 		if ($resultGenres->num_rows > 0)
 		{
-			echo "<br> <div> Pick Your Band Genres: <br>";
+			echo "<br> <div><h3> Pick Your Band Genres:</h3> <br><br>";
 			while($rowC = $resultGenres->fetch_assoc())
 			{
-				echo "<input type=\"checkbox\" id=\"" . $rowC["genreID"] . "\" name=\"" . $rowC["genreID"] . "\" value=\"" . $rowC["genreID"] . "\">";			//display genre checkboxes
+        echo "<input type=\"checkbox\" id=\"" . $rowC["genreID"] . "\" name=\"" . $rowC["genreID"] . "\" value=\"" . $rowC["genreID"] . "\">";			//display genre checkboxes
+        echo " ";
 				echo "<label for=\"" . $rowC["genreID"] ."\"> " . $rowC["genreName"] . "</label> <br>";
 			}
-			echo "</div>";
+			echo "</div> <br>";
 		}
 
 		$sqlInstruments = "SELECT * FROM Instruments";
 		$resultInstruments = $conn->query($sqlInstruments);
 		if ($resultInstruments->num_rows > 0)
 		{
-			echo "<br> <div> Pick Your Instruments: <br>";
+			echo "<br> <div> <h3>Select what instruments you want to find for the band :</h3> <br>";
 			while($rowD = $resultInstruments->fetch_assoc())
 			{
-				echo "<input type=\"checkbox\" id=\"i" . $rowD["instrumentID"] . "\" name=\"instruments[]\" value=\"" . $rowD["instrumentID"] . "\">";			//display instrument checkboxes
+        echo "<input type=\"checkbox\" id=\"i" . $rowD["instrumentID"] . "\" name=\"instruments[]\" value=\"" . $rowD["instrumentID"] . "\">";			//display instrument checkboxes
+        echo " ";
 				echo "<label for=\"i" . $rowD["instrumentID"] ."\"> " . $rowD["instrumentName"] . "</label> <br>";
 			}
 			echo "</div>";
-		}
+    }
+    echo "<br>";
 		echo "<input type=\"submit\"> </form>";
 	}
 ?>
@@ -276,99 +187,7 @@
    
   </main><!-- End #main -->
 
-  <!-- ======= Footer ======= -->
-  <footer id="footer">
-    <div class="footer-top">
-      <div class="container">
-        <div class="row">
-
-          <div class="col-lg-4 col-md-6 footer-info">
-          </div>
-
-          <div class="col-lg-2 col-md-6 footer-links">
-            <h4>Useful Links</h4>
-            <ul>
-              <li><a href="#">Home</a></li>
-              <li><a href="#">Services</a></li>
-              <li><a href="#">Terms of service</a></li>
-              <li><a href="#">Privacy policy</a></li>
-            </ul>
-          </div>
-
-          <div class="col-lg-3 col-md-6 footer-contact">
-            <h4>Contact Us</h4>
-            <p>
-              A410 Morobe Street <br>
-              Heidelberg West, Victoria<br>
-              Australia <br>
-              <strong>Phone:</strong> +1 5589 55488 55<br>
-              <strong>Email:</strong> support@xpertmenace.com<br>
-            </p>
-
-            <div class="social-links">
-              <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
-              <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
-              <a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
-              <a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a>
-              <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
-            </div>
-
-          </div>
-
-
-        </div>
-      </div>
-    </div>
-
-    <div class="container">
-      <div class="copyright">
-        &copy; Copyright <strong>BandMates</strong>. All Rights Reserved
-      </div>
-      <div class="credits">
-        <!--
-        All the links in the footer should remain intact.
-        You can delete the links only if you purchased the pro version.
-        Licensing information: https://bootstrapmade.com/license/
-        Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=NewBiz
-      -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-      </div>
-    </div>
-  </footer><!-- End Footer -->
-
-  <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
-
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/jquery/jquery.min.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="assets/vendor/counterup/counterup.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
-  <script src="assets/vendor/waypoints/jquery.waypoints.min.js"></script>
-  <script src="assets/vendor/venobox/venobox.min.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-
-  <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
-  <script> 
-  function showUser(str) {
-  if (str == "") {
-    document.getElementById("txtHint").innerHTML = "";
-    return;
-  } else {
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-        document.getElementById("txtHint").innerHTML = this.responseText;
-      }
-    };
-    xmlhttp.open("GET","search.php?q="+str,true);
-    xmlhttp.send();
-  }
-}
-</script>
+  <?php require_once('footer.php'); ?>
 
 </body>
 

@@ -1,5 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<?php require_once('header.php'); ?>
+<?php require_once('nav.php'); ?>
+<body>
+<section id="intro" class="clearfix">
+    <div class="container" data-aos="fade-up">
+    <style>
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+}
+
+.h1 {band
+  color: white;
+}
+
+.title {
+  color: grey;
+  font-size: 18px;
+}
+
+
+.button {
+  background-color: #050514;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  font-size: 22px;
+  color: black;
+}
+
+button:hover, a:hover {
+  opacity: 0.7;
+}
+</style>
+
+      
     <body>
         <?php
             session_start();  
@@ -13,18 +61,11 @@
                 die("Connection failed: " . $conn->connect_error);
             }
 
-            echo "<div>";
-            echo "get band = " . $_GET['band'];
-            echo "</div> <br>";
+
             $thisBandID = $_GET['band'];
             $viewerRole = 0;        //viewerRole 0=nonMember, 1=member, 2=leader          
 
             //leader checking
-            $seshUser = $_SESSION['login_user'];
-            echo "seshUser = " . $seshUser;
-            $sqlLeaderCheck = "SELECT * FROM BandMembers WHERE personID in (SELECT personID FROM Person WHERE username = '$seshUser') AND bandID = '$thisBandID'";
-            $resultLeaderCheck = $conn->query($sqlLeaderCheck);
-
             if($resultLeaderCheck->num_rows>0)
             {
                 while($rowD = $resultLeaderCheck->fetch_assoc())
@@ -33,20 +74,15 @@
                     $leaderID = $rowD['personID'];
                     if($leaderBoolCheck == 1)
                     {
-                        echo "this user is a leader";
+                       
                         $viewerRole = 2;
                     }
                     else
                     {
-                        echo "loser, not a leader";
+                       
                         $viewerRole = 1;
                     }
                 }
-            }
-            else
-            {
-                echo "<br>";
-                echo "you're not a member of this band";
             }
             //end leader checking
             
@@ -225,6 +261,13 @@
             }
             //end instrument deleting
 
+            if ($row["bandJamBool"]== 0) {
+                $jam = yes;
+            } else {
+                $jam = no;
+            }
+
+
 
 
             $sqlBand = "SELECT * FROM Band WHERE bandID = '$thisBandID'";   //get band info
@@ -237,39 +280,52 @@
             {
                 while($row = $resultBand->fetch_assoc())
                 {
-                    echo "<div>";
-                    echo "Band Details: <br>";
-                    echo "bandID = " . $row["bandID"] . "<br>";
-                    echo "bandName = " . $row["bandName"] . "<br>";
+                    echo "
+                     <center><h2 class='white'>Band Profile</h2><br></center> 
+                      <div class='card bg-primary'>";
+                      echo " <h1>" . $row["bandName"] . "</h1>";
                     // echo "bandGenre = " . $row["bandGenre"] . "<br>";
-                    echo "Jam Band? " . $row["bandJamBool"] . "<br>";
-                    echo "Showing in people's feeds? " . $row["bandShowInFeedBool"] . "<br>";
-                    // echo "Are you the leader? MUST BE FIXED " . $row["bandJamBool"] . "<br>";
-                    echo "</div>";
-                    $bandName = $row["bandName"];
-                    $jamBool = $row["bandJamBool"];
-                    $feedBool = $row["bandShowInFeedBool"];
-                }
-                echo "<div>";
-                if ($resultBandMembers->num_rows > 0)
+                    echo "Jam Band: " . $jam . "<br>";
+                    if ($resultBandMembers->num_rows > 0)
                 {
                     echo "<br> Band Members: <br>";
                     while($rowB = $resultBandMembers->fetch_assoc())
                     {
                         // echo $rowB["firstName"] . "<br>";
-                        echo "<a href='viewProfile.php?user=" . $rowB["personID"] . "'>" . $rowB["firstName"] . " " . $rowB["surName"] . "</a> <br>";
+                        echo "<a href='viewProfile.php?user=" . $rowB["personID"] . "'>" . $rowB["firstName"] . " " . $rowB["surName"] . "</a> <br>"; //need to set a session id to veiw the profile
                     }
                 }
                 else
                 {
                     echo "no results, there must be 0 band members";
                 }
+                }
+
+                    // echo "Are you the leader? MUST BE FIXED " . $row["bandJamBool"] . "<br>";
+                    echo "</div>";
+                    $bandName = $row["bandName"];
+                    $jamBool = $row["bandJamBool"];
+                    $feedBool = $row["bandShowInFeedBool"];
+                    
+                echo "<div>";
+                echo "</div>";
+                echo "</div>";
                 echo "</div>";
 
 
                 //edit if leader
                 if($viewerRole == 2)    //viewerRole 0=nonMember, 1=member, 2=leader
                 {
+
+                    echo "<div>";
+                    echo "get band = " . $_GET['band'];
+                    echo "</div> <br>";
+                    $seshUser = $_SESSION['login_user'];
+            echo "seshUser = " . $seshUser;
+            $sqlLeaderCheck = "SELECT * FROM BandMembers WHERE personID in (SELECT personID FROM Person WHERE username = '$seshUser') AND bandID = '$thisBandID'";
+            $resultLeaderCheck = $conn->query($sqlLeaderCheck);
+
+
                     echo "<br>";
                     echo "<br>";
                     echo "<br>";
@@ -284,6 +340,7 @@
 
                     //input for editing bandName
                     echo "<label for=\"bandName\">bandName: </label> <br>";
+                    echo " ";
                     // echo "<input type=\"text\"  id=\"bandName\"     name=\"bandName\"   placeholder=\"" . $bandName . "\">";
                     echo "<input type=\"text\"  id=\"bandName\"     name=\"bandName\"   placeholder=\"" . $bandName . "\"   value=\"" . $bandName . "\">";
                     echo "<br>";
@@ -326,6 +383,7 @@
                         while($rowC = $resultGenres->fetch_assoc())
                         {
                             echo "<input type=\"checkbox\" id=\"g" . $rowC["genreID"] . "\" name=\"genreArrayA[]\" value=\"" . $rowC["genreID"] . "\">";
+                            echo " ";
                             echo "<label for=\"g" . $rowC["genreID"] ."\"> " . $rowC["genreName"] . "</label> <br>";
                         }
                     }
@@ -337,6 +395,7 @@
                         while($rowF = $resultGenresB->fetch_assoc())
                         {
                             echo "<input type=\"checkbox\" id=\"g" . $rowF["genreID"] . "\" name=\"genreArrayB[]\" value=\"" . $rowF["genreID"] . "\">";
+                            echo " ";
                             echo "<label for=\"g" . $rowF["genreID"] ."\"> " . $rowF["genreName"] . "</label> <br>";
                         }
                     }
@@ -352,6 +411,7 @@
                         while($rowG = $resultInstrumentsA->fetch_assoc())
                         {
                             echo "<input type=\"checkbox\" id=\"i" . $rowG["instrumentID"] . "\" name=\"instrumentArrayA[]\" value=\"" . $rowG["instrumentID"] . "\">";
+                            echo " ";
                             echo "<label for=\"i" . $rowG["instrumentID"] ."\"> " . $rowG["instrumentName"] . "</label> <br>";
                         }
                     }
@@ -363,6 +423,7 @@
                         while($rowH = $resultInstrumentsB->fetch_assoc())
                         {
                             echo "<input type=\"checkbox\" id=\"i" . $rowH["instrumentID"] . "\" name=\"instrumentArrayB[]\" value=\"" . $rowH["instrumentID"] . "\">";
+                            echo " ";
                             echo "<label for=\"i" . $rowH["instrumentID"] ."\"> " . $rowH["instrumentName"] . "</label> <br>";
                         }
                     }
@@ -385,5 +446,11 @@
             }
 
         ?>
+    </div>
+    </div>
+  </section><!-- End Intro Section -->
+
+  <main id="main">
+  <?php require_once('footer.php'); ?>
     </body>
 </html>
