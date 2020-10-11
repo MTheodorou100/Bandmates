@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <?php require_once('header.php'); ?>
+<?php require_once('nav.php'); ?>
 <body>
 <section id="intro" class="clearfix">
     <div class="container" data-aos="fade-up">
@@ -7,8 +8,13 @@
       <div class="intro-img" data-aos="zoom-out" data-aos-delay="200">
         <img src="assets/img/intro-img.svg" alt="" class="img-fluid">
       </div>
+      <style>
+    .body {
+        color: white;
+    }
+      </style>
 
-      <?php require_once('nav.php'); ?>
+      
     <body>
         <?php
             session_start();  
@@ -293,6 +299,7 @@
 
                     //input for editing bandName
                     echo "<label for=\"bandName\">bandName: </label> <br>";
+                    echo " ";
                     // echo "<input type=\"text\"  id=\"bandName\"     name=\"bandName\"   placeholder=\"" . $bandName . "\">";
                     echo "<input type=\"text\"  id=\"bandName\"     name=\"bandName\"   placeholder=\"" . $bandName . "\"   value=\"" . $bandName . "\">";
                     echo "<br>";
@@ -335,6 +342,7 @@
                         while($rowC = $resultGenres->fetch_assoc())
                         {
                             echo "<input type=\"checkbox\" id=\"g" . $rowC["genreID"] . "\" name=\"genreArrayA[]\" value=\"" . $rowC["genreID"] . "\">";
+                            echo " ";
                             echo "<label for=\"g" . $rowC["genreID"] ."\"> " . $rowC["genreName"] . "</label> <br>";
                         }
                     }
@@ -346,6 +354,7 @@
                         while($rowF = $resultGenresB->fetch_assoc())
                         {
                             echo "<input type=\"checkbox\" id=\"g" . $rowF["genreID"] . "\" name=\"genreArrayB[]\" value=\"" . $rowF["genreID"] . "\">";
+                            echo " ";
                             echo "<label for=\"g" . $rowF["genreID"] ."\"> " . $rowF["genreName"] . "</label> <br>";
                         }
                     }
@@ -361,6 +370,7 @@
                         while($rowG = $resultInstrumentsA->fetch_assoc())
                         {
                             echo "<input type=\"checkbox\" id=\"i" . $rowG["instrumentID"] . "\" name=\"instrumentArrayA[]\" value=\"" . $rowG["instrumentID"] . "\">";
+                            echo " ";
                             echo "<label for=\"i" . $rowG["instrumentID"] ."\"> " . $rowG["instrumentName"] . "</label> <br>";
                         }
                     }
@@ -372,6 +382,7 @@
                         while($rowH = $resultInstrumentsB->fetch_assoc())
                         {
                             echo "<input type=\"checkbox\" id=\"i" . $rowH["instrumentID"] . "\" name=\"instrumentArrayB[]\" value=\"" . $rowH["instrumentID"] . "\">";
+                            echo " ";
                             echo "<label for=\"i" . $rowH["instrumentID"] ."\"> " . $rowH["instrumentName"] . "</label> <br>";
                         }
                     }
