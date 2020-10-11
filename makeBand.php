@@ -101,7 +101,7 @@
 ?>
 
 <!DOCTYPE html>
-
+<title>BandMates | Create Band</title>
 <?php require_once('header.php'); ?>
 
 <body>

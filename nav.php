@@ -16,7 +16,7 @@ if ( $_SESSION['login_user']==null){
         <li><a href='index.php'>Home</a></li>
         <li><a href='service.php'>Terms of Service</a></li>
          <li><a href='policy.php'>Privacy Policy</a></li>
-         <li><a href='profile.php'>My Profile</a></li>
+         <li><a href='register.php'>Register</a></li>
          <li><a href='login.php'> Login </a></li>
              
         </ul>
@@ -39,12 +39,38 @@ if ( $_SESSION['login_user']==null){
     <ul>
       
              <li ><a href='index.php'>Home</a></li>
+             
         <li><a href='makeBand.php'>Create a Band</a></li>
-        <li><a href='viewMyBands.php'>View my Bands</a></li>
-          <li><a href='service.php'>Terms of Service</a></li>
-           <li><a href='policy.php'>Privacy Policy</a></li>
-           <li><a href='profile.php'>My Profile</a></li>
-           <li><a href='signout.php'> Sign Out </a></li>
+        <li><a href='seachC.php'>Search</a></li>
+           
+           <li class='nav-item dropdown'>
+           <a class='nav-link dropdown-toggle' href='#' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+             About
+           </a>
+           <div class='dropdown-menu' aria-labelledby='navbarDropdown'>
+             <a class='dropdown-item' href='service.php'>Terms of Service</a>
+             <a class='dropdown-item' href='policy.php'>Privacy Policy</a>
+           </div></li>
+           <li class='nav-item dropdown'>
+           <a class='nav-link dropdown-toggle' href='#' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+             My Feeds
+           </a>
+           <div class='dropdown-menu' aria-labelledby='navbarDropdown'>
+             <a class='dropdown-item' href='bandsThatMatchYou.php'>Bands you match</a>
+             <a class='dropdown-item' href='matchesForYourBand.php'>Looking for a new Band member?</a>
+           </div></li>
+           <li class='nav-item dropdown'>
+           <a class='nav-link dropdown-toggle' href='#' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+             Profile
+           </a>
+           <div class='dropdown-menu' aria-labelledby='navbarDropdown'>
+             <a class='dropdown-item' href='profile.php'>View my Profile</a>
+             <a class='dropdown-item' href='viewMyBands.php'>My Bands</a>
+             <a class='dropdown-item' href='myRequests.php'>My Requests</a>
+             <div class='dropdown-divider'></div>
+             <a class='dropdown-item' href='signout.php'>Sign Out</a>
+           </div></li>
+           
          
     </ul>
     </nav><!-- .main-nav -->
