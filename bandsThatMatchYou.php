@@ -273,28 +273,20 @@
                         echo "<div>";
                         if($a==0)
                         {
-                            echo "BEST MATCH";
+                            echo "BEST MATCH:";
                             echo "<br>";
                         }
                         else
                         {
-                            echo "Match No. " . ($a+1);
+                            echo "Match No. " . ($a+1) . ":";
                             echo "<br>";
                         }
 
-                        echo $bandArray[$a][0];
+                        echo "Band name: " . $bandArray[$a][1];
                         echo "<br>";
-                        echo "band name: " . $bandArray[$a][1];
-                        echo "<br>";
-                        echo "GenreScore: " . $bandArray[$a][3];
-                        echo "<br>";
-                        echo "LoginScore: " . $bandArray[$a][4];
-                        echo "<br>";
-                        echo "AgeScore: " . $bandArray[$a][5];
-                        echo "<br>";
-                        echo "Total score: " . $bandArray[$a][6];
+                        echo "<a class='btn btn-primary' href=\"band.php?band=" . $bandArray[$a][0] . "\" role='button'>View Band Profile</a> ";
                         echo "</div>";
-                        echo "<br>";
+                        echo "<br><br>";
                     }    
                 }
             }

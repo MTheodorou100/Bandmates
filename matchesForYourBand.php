@@ -1,5 +1,10 @@
 <html>
-    <body>
+<?php require_once('header.php'); ?>
+
+<body>
+<?php require_once('nav.php'); ?>
+<section id="intro" class="clearfix">
+    <div class="container"> 
         <?php
             session_start();
         
@@ -63,7 +68,7 @@
                         $selectedBandName = $rowE['bandName'];
                     }
 
-                    echo "Looking at candidates for " . $selectedBandName;
+                    echo "Looking at candidates for " . $selectedBandName . "<br>";
                     
 
                     //Step 1: Get all users that play any instruments the band wants
@@ -271,31 +276,23 @@
 
                     for($a = 0; $a < count($userArray); $a++)
                     {
-                        echo "<div>";
+                        echo "<br><div>";
                         if($a==0)
                         {
-                            echo "BEST MATCH";
-                            echo "<br>";
+                            echo "BEST MATCH:";
                         }
                         else
                         {
-                            echo "Match No. " . ($a+1);
-                            echo "<br>";
+                            echo "Match No. " . ($a+1) . ":";
+
                         }
 
-                        echo $userArray[$a][0];
                         echo "<br>";
-                        echo $userArray[$a][3];
+                        echo "Name: " . $userArray[$a][3] ;
                         echo "<br>";
-                        echo "GenreScore: " . $userArray[$a][8];
-                        echo "<br>";
-                        echo "LoginScore: " . $userArray[$a][9];
-                        echo "<br>";
-                        echo "AgeScore: " . $userArray[$a][10];
-                        echo "<br>";
-                        echo "Total score: " . $userArray[$a][4];
+                        echo "<a class='btn btn-primary' href='viewProfile.php?user=" . $userArray[$a][0] . "\" role='button'>View Profile</a> ";
                         echo "</div>";
-                        echo "<br>";
+                        echo "<br><br>";
                     }    
                 }
                 }
@@ -307,5 +304,8 @@
 
                 
         ?>
+                  </div>    
+        </section>
+        <?php require_once('footer.php'); ?>
     </body>
 </html>  
