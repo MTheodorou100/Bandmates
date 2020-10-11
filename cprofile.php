@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<title>BandMates | Create Profile</title>
 <?php require_once('header.php'); ?>
 
 	<?php  

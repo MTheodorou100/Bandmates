@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-
+<title>BandMates | Home</title>
 <?php require_once('header.php'); ?>
 
 <body>

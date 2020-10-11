@@ -1,5 +1,5 @@
 <html>
-
+<title>BandMates | Band Feed</title>
 <?php require_once('header.php'); ?>
 
 <body>
@@ -16,7 +16,7 @@
             if(isset($_SESSION['login_user']))
             {
                 $seshUser = $_SESSION['login_user'];
-                echo "logged in as " . $seshUser;
+                echo "<h1>These are the most compatible Bands for you </h1>";
                 echo "<br> <br>";
 
                 $sqlUserInfo = "SELECT * FROM Person WHERE username = '$seshUser'";
@@ -275,16 +275,14 @@
                         echo "<div>";
                         if($a==0)
                         {
-                            echo "BEST MATCH:";
-                            echo "<br>";
+                            echo "<h3>BEST MATCH:</h3>";
                         }
                         else
                         {
-                            echo "Match No. " . ($a+1) . ":";
-                            echo "<br>";
+                            echo "<h3>Match No. " . ($a+1) . ":</h3>";
                         }
 
-                        echo "Band name: " . $bandArray[$a][1];
+                        echo "<h5>Band name: " . $bandArray[$a][1]; "</h5>";
                         echo "<br>";
                         echo "<a class='btn btn-primary' href=\"band.php?band=" . $bandArray[$a][0] . "\" role='button'>View Band Profile</a> ";
                         echo "</div>";

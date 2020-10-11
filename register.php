@@ -1,7 +1,7 @@
    <?php   
             session_start();         
             ?><html lang="en">
-
+<title>BandMates | Register</title>
 <head>
 
     

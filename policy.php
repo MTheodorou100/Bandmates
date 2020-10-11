@@ -3,6 +3,7 @@
             ?>
 <!DOCTYPE html>
 <html lang="en">
+<title>BandMates | Privacy Policy</title>
 
 <?php require_once('header.php'); ?>
 

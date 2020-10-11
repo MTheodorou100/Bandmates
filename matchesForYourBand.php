@@ -1,4 +1,5 @@
 <html>
+<title>BandMates | Musician Feed</title>
 <?php require_once('header.php'); ?>
 
 <body>
@@ -13,7 +14,7 @@
             if(isset($_SESSION['login_user']))
             {
                 $seshUser = $_SESSION['login_user'];
-                echo "logged in as " . $seshUser;
+                echo "<h1>These are the most compatible musicians for you </h1>";
 
                 $sqlUserInfo = "SELECT * FROM Person WHERE username = '$seshUser'";
                 $userInfoResult = mysqli_query($db, $sqlUserInfo) or die(mysqli_error($db));
@@ -279,16 +280,15 @@
                         echo "<br><div>";
                         if($a==0)
                         {
-                            echo "BEST MATCH:";
+                            echo "<h3>BEST MATCH:</h3>";
                         }
                         else
                         {
-                            echo "Match No. " . ($a+1) . ":";
+                            echo "<h3>Match No. " . ($a+1) . ":</h3>";
 
                         }
 
-                        echo "<br>";
-                        echo "Name: " . $userArray[$a][3] ;
+                        echo "<h5>Name: " . $userArray[$a][3]; "</h5>" ;
                         echo "<br>";
                         echo "<a class='btn btn-primary' href='viewProfile.php?user=" . $userArray[$a][0] . "\" role='button'>View Profile</a> ";
                         echo "</div>";

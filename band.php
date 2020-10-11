@@ -1,5 +1,6 @@
   
 <!DOCTYPE html>
+<title>BandMates | Band Profile</title>
 <?php require_once('header.php'); ?>
 <?php require_once('nav.php'); ?>
 <body>
@@ -287,6 +288,9 @@ button:hover, a:hover {
                       echo " <h1>" . $row["bandName"] . "</h1>";
                     // echo "bandGenre = " . $row["bandGenre"] . "<br>";
                     echo "Jam Band: " . $jam . "<br>";
+
+        
+
                     if ($resultBandMembers->num_rows > 0)
                 {
                     echo "<br> Band Members: <br>";

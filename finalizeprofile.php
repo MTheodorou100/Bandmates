@@ -12,6 +12,7 @@ $servername = utf8_encode("35.197.167.52");
             ?>
 
 <html lang="en">
+<title>BandMates | Finish Profile</title>
 
 <head>
   <meta charset="utf-8">

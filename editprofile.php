@@ -53,7 +53,7 @@ $result = mysqli_query($db, $sql) or die(mysqli_error($db));
             ?>
 
 <html lang="en">
-
+<title>BandMates | Edit Profile</title>
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
