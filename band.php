@@ -342,7 +342,8 @@ button:hover, a:hover {
                        <input name='uid' type=hidden value='$querysql[personID]'>
                      <input type=submit value='Request to Join'>
                      </form><br><br> ";
-                        }
+                    }
+
                     echo "</div>";
                     $bandName = $row["bandName"];
                     $jamBool = $row["bandJamBool"];

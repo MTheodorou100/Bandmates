@@ -121,14 +121,14 @@ button:hover, a:hover {
                     {   
                         echo "<br> Add this user to one of your bands: <br>";
                         echo "<form action='addToBand.php' method='post'>";
-                        echo "<select name='band' require>";
+                        echo "<select class='btn btn-primary dropdown-toggle' name='band' require>";
                         while($rowB = $resultBands->fetch_assoc())
                         {
                             echo "<option value=" . $rowB["bandID"] .  ">" .  $rowB["bandName"] . "</option>";
                         }
                         echo "<input type='hidden' name='inviteeID' value=" . $thisPersonID . ">";
-                        echo "</select>";
-                        echo "<input type='submit'>";
+                        echo "</select><br><br>";
+                        echo "<input class='btn btn-success' type='submit'>";
                         echo $rowB["bandID"];
                     }
                     else

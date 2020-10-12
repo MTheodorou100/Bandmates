@@ -289,7 +289,7 @@
                         echo "<div class='card text-white bg-primary mb-3' style='max-width: 24rem'>";
                         echo "<div class='card-header'>" . $userArray[$a][3]; "</div>" ;
                         echo "<br><br>";
-                        echo "<div class='card-footer'><a class='btn btn-success' href='viewProfile.php?user=" . $userArray[$a][0] . "\" role='button'>View Profile</a></div> ";
+                        echo "<div class='card-footer'><a class='btn btn-success' href='viewProfile.php?user=" . $userArray[$a][0] . "'>View Profile</a></div> ";
                         echo "</div></div>";
                         echo "<br><br>";
                     }    
