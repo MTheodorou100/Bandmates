@@ -48,7 +48,6 @@ button:hover, a:hover {
   opacity: 0.7;
 }
 </style>
-
       
     <body>
         <?php
@@ -433,11 +432,9 @@ button:hover, a:hover {
                         }
                     }
                     echo "</div>";
-                    echo "<br>";
+                    echo "<br>";             
                     echo "<input type=\"submit\">";
                     echo "</form>";
-
-
                     echo "</div>";
                 }
                 else
@@ -449,7 +446,39 @@ button:hover, a:hover {
             {
                 echo "0 results";
             }
-
+        
+          $sqlUserID = "SELECT personID FROM Person WHERE username='$_SESSION[login_user]';";
+          $usersListResult = mysqli_query($db, $sqlUserID) or die(mysqli_error($db));
+          $querysql = mysqli_fetch_array($usersListResult, MYSQL_ASSOC);
+        
+          $sqlUserID2 = "SELECT * FROM BandMembers WHERE personID='$querysql[personID]' AND bandID='$thisBandID';";
+          $usersListResult2 = mysqli_query($db, $sqlUserID2) or die(mysqli_error($db));
+          $querysql2 = mysqli_fetch_array($usersListResult2, MYSQL_ASSOC);
+        
+          $sqlUserID3 = "SELECT * FROM Requests WHERE personID='$querysql[personID]' AND bandID='$thisBandID';";
+          $usersListResult3 = mysqli_query($db, $sqlUserID3) or die(mysqli_error($db));
+          $querysql3 = mysqli_fetch_array($usersListResult3, MYSQL_ASSOC);
+        
+//          $sqlUserID4 = "SELECT * FROM BandMembers WHERE personID='$querysql[personID]' AND bandID='$thisBandID';";
+//          $usersListResult4 = mysqli_query($db, $sqlUserID4) or die(mysqli_error($db));
+//          $querysql4 = mysqli_fetch_array($usersListResult4, MYSQL_ASSOC);
+//        
+        
+        
+      //  echo "<h1>".$querysql2['leaderBool']."</h1>";
+        
+        
+           if ($querysql2['leaderBool']==1 || $querysql3['personAccept']==1 || isset($querysql2)){
+               
+           }else{
+        
+              echo " <form method=post action=requestToJoin.php>
+              <input name=join type=hidden value='$thisBandID'>
+              <input name='uid' type=hidden value='$querysql[personID]'>
+            <input type=submit value='Request to Join'>
+            </form> ";
+               }
+          
         ?>
     </div>
     </div>

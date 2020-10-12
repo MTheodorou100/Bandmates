@@ -2,6 +2,7 @@
 <html lang="en">
     <body>
         <?php
+            include("config.php");
             // error_reporting(E_ERROR | E_PARSE);
             session_start();  
             $servername = utf8_encode("35.197.167.52");
@@ -16,13 +17,18 @@
 
 
             $bandID = $_POST['band'];
-            $newBandMember = $_POST['inviteeID'];
+            $newBandMember = $_POST['person'];
 
             //Request to Add BandMember
-            $personAccept = 0;
-            $bandAccept = 1;
-            //$sql2 = "INSERT INTO BandMembers (bandID, personID, leaderBool) VALUES ('$bandID', '$newBandMember', '$leaderBoolean')";
-            $sql2 = "INSERT INTO Requests (bandID, personID, bandAccept, personAccept) VALUES ('$bandID', '$newBandMember', '$bandAccept', '$personAccept')";
+            $leaderBoolean = 0;
+            $joinedBoolean = 1;
+            $sql2 = "INSERT INTO BandMembers (bandID, personID, leaderBool) VALUES ('$bandID', '$newBandMember', '$leaderBoolean')";  
+        
+            $sqlUserID2 = "UPDATE Requests SET bandAccept='$joinedBoolean' WHERE personID='$newBandMember' AND bandID='$bandID';";
+            $usersListResult2 = mysqli_query($db, $sqlUserID2) or die(mysqli_error($db));
+            $querysql2 = mysqli_fetch_array($usersListResult2, MYSQL_ASSOC);
+        
+        
             if ($conn->query($sql2) === TRUE)   //executes "$conn->query($sql2);" to run the insert
             {
                 // echo "Person added to band!";
