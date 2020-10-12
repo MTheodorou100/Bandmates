@@ -113,7 +113,11 @@
                         // echo "bandGenre = " . $row["bandGenre"] . "<br>";
                         // echo "Are you the leader? MUST BE FIXED " . $row["bandJamBool"] . "<br>";
                         // echo "(edit link)";
-                        echo "<a href=\"acceptBand.php?band=" . $row["bandID"] . "\">Accept Request</a>";
+                         echo "<form method=post action=\"acceptBand.php\">";
+                        echo "<input type=hidden name=band value=".$row["bandID"].">";
+                        echo "<input type=hidden name=person value=".$personID.">";
+                        echo "<input type=submit value='Accept Request'>";
+                        echo "</form>";
                         //"<a href=\"band.php?band=" . $row["bandID"] . "\">Deny Request</a>";
                         echo "</div>";
                         echo "<br><br>";
