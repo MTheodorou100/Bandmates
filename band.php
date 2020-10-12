@@ -64,7 +64,19 @@ button:hover, a:hover {
 
 
             $thisBandID = $_GET['band'];
-            $viewerRole = 0;        //viewerRole 0=nonMember, 1=member, 2=leader          
+            $viewerRole = 0;        //viewerRole 0=nonMember, 1=member, 2=leader  
+            
+            $sqlUserID = "SELECT personID FROM Person WHERE username='$_SESSION[login_user]';";
+          $usersListResult = mysqli_query($db, $sqlUserID) or die(mysqli_error($db));
+          $querysql = mysqli_fetch_array($usersListResult, MYSQL_ASSOC);
+        
+          $sqlUserID2 = "SELECT * FROM BandMembers WHERE personID='$querysql[personID]' AND bandID='$thisBandID';";
+          $usersListResult2 = mysqli_query($db, $sqlUserID2) or die(mysqli_error($db));
+          $querysql2 = mysqli_fetch_array($usersListResult2, MYSQL_ASSOC);
+        
+          $sqlUserID3 = "SELECT * FROM Requests WHERE personID='$querysql[personID]' AND bandID='$thisBandID';";
+          $usersListResult3 = mysqli_query($db, $sqlUserID3) or die(mysqli_error($db));
+          $querysql3 = mysqli_fetch_array($usersListResult3, MYSQL_ASSOC);
 
             //leader checking
             if($resultLeaderCheck->num_rows>0)
@@ -282,11 +294,26 @@ button:hover, a:hover {
                 while($row = $resultBand->fetch_assoc())
                 {
                     echo "
-                     <center><h2 class='white'>Band Profile</h2><br></center> 
-                      <div class='card bg-primary'>";
-                      echo " <h1>" . $row["bandName"] . "</h1>";
-                    // echo "bandGenre = " . $row["bandGenre"] . "<br>";
-                    echo "Jam Band: " . $jam . "<br>";
+                    <center><h2 class='white'>Band Profile</h2><br></center> 
+                     <div class='card bg-primary'>";
+                     echo " <h1>" . $row["bandName"] . "</h1>";
+                   // echo "bandGenre = " . $row["bandGenre"] . "<br>";
+                   echo "<h5>Jam Band:</h5> " . $jam . "<br><br>";
+                   echo "<h5>Band Genres:</h5> ";
+                   $genresql = "SELECT genreName FROM Genres WHERE genreID IN (SELECT genreID FROM BandGenres WHERE bandID=".$thisBandID.")";
+                   $resultGenre = mysqli_query($conn, $genresql) or die(mysqli_error($conn));
+                   while ($rowA = mysqli_fetch_array($resultGenre, MYSQL_ASSOC)){
+                   echo $rowA['genreName'].", ";
+                   }
+                   echo"<br><br>";
+                   echo "<h5>Band is looking for muscians who play:</h5> ";
+                   $instrsql = "SELECT instrumentName FROM Instruments WHERE instrumentID IN (SELECT instrumentID FROM BandWants WHERE bandID =".$thisBandID.")";
+                   $resultInstrument = mysqli_query($conn, $instrsql) or die(mysqli_error($conn));
+                   while ($rowN = mysqli_fetch_array($resultInstrument, MYSQL_ASSOC)){
+                       echo $rowN['instrumentName'].", ";
+                   }
+                   echo"<br>";
+
 
         
 
@@ -306,13 +333,23 @@ button:hover, a:hover {
                 }
 
                     // echo "Are you the leader? MUST BE FIXED " . $row["bandJamBool"] . "<br>";
+                    if ($querysql2['leaderBool']==1 || $querysql3['personAccept']==1 || isset($querysql2)){
+
+                    }else{
+                 
+                       echo " <form method=post action=requestToJoin.php>
+                       <input name=join type=hidden value='$thisBandID'>
+                       <input name='uid' type=hidden value='$querysql[personID]'>
+                     <input type=submit value='Request to Join'>
+                     </form><br><br> ";
+                        }
                     echo "</div>";
                     $bandName = $row["bandName"];
                     $jamBool = $row["bandJamBool"];
                     $feedBool = $row["bandShowInFeedBool"];
                     
-                echo "<div>";
-                echo "</div>";
+                
+                   
                 echo "</div>";
                 echo "</div>";
 
@@ -447,17 +484,7 @@ button:hover, a:hover {
                 echo "0 results";
             }
         
-          $sqlUserID = "SELECT personID FROM Person WHERE username='$_SESSION[login_user]';";
-          $usersListResult = mysqli_query($db, $sqlUserID) or die(mysqli_error($db));
-          $querysql = mysqli_fetch_array($usersListResult, MYSQL_ASSOC);
-        
-          $sqlUserID2 = "SELECT * FROM BandMembers WHERE personID='$querysql[personID]' AND bandID='$thisBandID';";
-          $usersListResult2 = mysqli_query($db, $sqlUserID2) or die(mysqli_error($db));
-          $querysql2 = mysqli_fetch_array($usersListResult2, MYSQL_ASSOC);
-        
-          $sqlUserID3 = "SELECT * FROM Requests WHERE personID='$querysql[personID]' AND bandID='$thisBandID';";
-          $usersListResult3 = mysqli_query($db, $sqlUserID3) or die(mysqli_error($db));
-          $querysql3 = mysqli_fetch_array($usersListResult3, MYSQL_ASSOC);
+          
         
 //          $sqlUserID4 = "SELECT * FROM BandMembers WHERE personID='$querysql[personID]' AND bandID='$thisBandID';";
 //          $usersListResult4 = mysqli_query($db, $sqlUserID4) or die(mysqli_error($db));
@@ -468,16 +495,7 @@ button:hover, a:hover {
       //  echo "<h1>".$querysql2['leaderBool']."</h1>";
         
         
-           if ($querysql2['leaderBool']==1 || $querysql3['personAccept']==1 || isset($querysql2)){
-               
-           }else{
-        
-              echo " <form method=post action=requestToJoin.php>
-              <input name=join type=hidden value='$thisBandID'>
-              <input name='uid' type=hidden value='$querysql[personID]'>
-            <input type=submit value='Request to Join'>
-            </form> ";
-               }
+           
           
         ?>
     </div>
