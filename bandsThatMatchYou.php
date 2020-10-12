@@ -281,7 +281,7 @@
                         {
                             echo "<h3>Match No. " . ($a+1) . ":</h3>";
                         }
-                        echo "<div class='card text-white bg-primary mb-3' style='max-width: 24rem'>";
+                        echo "<div class='card text-white text-center bg-primary mb-3' style='max-width: 24rem'>";
                         echo "<br><h5>Band name: " . $bandArray[$a][1]; "</h5>";
                         echo "<br><br>";
                         echo "<a class='btn btn-success' href=\"band.php?band=" . $bandArray[$a][0] . "\" role='button'>View Band Profile</a> ";

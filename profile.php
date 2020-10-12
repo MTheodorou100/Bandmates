@@ -87,7 +87,6 @@ button:hover, a:hover {
     <div class="container">
      <center><h2 class="white">Your Profile</h2><br></center> 
       <div class="card bg-primary">
-  <img src="assets/img/empty.png" style="width:100%">
   <h1><?php echo $row['firstName']; ?> <?php echo $row['surName'];?></h1>
 
         <p><b>Genres:</b> 

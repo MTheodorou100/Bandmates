@@ -114,34 +114,30 @@ button:hover, a:hover {
                     echo "BIO: " . $rowA["bio"] . "<br>";
                     echo "Experience: " . $rowA["preExp"] . "<br>";
                     echo "Email: " . $rowA["email"] . "<br>";
-                   
+
+                    
 
                     if ($resultBands->num_rows > 0)
-                    {echo "<br> Add this user to one of your bands: <br>";
-                        echo "<form action=\"addToBand.php\" method=\"post\">";
-                        echo "<select name=\"band\" require>";
+                    {   
+                        echo "<br> Add this user to one of your bands: <br>";
+                        echo "<form action='addToBand.php' method='post'>";
+                        echo "<select name='band' require>";
                         while($rowB = $resultBands->fetch_assoc())
                         {
-                            echo "<option value=\"" . $rowB["bandID"] .  "\">" .  $rowB["bandName"] . "</option><br>";
+                            echo "<option value=" . $rowB["bandID"] .  ">" .  $rowB["bandName"] . "</option>";
                         }
-                        echo "</select><br>";
-                        echo "<input type=\"hidden\" name=\"inviteeID\" value=\"" . $thisPersonID . "\"></input>";
-                        
-                        echo "<input class='btn btn-primary' type=\"submit\">";
+                        echo "<input type='hidden' name='inviteeID' value=" . $thisPersonID . ">";
+                        echo "</select>";
+                        echo "<input type='submit'>";
                         echo $rowB["bandID"];
-                        echo "</form>";
                     }
                     else
                     {
                     }
-                    
+                    echo "</form>";
                     echo "</div>";
                     echo "<br>";
-                    echo "</div>";
                 }
-            }
-            else
-            {
             }
 
         ?>
