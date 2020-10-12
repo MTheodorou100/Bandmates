@@ -71,7 +71,7 @@
                     while($row2 = $resultBands2->fetch_assoc())
                     {
                         $sqlUserID = "SELECT * FROM Person WHERE personID IN (SELECT personID FROM Requests WHERE bandID=".$row2['bandID']." AND bandAccept=0 AND personAccept=1);";
-                        $usersListResult = mysqli_query($db, $sqlUserID) or die(mysqli_error($db));
+                        $usersListResult = mysqli_query($conn, $sqlUserID) or die(mysqli_error($conn));
                         $querysql = mysqli_fetch_array($usersListResult, MYSQL_ASSOC);
                         
                         if (isset($querysql["personID"])){

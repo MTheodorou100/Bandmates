@@ -61,13 +61,14 @@
                 {
                     while($row = $resultBands->fetch_assoc())
                     {
-                        echo "<div>";
-                        echo "<h4>  " . $row["bandName"] . "</h4>";
+                        echo "<div class='text-white bg-primary mb-3' style='max-width: 18rem;'>";
+                        echo "<div class='card-header'>  " . $row["bandName"] . "</div>";
                         // echo "bandGenre = " . $row["bandGenre"] . "<br>";
                         // echo "Are you the leader? MUST BE FIXED " . $row["bandJamBool"] . "<br>";
                         // echo "(edit link)";
-                        echo "<a class='btn btn-primary' href=\"band.php?band=" . $row["bandID"] . "\">View Band</a>";
-                        echo "</div>";
+                        echo "<div class='card-body text-primary'>";
+                        echo "<p class='card-text'><a class='btn btn-success' href=\"band.php?band=" . $row["bandID"] . "\">View Band</a></p>";
+                        echo "</div></div>";
                         echo "<br><br>";
                     }
                 }

@@ -1,7 +1,6 @@
 <html>
 <title>BandMates | Musician Feed</title>
 <?php require_once('header.php'); ?>
-
 <body>
 <?php require_once('nav.php'); ?>
 <section id="intro" class="clearfix">
@@ -14,7 +13,7 @@
             if(isset($_SESSION['login_user']))
             {
                 $seshUser = $_SESSION['login_user'];
-                echo "<h1>These are the most compatible musicians for you </h1>";
+                echo "<h1>These are the most compatible musicians for your Band </h1>";
 
                 $sqlUserInfo = "SELECT * FROM Person WHERE username = '$seshUser'";
                 $userInfoResult = mysqli_query($db, $sqlUserInfo) or die(mysqli_error($db));
@@ -49,7 +48,7 @@
                 }
                 echo "
                 </select>
-                <input type='submit' value='Submit'>
+                <input class='btn btn-success' type='submit' value='Submit'>
                 </form>
                 </div>";
                 } else{
@@ -287,11 +286,11 @@
                             echo "<h3>Match No. " . ($a+1) . ":</h3>";
 
                         }
-
-                        echo "<h5>Name: " . $userArray[$a][3]; "</h5>" ;
-                        echo "<br>";
-                        echo "<a class='btn btn-primary' href='viewProfile.php?user=" . $userArray[$a][0] . "\" role='button'>View Profile</a> ";
-                        echo "</div>";
+                        echo "<div class='card text-white bg-primary mb-3' style='max-width: 24rem'>";
+                        echo "<div class='card-header'>" . $userArray[$a][3]; "</div>" ;
+                        echo "<br><br>";
+                        echo "<div class='card-footer'><a class='btn btn-success' href='viewProfile.php?user=" . $userArray[$a][0] . "'>View Profile</a></div> ";
+                        echo "</div></div>";
                         echo "<br><br>";
                     }    
                 }

@@ -118,28 +118,26 @@ button:hover, a:hover {
                     
 
                     if ($resultBands->num_rows > 0)
-                    {echo "<br> Add this user to one of your bands: <br>";
-                        echo "<form action=\"addToBand.php\" method=\"post\">";
-                        echo "<select name=\"band\" require>";
+                    {   
+                        echo "<br> Add this user to one of your bands: <br>";
+                        echo "<form action='addToBand.php' method='post'>";
+                        echo "<select class='btn btn-primary dropdown-toggle' name='band' require>";
                         while($rowB = $resultBands->fetch_assoc())
                         {
-                            echo "<option value=\"" . $rowB["bandID"] .  "\">" .  $rowB["bandName"] . "</option>";
+                            echo "<option value=" . $rowB["bandID"] .  ">" .  $rowB["bandName"] . "</option>";
                         }
-                        echo "<input type=\"hidden\" name=\"inviteeID\" value=\"" . $thisPersonID . "\">";
-                        echo "</select>";
-                        echo "<input type=\"submit\">";
+                        echo "<input type='hidden' name='inviteeID' value=" . $thisPersonID . ">";
+                        echo "</select><br><br>";
+                        echo "<input class='btn btn-success' type='submit'>";
                         echo $rowB["bandID"];
                     }
                     else
                     {
                     }
-                    
+                    echo "</form>";
                     echo "</div>";
                     echo "<br>";
                 }
-            }
-            else
-            {
             }
 
         ?>
