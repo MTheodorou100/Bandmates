@@ -75,7 +75,8 @@
                         $querysql = mysqli_fetch_array($usersListResult, MYSQL_ASSOC);
                         
                         if (isset($querysql["personID"])){
-                        echo "<div class='card text-white bg-primary mb-3' style='max-width: 18rem;'>";
+                        echo "<div class='card text-white text-center bg-primary mb-3' style='max-width: 18rem;'>";
+                        echo "<br>";
                         echo "<h4>  " . $row2["bandName"] . "</h4>";
                         // echo "bandGenre = " . $row["bandGenre"] . "<br>";
                         // echo "Are you the leader? MUST BE FIXED " . $row["bandJamBool"] . "<br>";
@@ -87,6 +88,7 @@
                             echo "<input type=hidden name=band value=".$row2["bandID"].">";
                         echo "<input class='btn btn-success' type=submit value='Accept Request'>";
                         echo "</form>";
+                         echo "<br>";
                         //"<a href=\"band.php?band=" . $row["bandID"] . "\">Deny Request</a>";
                         echo "</div>";
                         echo "<br><br>";
@@ -108,7 +110,8 @@
                 {
                     while($row = $resultBands->fetch_assoc())
                     {
-                        echo "<div class='card text-white bg-primary mb-3' style='max-width: 18rem;'>";
+                        echo "<div class='card text-white text-center bg-primary mb-3' style='max-width: 18rem;'>";
+                        echo "<br>";
                         echo "<h4>  " . $row["bandName"] . "</h4>";
                         // echo "bandGenre = " . $row["bandGenre"] . "<br>";
                         // echo "Are you the leader? MUST BE FIXED " . $row["bandJamBool"] . "<br>";
@@ -118,6 +121,7 @@
                         echo "<input type=hidden name=person value=".$personID.">";
                         echo "<input class='btn btn-submit' type=submit value='Accept Request'>";
                         echo "</form>";
+                        echo "<br>";
                         //"<a href=\"band.php?band=" . $row["bandID"] . "\">Deny Request</a>";
                         echo "</div>";
                         echo "<br><br>";
