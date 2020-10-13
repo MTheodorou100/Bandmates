@@ -221,7 +221,7 @@ label {
 </div>
             <br>   
              
- <button class="button-register" type="submit" href="home.html">Register</button>
+ <button class="btn btn-success" type="submit" href="home.html">Register</button>
          
          </form>
     </div>    

@@ -296,7 +296,9 @@ button:hover, a:hover {
                     echo "
                     <center><h2 class='white'>Band Profile</h2><br></center> 
                      <div class='card bg-primary'>";
+
 			echo "<br>";
+
                      echo " <h1>" . $row["bandName"] . "</h1>";
                    // echo "bandGenre = " . $row["bandGenre"] . "<br>";
                    echo "<h5>Jam Band:</h5> " . $jam . "<br><br>";
@@ -341,7 +343,7 @@ button:hover, a:hover {
                        echo " <form method=post action=requestToJoin.php>
                        <input name=join type=hidden value='$thisBandID'>
                        <input name='uid' type=hidden value='$querysql[personID]'>
-                     <input type=submit value='Request to Join'>
+                     <input class='btn btn-success' type=submit value='Request to Join'>
                      </form><br><br> ";
                     }
 
