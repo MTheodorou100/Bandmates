@@ -75,7 +75,7 @@
                         $querysql = mysqli_fetch_array($usersListResult, MYSQL_ASSOC);
                         
                         if (isset($querysql["personID"])){
-                        echo "<div>";
+                        echo "<div card text-white bg-primary mb-3" style="max-width: 18rem;>";
                         echo "<h4>  " . $row2["bandName"] . "</h4>";
                         // echo "bandGenre = " . $row["bandGenre"] . "<br>";
                         // echo "Are you the leader? MUST BE FIXED " . $row["bandJamBool"] . "<br>";
@@ -108,7 +108,7 @@
                 {
                     while($row = $resultBands->fetch_assoc())
                     {
-                        echo "<div>";
+                        echo "<div card text-white bg-primary mb-3" style="max-width: 18rem;>";
                         echo "<h4>  " . $row["bandName"] . "</h4>";
                         // echo "bandGenre = " . $row["bandGenre"] . "<br>";
                         // echo "Are you the leader? MUST BE FIXED " . $row["bandJamBool"] . "<br>";
