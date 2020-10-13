@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <title>BandMates | Search</title>
 <?php require_once('header.php'); ?>
 
@@ -167,6 +168,7 @@
 
             echo "
                     <input class='btn btn-success' type='submit'>
+
                     </form>
                 ";
             
@@ -191,6 +193,7 @@
                         echo "Name: " . $peopleArray[$x][1] . " " . $peopleArray[$x][2];
                         echo "<br><br>";
                         echo "<a class='btn btn-success' href='viewProfile.php?user=" . $peopleArray[$x][0] . "' role='button'>View Profile</a>";       //link to the user's page
+
                         // echo "<br>";
                         echo "</div>";
 
@@ -201,6 +204,7 @@
                 {
                     for($x = 0; $x < COUNT($bandArray); $x++)       //loop through band array and display the search results
                     {
+
                         echo "<br>";
                         echo "<div class='card bg-primary text-center' style='max-width: 18rem;'>";
                         echo "<br>";
@@ -216,10 +220,12 @@
                 echo "</section>";
             }
         ?>
+
        </div>
   </section><!-- End Intro Section -->
 
   <main id="main">
   <?php require_once('footer.php'); ?>
+
     </body>
 </html>
