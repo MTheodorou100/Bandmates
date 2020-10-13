@@ -57,7 +57,7 @@ if ($conn->query($sql) === TRUE) {
         <h2 class="white">Success!</h2>
         <p class="white">Your profile has been created!</p>
        <br>
-       <a href='profile.php'>Click Here to view profile</a>
+       <a class="btn btn-primary" href='profile.php'>Click Here to view profile</a>
 
     </div>    
         </section>

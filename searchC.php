@@ -1,6 +1,12 @@
 <!DOCTYPE html>
-    <body>
 
+<title>BandMates | Search</title>
+<?php require_once('header.php'); ?>
+
+<body>
+<?php require_once('nav.php'); ?>
+<section id="intro" class="clearfix">
+    <div class="container" data-aos="fade-up">
         <?php
             include("config.php");
             session_start();
@@ -99,6 +105,7 @@
 
             //this section echoes the form
             //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+            echo "<h1> Search for Bands or Musicians </h1>";
             echo "
             <form method='post' action=''> 
                 <label for='searchTerm'>Search term:</label>
@@ -108,7 +115,7 @@
             {
                 $searchTerm = $_POST['searchTerm'];
                 echo "
-                    <input type='text' id='searchTerm' name='searchTerm' value='$searchTerm' required>
+                    <input type='text' id='searchTerm' name='searchTerm' value='$searchTerm' required><br>
                 ";
             }
             else    //this runs if nothing has been posted to the page, eg when it is first opened
@@ -160,7 +167,8 @@
             }
 
             echo "
-                    <input type='submit'>
+                    <input class='btn btn-success' type='submit'>
+
                     </form>
                 ";
             
@@ -176,16 +184,16 @@
                 }
                 else if ($_POST['bandOrPeople']=="people")
                 {
+                    
                     for($x = 0; $x < COUNT($peopleArray); $x++)     //loop through people array and display the search results
-                    {
-                        echo "<div>";
-                        echo "username: " . $peopleArray[$x][3];
+                    {   
                         echo "<br>";
-                        echo "first name: " . $peopleArray[$x][1];
+                        echo "<div class='card bg-primary text-center' style='max-width: 18rem;'>";
                         echo "<br>";
-                        echo "surname: " . $peopleArray[$x][2];
-                        echo "<br>";
-                        echo "<a class='btn btn-primary' href='viewProfile.php?user=" . $peopleArray[$x][0] . "' role='button'>View Profile</a>";       //link to the user's page
+                        echo "Name: " . $peopleArray[$x][1] . " " . $peopleArray[$x][2];
+                        echo "<br><br>";
+                        echo "<a class='btn btn-success' href='viewProfile.php?user=" . $peopleArray[$x][0] . "' role='button'>View Profile</a>";       //link to the user's page
+
                         // echo "<br>";
                         echo "</div>";
 
@@ -196,10 +204,13 @@
                 {
                     for($x = 0; $x < COUNT($bandArray); $x++)       //loop through band array and display the search results
                     {
-                        echo "<div>";
-                        echo "bandname: " . $bandArray[$x][1];
+
                         echo "<br>";
-                        echo "<a class='btn btn-primary' href='band.php?band=" . $bandArray[$x][0] . "' role='button'>View Band Profile</a>";       //link to the band page
+                        echo "<div class='card bg-primary text-center' style='max-width: 18rem;'>";
+                        echo "<br>";
+                        echo "bandname: " . $bandArray[$x][1];
+                        echo "<br><br>";
+                        echo "<a class='btn btn-success' href='band.php?band=" . $bandArray[$x][0] . "' role='button'>View Band Profile</a>";       //link to the band page
                         // echo "<br>";
                         echo "</div>";
                         
@@ -209,6 +220,12 @@
                 echo "</section>";
             }
         ?>
+
+       </div>
+  </section><!-- End Intro Section -->
+
+  <main id="main">
+  <?php require_once('footer.php'); ?>
 
     </body>
 </html>

@@ -48,7 +48,8 @@ button:hover, a:hover {
   opacity: 0.7;
 }
 </style> 
-
+<script>
+</script>
         <!-- <a href="user.php?user=56">go to test user (56)</a> -->
         <!-- <br> -->
         <section id="intro" class="clearfix">
@@ -96,7 +97,7 @@ button:hover, a:hover {
                 echo "0 results";
             }
             //Get the user's bands that this profile isn't a part of
-            $sqlBands = "SELECT * FROM Band WHERE bandID in (SELECT bandID FROM BandMembers WHERE personID = '$personID') AND NOT bandID in (SELECT bandID FROM BandMembers WHERE personID = '$thisPersonID')";
+            $sqlBands = "SELECT * FROM Band WHERE bandID in (SELECT bandID FROM BandMembers WHERE personID = '$personID') AND NOT bandID in (SELECT bandID FROM BandMembers WHERE personID = '$thisPersonID') AND NOT bandID in (SELECT bandID FROM Requests WHERE personID='$thisPersonID' AND bandAccept=1)";
             $resultBands = $conn->query($sqlBands);
 
 
@@ -114,33 +115,29 @@ button:hover, a:hover {
                     echo "Experience: " . $rowA["preExp"] . "<br>";
                     echo "Email: " . $rowA["email"] . "<br>";
 
-                    echo "<br> Add this user to one of your bands: <br>";
+                    
 
                     if ($resultBands->num_rows > 0)
-                    {
-                        echo "<form action=\"addToBand.php\" method=\"post\">";
-                        echo "<select name=\"band\" require>";
+                    {   
+                        echo "<br> Add this user to one of your bands: <br>";
+                        echo "<form action='addToBand.php' method='post'>";
+                        echo "<select class='btn btn-primary dropdown-toggle' name='band' require>";
                         while($rowB = $resultBands->fetch_assoc())
                         {
-                            echo "<option value=\"" . $rowB["bandID"] .  "\">" .  $rowB["bandName"] . "</option>";
+                            echo "<option value=" . $rowB["bandID"] .  ">" .  $rowB["bandName"] . "</option>";
                         }
-                        echo "<input type=\"hidden\" name=\"inviteeID\" value=\"" . $thisPersonID . "\">";
-                        echo "</select>";
-                        echo "<input type=\"submit\">";
+                        echo "<input type='hidden' name='inviteeID' value=" . $thisPersonID . ">";
+                        echo "</select><br><br>";
+                        echo "<input class='btn btn-success' type='submit'>";
                         echo $rowB["bandID"];
                     }
                     else
                     {
-                        echo "0 results - you have no bands that this user isn't a part of";
                     }
-                    
+                    echo "</form>";
                     echo "</div>";
                     echo "<br>";
                 }
-            }
-            else
-            {
-                echo "0 results - you have no bands that this user isn't a part of";
             }
 
         ?>
