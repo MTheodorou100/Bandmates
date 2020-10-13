@@ -296,7 +296,9 @@ button:hover, a:hover {
                     echo "
                     <center><h2 class='white'>Band Profile</h2><br></center> 
                      <div class='card bg-primary'>";
-                     echo "<br>";
+
+			echo "<br>";
+
                      echo " <h1>" . $row["bandName"] . "</h1>";
                    // echo "bandGenre = " . $row["bandGenre"] . "<br>";
                    echo "<h5>Jam Band:</h5> " . $jam . "<br><br>";
