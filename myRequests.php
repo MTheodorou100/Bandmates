@@ -81,11 +81,12 @@
                         // echo "bandGenre = " . $row["bandGenre"] . "<br>";
                         // echo "Are you the leader? MUST BE FIXED " . $row["bandJamBool"] . "<br>";
                         // echo "(edit link)";
-                        echo "<p>New Member:</p>";
+                        echo "<p>Wants to join this band:</p>";
                         echo "<a href=viewProfile.php?user=".$querysql['personID'].">   ".$querysql['username']."</a>";
                         echo "<form method=post action=\"acceptPerson.php?band=" .$querysql["personID"]."\">";
                             echo "<input type=hidden name=person value=".$querysql['personID'].">";
                             echo "<input type=hidden name=band value=".$row2["bandID"].">";
+                        echo "<br>";
                         echo "<input class='btn btn-success' type=submit value='Accept Request'>";
                         echo "</form>";
                          echo "<br>";
@@ -120,6 +121,7 @@
                         echo "<input type=hidden name=band value=".$row["bandID"].">";
                         echo "<input type=hidden name=person value=".$personID.">";
                         echo "<input class='btn btn-submit' type=submit value='Accept Request'>";
+                        echo "<br>";
                         echo "</form>";
                         echo "<br>";
                         //"<a href=\"band.php?band=" . $row["bandID"] . "\">Deny Request</a>";
