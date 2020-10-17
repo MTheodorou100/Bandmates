@@ -22,9 +22,9 @@
             //Request to Add BandMember
             $leaderBoolean = 0;
             $joinedBoolean = 1;
-            $sql2 = "INSERT INTO BandMembers (bandID, personID, leaderBool) VALUES ('$bandID', '$newBandMember', '$leaderBoolean')";  
+            $sql2 = "INSERT INTO BandMembers (bandID, personID, leaderBool) VALUES ('$bandID', '$newBandMember', '$leaderBoolean')";  //adds the new users to bandmembers
         
-            $sqlUserID2 = "UPDATE Requests SET bandAccept='$joinedBoolean' WHERE personID='$newBandMember' AND bandID='$bandID';";
+            $sqlUserID2 = "UPDATE Requests SET bandAccept='$joinedBoolean' WHERE personID='$newBandMember' AND bandID='$bandID';"; //updates band requests
             $usersListResult2 = mysqli_query($db, $sqlUserID2) or die(mysqli_error($db));
             $querysql2 = mysqli_fetch_array($usersListResult2, MYSQL_ASSOC);
         
