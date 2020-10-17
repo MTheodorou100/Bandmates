@@ -1,5 +1,6 @@
 <html>
 <title>BandMates | Band Feed</title>
+    <!-- This is the algorithm that matches bands to the user based on instrument, genre, age and login recentcy -->
 <?php require_once('header.php'); ?>
 
 <body>
