@@ -1,7 +1,7 @@
 <?php
    include("config.php");
    session_start();
-
+// admin login no link to this page
    if($db === false){
     die("ERROR: Could not connect. " . mysqli_connect_error());
    }
