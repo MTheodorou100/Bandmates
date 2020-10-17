@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- This is the view profile for other people profile -->
 <html lang="en">
 <title>BandMates | Profiles</title>
 <?php require_once('header.php'); ?>
