@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- page that displays links to bands that the user is in -->
  <?php require_once('header.php'); ?>
  <title>BandMates | My Bands</title>
 <body>
