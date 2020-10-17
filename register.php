@@ -3,8 +3,7 @@
             ?><html lang="en">
 <title>BandMates | Register</title>
 <head>
-
-
+<!-- Registering page for the user -->
 
     
   <script type="text/javascript">
