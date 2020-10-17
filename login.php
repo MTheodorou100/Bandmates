@@ -1,6 +1,7 @@
 <?php
    include("config.php");
    session_start();
+// This is the login page with validation against the database
 
    if($db === false){
     die("ERROR: Could not connect. " . mysqli_connect_error());
