@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <body>
+        <!-- This page is for adding new memebers to the band -->
         <?php
             // error_reporting(E_ERROR | E_PARSE);
             session_start();  
