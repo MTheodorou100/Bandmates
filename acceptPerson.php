@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <body>
+        <!-- This page is for adding new members to the band from the requests -->
         <?php
             include("config.php");
             // error_reporting(E_ERROR | E_PARSE);
