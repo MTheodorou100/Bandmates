@@ -1,4 +1,5 @@
 <?php
+	//This is band creation page
 	session_start();
 	$servername = utf8_encode("35.197.167.52");
 	$dbname = utf8_encode("bandmates");
