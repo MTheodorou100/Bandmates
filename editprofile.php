@@ -1,4 +1,5 @@
-            <?php   
+            <?php  
+//This page is for the edting of the profile based on personID
             session_start();    
 include("config.php");
 if(isset($_POST['submit'])){
