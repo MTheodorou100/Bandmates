@@ -1,6 +1,7 @@
 <?php
    include("config.php");
    session_start();
+//This the admin main ladning page after login
 ?>
 <!DOCTYPE html>
 <html lang="en">
