@@ -1,5 +1,6 @@
   
 <!DOCTYPE html>
+<!-- This page will display the band profile page based on band ID it displays memebers genres and what the band is looking, this is done with sql statments -->
 <title>BandMates | Band Profile</title>
 <?php require_once('header.php'); ?>
 <?php require_once('nav.php'); ?>
