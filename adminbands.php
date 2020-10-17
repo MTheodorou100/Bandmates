@@ -1,7 +1,7 @@
 <?php
    include("config.php");
    session_start();
-
+   // Admin access to bands
       $sql = "SELECT * FROM Band";
       $result = mysqli_query($db, $sql) or die(mysqli_error($db));
   
