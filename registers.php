@@ -1,5 +1,6 @@
 
 <html>
+	<!-- Updates the user login info -->
 	<style>
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 </style> 
