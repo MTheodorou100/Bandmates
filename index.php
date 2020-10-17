@@ -1,6 +1,7 @@
 
 <!DOCTYPE html>
 <title>BandMates | Home</title>
+<!-- The main landing page that changes depending if a user is logged in or not by checking the session variable -->
 <?php require_once('header.php'); ?>
 
 <body>
