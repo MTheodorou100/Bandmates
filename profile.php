@@ -1,5 +1,5 @@
 <?php
-   
+   //This page dispays the users profile with the option to edit
   session_start();
   include("config.php");
    if($db == false){
