@@ -1,5 +1,6 @@
 <!DOCTYPE html>
  <?php require_once('header.php'); ?>
+<!-- This page is for band leaders and musicians who are invited to bands -->
  
 <body>
 <style>
