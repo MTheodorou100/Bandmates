@@ -1,5 +1,6 @@
 <html>
 <title>BandMates | Musician Feed</title>
+    <!-- Algorithm for musicians for your band -->
 <?php require_once('header.php'); ?>
 <body>
 <?php require_once('nav.php'); ?>
