@@ -1,7 +1,7 @@
 <?php
    include("config.php");
    session_start();
-
+//admin backend access to users
       $sql = "SELECT * FROM Person";
       $result = mysqli_query($db, $sql) or die(mysqli_error($db));
   
