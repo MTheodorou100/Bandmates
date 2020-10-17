@@ -16,15 +16,15 @@
             }
 
 
-            $bandID = $_POST['band'];
+            $bandID = $_POST['band']; //gets bandid
             $newBandMember = $_POST['person'];
 
             //Request to Add BandMember
             $leaderBoolean = 0;
             $joinedBoolean = 1;
-            $sql2 = "INSERT INTO BandMembers (bandID, personID, leaderBool) VALUES ('$bandID', '$newBandMember', '$leaderBoolean')";  
+            $sql2 = "INSERT INTO BandMembers (bandID, personID, leaderBool) VALUES ('$bandID', '$newBandMember', '$leaderBoolean')";  //inserts new band members in
         
-            $sqlUserID2 = "UPDATE Requests SET personAccept='$joinedBoolean' WHERE personID='$newBandMember' AND bandID='$bandID';";
+            $sqlUserID2 = "UPDATE Requests SET personAccept='$joinedBoolean' WHERE personID='$newBandMember' AND bandID='$bandID';"; //updates the database of requests
             $usersListResult2 = mysqli_query($db, $sqlUserID2) or die(mysqli_error($db));
             $querysql2 = mysqli_fetch_array($usersListResult2, MYSQL_ASSOC);
         
