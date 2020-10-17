@@ -3,7 +3,7 @@
 <?php require_once('header.php'); ?>
 
 <body>
-
+<!-- This is the algorithm for finding a band -->
 <?php require_once('nav.php'); ?>  
 <section id="intro" class="clearfix">
     <div class="container"> 
