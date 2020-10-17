@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+    <!-- Page to process the requests to join bands -->
     <body>
         <?php
             // error_reporting(E_ERROR | E_PARSE);
