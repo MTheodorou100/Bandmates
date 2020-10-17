@@ -62,7 +62,7 @@ button:hover, a:hover {
                 die("Connection failed: " . $conn->connect_error);
             }
 
-
+		// This section selects relivant data for the profile
             $thisBandID = $_GET['band'];
             $viewerRole = 0;        //viewerRole 0=nonMember, 1=member, 2=leader  
             
