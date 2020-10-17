@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <title>BandMates | Create Profile</title>
+<!-- This page creates the profile by inserting the information into the database then redirects the user -->
 <?php require_once('header.php'); ?>
 
 	<?php  
