@@ -4,7 +4,7 @@
 
       $sql = "SELECT * FROM Admins";
       $result = mysqli_query($db, $sql) or die(mysqli_error($db));
-  
+   //This page is for managing the accounts by the admins
       
   if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['submit']!=null) {
       $myusername = mysqli_real_escape_string($db,$_POST['user_name']);
