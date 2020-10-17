@@ -22,7 +22,7 @@ $username= $_SESSION['login_user'];
    $pexp = $_POST['pexp'];
 
 $sql = "UPDATE Person SET firstName='$_POST[fname]', surName='$_POST[lname]', bio='$_POST[bio]', preExp='$_POST[pexp]', email='$_POST[email]' WHERE username='$_SESSION[login_user]'";
-
+//creates the prfile adding in the new info
     
      $sqlUserID = "SELECT personID FROM Person WHERE username='$_SESSION[login_user]';";
       $usersListResult = mysqli_query($db, $sqlUserID) or die(mysqli_error($db));
