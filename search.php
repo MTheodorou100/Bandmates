@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-
+<!-- The search page for bands and people based on keywords related to name genre and instrument -->
 <?php require_once('header.php'); ?>
 
 <body>
