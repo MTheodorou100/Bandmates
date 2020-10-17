@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-
+<!-- Search function based on genre name and instrument -->
 <title>BandMates | Search</title>
 <?php require_once('header.php'); ?>
 
