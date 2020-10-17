@@ -1,4 +1,5 @@
 <?php   
+//This finishes the profile but inputting the last of the information
             session_start();    
 $servername = utf8_encode("35.197.167.52");
             $dbname = utf8_encode("bandmates");
