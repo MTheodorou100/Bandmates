@@ -1,4 +1,5 @@
-   <?php   
+   <?php  
+//logout for users
 session_start();   
 session_destroy();
 header("Location: index.php"); 
