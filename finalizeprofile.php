@@ -222,7 +222,7 @@ label {
 </div>
             <br>   
              
- <button class="btn btn-success" type="submit" href="home.html">Register</button>
+ <button class="btn btn-success" type="submit" href="home.html">Finish Profile!</button>
          
          </form>
     </div>    
